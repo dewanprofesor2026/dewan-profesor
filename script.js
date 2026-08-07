@@ -1,7 +1,16 @@
 // ========================================================
 // DEWAN PROFESOR UNIVERSITAS ANDALAS
-// SCRIPT.JS FINAL
+// SCRIPT.JS
+// DATA OTOMATIS DARI GOOGLE SHEETS
 // ========================================================
+
+
+// ========================================================
+// URL GOOGLE APPS SCRIPT
+// ========================================================
+
+const API_URL =
+    "https://script.google.com/macros/s/AKfycbyAFoztVoX6ZJ7ANsDTFLDJ5WcBOT8SneZZ9IgnAqLyu0Kz0ufoJERtdhe5iq0OCYH7qA/exec";
 
 
 // ========================================================
@@ -20,45 +29,90 @@ const totalVideo = document.getElementById("totalVideo");
 
 
 // ========================================================
-// DATA BULAN
+// DATA GLOBAL
 // ========================================================
 
-const bulan = {
-
-    Januari: 0,
-    Februari: 1,
-    Maret: 2,
-    April: 3,
-    Mei: 4,
-    Juni: 5,
-    Juli: 6,
-    Agustus: 7,
-    September: 8,
-    Oktober: 9,
-    November: 10,
-    Desember: 11
-
-};
+let professors = [];
+let profesorTerbaru = [];
+let periodeTerbaru = "";
 
 
 // ========================================================
-// MENGUBAH TANGGAL INDONESIA MENJADI DATE
-// Contoh: "27 Juni 2026"
+// NAMA BULAN INDONESIA
+// ========================================================
+
+const namaBulan = [
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember"
+];
+
+
+// ========================================================
+// FORMAT TANGGAL
+// Google Sheets → 25 Oktober 2026
+// ========================================================
+
+function formatTanggal(tanggal) {
+
+    if (!tanggal) {
+        return "";
+    }
+
+    const date = new Date(tanggal);
+
+    if (isNaN(date.getTime())) {
+        return tanggal;
+    }
+
+    return (
+        date.getUTCDate() +
+        " " +
+        namaBulan[date.getUTCMonth()] +
+        " " +
+        date.getUTCFullYear()
+    );
+
+}
+
+
+// ========================================================
+// MENGUBAH TANGGAL MENJADI DATE
 // ========================================================
 
 function ubahTanggal(teks) {
 
+    if (!teks) {
+        return new Date(0);
+    }
+
     const bagian = teks.split(" ");
+
+    if (bagian.length < 3) {
+        return new Date(teks);
+    }
 
     const tanggal = parseInt(bagian[0]);
 
-    const namaBulan = bagian[1];
+    const nama = bagian[1];
 
     const tahun = parseInt(bagian[2]);
 
+    const indexBulan =
+        namaBulan.indexOf(nama);
+
     return new Date(
         tahun,
-        bulan[namaBulan],
+        indexBulan,
         tanggal
     );
 
@@ -66,106 +120,232 @@ function ubahTanggal(teks) {
 
 
 // ========================================================
-// MENENTUKAN PERIODE TERBARU
+// AMBIL DATA DARI GOOGLE SHEETS
 // ========================================================
 
-const daftarPeriode = [
+async function ambilDataDariGoogleSheets() {
 
-    ...new Set(
+    try {
 
-        professors.map(
-            item => item.periode
+        list.innerHTML = `
+            <div class="data-kosong">
+                <i class="fa-solid fa-spinner fa-spin"></i>
+                <h3>Memuat data...</h3>
+                <p>Mohon tunggu sebentar.</p>
+            </div>
+        `;
+
+
+        const response = await fetch(
+            API_URL + "?action=data"
+        );
+
+
+        if (!response.ok) {
+            throw new Error(
+                "Gagal menghubungi database."
+            );
+        }
+
+
+        const data =
+            await response.json();
+
+
+        // =================================================
+        // UBAH DATA GOOGLE SHEETS
+        // MENJADI FORMAT YANG DIPAKAI PORTAL
+        // =================================================
+
+        professors = data.map(item => ({
+
+            id: item.id,
+
+            periode:
+                formatTanggal(item.periode),
+
+            nama:
+                item.nama || "",
+
+            fakultas:
+                item.fakultas || "",
+
+            foto:
+                item.foto || "",
+
+            pdf:
+                item.buku || "",
+
+            youtube:
+                item.video || ""
+
+        }));
+
+
+        // =================================================
+        // JALANKAN PORTAL
+        // =================================================
+
+        mulaiPortal();
+
+
+    } catch (error) {
+
+        console.error(error);
+
+
+        list.innerHTML = `
+            <div class="data-kosong">
+
+                <i class="fa-solid fa-circle-exclamation"></i>
+
+                <h3>Data tidak dapat dimuat</h3>
+
+                <p>
+                    Database Guru Besar sedang tidak dapat
+                    diakses.
+                </p>
+
+            </div>
+        `;
+
+    }
+
+}
+
+
+// ========================================================
+// MEMULAI PORTAL
+// ========================================================
+
+function mulaiPortal() {
+
+
+    if (professors.length === 0) {
+
+        periodeAktif.textContent =
+            "Belum ada data";
+
+        jumlahPeriode.textContent =
+            "Belum ada Guru Besar";
+
+        totalProfesor.textContent = "0";
+        totalBuku.textContent = "0";
+        totalVideo.textContent = "0";
+
+        tampilkanData([]);
+
+        return;
+
+    }
+
+
+    // ====================================================
+    // DAFTAR PERIODE
+    // ====================================================
+
+    const daftarPeriode = [
+
+        ...new Set(
+
+            professors.map(
+                item => item.periode
+            )
+
         )
 
-    )
-
-];
+    ];
 
 
-const periodeTerbaru = daftarPeriode.sort(
+    // ====================================================
+    // CARI PERIODE TERBARU
+    // ====================================================
 
-    (a, b) =>
+    daftarPeriode.sort(
 
-        ubahTanggal(b) -
-        ubahTanggal(a)
+        (a, b) =>
+            ubahTanggal(b) -
+            ubahTanggal(a)
 
-)[0];
+    );
+
+
+    periodeTerbaru =
+        daftarPeriode[0];
+
+
+    // ====================================================
+    // PROFESOR PERIODE TERBARU
+    // ====================================================
+
+    profesorTerbaru =
+        professors.filter(
+
+            item =>
+                item.periode ===
+                periodeTerbaru
+
+        );
+
+
+    // ====================================================
+    // INFORMASI PERIODE
+    // ====================================================
+
+    periodeAktif.textContent =
+        periodeTerbaru;
+
+
+    jumlahPeriode.textContent =
+        profesorTerbaru.length +
+        " Guru Besar Dikukuhkan";
+
+
+    // ====================================================
+    // STATISTIK
+    // ====================================================
+
+    totalProfesor.textContent =
+        professors.length;
+
+
+    totalBuku.textContent =
+
+        professors.filter(
+
+            item =>
+                item.pdf
+
+        ).length;
+
+
+    totalVideo.textContent =
+
+        professors.filter(
+
+            item =>
+                item.youtube
+
+        ).length;
+
+
+    // ====================================================
+    // TAMPILKAN PERIODE TERBARU
+    // ====================================================
+
+    tampilkanData(
+        profesorTerbaru
+    );
+
+}
 
 
 // ========================================================
-// AMBIL PROFESOR PADA PERIODE TERBARU
-// ========================================================
-
-let profesorTerbaru = professors.filter(
-
-    item =>
-
-        item.periode === periodeTerbaru
-
-);
-
-
-// ========================================================
-// INFORMASI PERIODE TERBARU
-// ========================================================
-
-periodeAktif.textContent =
-    periodeTerbaru;
-
-
-jumlahPeriode.textContent =
-
-    profesorTerbaru.length +
-    " Guru Besar Dikukuhkan";
-
-
-// ========================================================
-// STATISTIK
-// ========================================================
-
-// Total Guru Besar
-
-totalProfesor.textContent =
-    professors.length;
-
-
-// Total Buku Digital
-
-totalBuku.textContent =
-
-    professors.filter(
-
-        item => item.pdf
-
-    ).length;
-
-
-// Total Video
-
-totalVideo.textContent =
-
-    professors.filter(
-
-        item => item.youtube
-
-    ).length;
-
-
-// ========================================================
-// TAMPILKAN PERIODE TERBARU SAAT WEBSITE DIBUKA
-// ========================================================
-
-tampilkanData(profesorTerbaru);
-
-
-// ========================================================
-// FITUR PENCARIAN GLOBAL
+// PENCARIAN GLOBAL
 // ========================================================
 
 searchInput.addEventListener(
-
     "keyup",
-
     () => {
 
         const keyword =
@@ -175,9 +355,7 @@ searchInput.addEventListener(
                 .trim();
 
 
-        // Jika pencarian kosong
-        // kembali ke periode terbaru
-
+        // Jika kosong
         if (keyword === "") {
 
             tampilkanData(
@@ -189,23 +367,23 @@ searchInput.addEventListener(
         }
 
 
-        // Cari seluruh data profesor
+        // Cari seluruh data
+        const hasil =
 
-        const hasil = professors.filter(
+            professors.filter(
 
-            item =>
+                item =>
 
-                item.nama
-                    .toLowerCase()
-                    .includes(keyword)
+                    item.nama
+                        .toLowerCase()
+                        .includes(keyword)
 
-        );
+            );
 
 
         tampilkanData(hasil);
 
     }
-
 );
 
 
@@ -216,13 +394,9 @@ searchInput.addEventListener(
 document
     .getElementById("btnBeranda")
     .addEventListener(
-
         "click",
-
         () => {
 
-
-            // Aktifkan Beranda
 
             document
                 .getElementById("btnBeranda")
@@ -230,15 +404,11 @@ document
                 .add("active");
 
 
-            // Nonaktifkan Arsip
-
             document
                 .getElementById("btnArsip")
                 .classList
                 .remove("active");
 
-
-            // Tampilkan periode
 
             document
                 .querySelector(".periode-box")
@@ -246,19 +416,14 @@ document
                 .display = "block";
 
 
-            // Kosongkan pencarian
-
             searchInput.value = "";
 
-
-            // Tampilkan periode terbaru
 
             tampilkanData(
                 profesorTerbaru
             );
 
         }
-
     );
 
 
@@ -269,13 +434,9 @@ document
 document
     .getElementById("btnArsip")
     .addEventListener(
-
         "click",
-
         () => {
 
-
-            // Aktifkan Arsip
 
             document
                 .getElementById("btnArsip")
@@ -283,15 +444,11 @@ document
                 .add("active");
 
 
-            // Nonaktifkan Beranda
-
             document
                 .getElementById("btnBeranda")
                 .classList
                 .remove("active");
 
-
-            // Sembunyikan periode terbaru
 
             document
                 .querySelector(".periode-box")
@@ -299,17 +456,12 @@ document
                 .display = "none";
 
 
-            // Kosongkan pencarian
-
             searchInput.value = "";
 
-
-            // Tampilkan arsip
 
             tampilkanArsip();
 
         }
-
     );
 
 
@@ -319,8 +471,6 @@ document
 
 function tampilkanData(data) {
 
-
-    // Kosongkan daftar
 
     list.innerHTML = "";
 
@@ -376,6 +526,7 @@ function tampilkanData(data) {
                     href="${item.pdf}"
                     class="btn btn-book"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
 
                     <i
@@ -403,6 +554,7 @@ function tampilkanData(data) {
                     href="${item.youtube}"
                     class="btn"
                     target="_blank"
+                    rel="noopener noreferrer"
                 >
 
                     <i
@@ -430,6 +582,7 @@ function tampilkanData(data) {
                     src="${item.foto}"
                     class="photo"
                     alt="${item.nama}"
+                    loading="lazy"
                 >
 
               `
@@ -469,7 +622,7 @@ function tampilkanData(data) {
 
                     <p class="fakultas">
 
-                        ${item.fakultas || ""}
+                        ${item.fakultas}
 
                     </p>
 
@@ -488,12 +641,9 @@ function tampilkanData(data) {
 
                     <div class="buttons">
 
-
                         ${tombolBuku}
 
-
                         ${tombolYoutube}
-
 
                     </div>
 
@@ -517,18 +667,16 @@ function tampilkanData(data) {
 function bukaPeriode(periode) {
 
 
-    // Ambil semua profesor pada periode tersebut
+    const dataPeriode =
 
-    const dataPeriode = professors.filter(
+        professors.filter(
 
-        item =>
+            item =>
+                item.periode ===
+                periode
 
-            item.periode === periode
+        );
 
-    );
-
-
-    // Aktifkan menu Arsip
 
     document
         .getElementById("btnArsip")
@@ -536,23 +684,17 @@ function bukaPeriode(periode) {
         .add("active");
 
 
-    // Nonaktifkan menu Beranda
-
     document
         .getElementById("btnBeranda")
         .classList
         .remove("active");
 
 
-    // Sembunyikan periode utama
-
     document
         .querySelector(".periode-box")
         .style
         .display = "none";
 
-
-    // Kosongkan pencarian
 
     searchInput.value = "";
 
@@ -561,17 +703,9 @@ function bukaPeriode(periode) {
     // TAMPILKAN DATA PROFESOR
     // ====================================================
 
-    tampilkanData(dataPeriode);
-
-
-    // ====================================================
-    // TAMBAHKAN INFORMASI PERIODE
-    // ====================================================
-
     list.innerHTML = `
 
         <div class="periode-detail">
-
 
             <button
                 class="btn-kembali"
@@ -595,7 +729,6 @@ function bukaPeriode(periode) {
 
                 <div>
 
-
                     <h2>
                         Pengukuhan Guru Besar
                     </h2>
@@ -614,7 +747,6 @@ function bukaPeriode(periode) {
 
                     </p>
 
-
                 </div>
 
 
@@ -623,11 +755,127 @@ function bukaPeriode(periode) {
 
         </div>
 
-    `
+    `;
 
-    +
 
-    list.innerHTML;
+    // Tambahkan card profesor
+
+    const containerData =
+        document.createElement("div");
+
+
+    dataPeriode.forEach(item => {
+
+
+        const tombolBuku = item.pdf
+
+            ? `
+
+                <a
+                    href="${item.pdf}"
+                    class="btn btn-book"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    Baca Orasi Ilmiah
+
+                </a>
+
+            `
+            : "";
+
+
+        const tombolYoutube = item.youtube
+
+            ? `
+
+                <a
+                    href="${item.youtube}"
+                    class="btn"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+
+                    <i class="fa-brands fa-youtube"></i>
+
+                    Video Biografi
+
+                </a>
+
+            `
+            : "";
+
+
+        const fotoProfesor = item.foto
+
+            ? `
+
+                <img
+                    src="${item.foto}"
+                    class="photo"
+                    alt="${item.nama}"
+                    loading="lazy"
+                >
+
+            `
+
+            : `
+
+                <div class="photo-placeholder">
+
+                    <i class="fa-solid fa-user"></i>
+
+                </div>
+
+            `;
+
+
+        containerData.innerHTML += `
+
+            <div class="card">
+
+                ${fotoProfesor}
+
+                <div class="info">
+
+                    <h3>
+                        ${item.nama}
+                    </h3>
+
+                    <p class="fakultas">
+                        ${item.fakultas}
+                    </p>
+
+                    <p class="periode-profesor">
+
+                        <i class="fa-regular fa-calendar"></i>
+
+                        Pengukuhan:
+                        ${item.periode}
+
+                    </p>
+
+                    <div class="buttons">
+
+                        ${tombolBuku}
+
+                        ${tombolYoutube}
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        `;
+
+    });
+
+
+    list.appendChild(containerData);
 
 }
 
@@ -639,14 +887,9 @@ function bukaPeriode(periode) {
 function tampilkanArsip() {
 
 
-    // ====================================================
-    // HEADER ARSIP
-    // ====================================================
-
     list.innerHTML = `
 
         <div class="arsip-header">
-
 
             <div class="arsip-header-icon">
 
@@ -670,14 +913,13 @@ function tampilkanArsip() {
 
             </p>
 
-
         </div>
 
     `;
 
 
     // ====================================================
-    // KELOMPOKKAN DATA BERDASARKAN TAHUN
+    // KELOMPOKKAN BERDASARKAN TAHUN
     // ====================================================
 
     const kelompokTahun = {};
@@ -712,7 +954,8 @@ function tampilkanArsip() {
 
             .sort(
 
-                (a, b) => b - a
+                (a, b) =>
+                    b - a
 
             );
 
@@ -723,10 +966,6 @@ function tampilkanArsip() {
 
     tahunUrut.forEach(tahun => {
 
-
-        // =================================================
-        // JUDUL TAHUN
-        // =================================================
 
         list.innerHTML += `
 
@@ -742,7 +981,7 @@ function tampilkanArsip() {
 
 
         // =================================================
-        // AMBIL PERIODE UNIK
+        // PERIODE UNIK
         // =================================================
 
         const periodeUnik = [
@@ -764,7 +1003,7 @@ function tampilkanArsip() {
 
 
         // =================================================
-        // URUTKAN PERIODE TERBARU
+        // URUTKAN PERIODE
         // =================================================
 
         periodeUnik.sort(
@@ -778,13 +1017,11 @@ function tampilkanArsip() {
 
 
         // =================================================
-        // TAMPILKAN SETIAP PERIODE
+        // TAMPILKAN PERIODE
         // =================================================
 
         periodeUnik.forEach(periode => {
 
-
-            // Hitung jumlah profesor
 
             const jumlah =
 
@@ -798,10 +1035,6 @@ function tampilkanArsip() {
                 ).length;
 
 
-            // =================================================
-            // ITEM ARSIP
-            // =================================================
-
             list.innerHTML += `
 
                 <div
@@ -812,9 +1045,7 @@ function tampilkanArsip() {
 
                 >
 
-
                     <div>
-
 
                         <h3>
 
@@ -834,7 +1065,6 @@ function tampilkanArsip() {
                             Guru Besar Dikukuhkan
 
                         </p>
-
 
                     </div>
 
@@ -858,5 +1088,7 @@ function tampilkanArsip() {
 
 
 // ========================================================
-// SELESAI
+// MULAI
 // ========================================================
+
+ambilDataDariGoogleSheets();
