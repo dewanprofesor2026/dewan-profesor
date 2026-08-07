@@ -1016,92 +1016,130 @@ footer p {
 }
 
 /* ========================================================
-   STYLING TOMBOL KEMBALI & DETAIL PERIODE
+   PERBAIKAN CSS: TOMBOL KEMBALI & DETAIL PERIODE (HIJAU UNAND)
    ======================================================== */
 
 .periode-detail {
-    margin-bottom: 25px;
+    width: 100%;
+    max-width: 1050px;
+    margin: 10px auto 25px auto !important;
 }
 
 /* Tombol Kembali Modern */
-.btn-kembali {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    background-color: #ffffff;
-    color: #1e3a8a; /* Warna biru gelap / sesuaikan dengan tema Anda */
-    border: 1px solid #e2e8f0;
-    padding: 10px 20px;
-    border-radius: 30px; /* Sudut membulat modern */
-    font-size: 0.95rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-    transition: all 0.25s ease-in-out;
-    margin-bottom: 20px;
+button.btn-kembali {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 8px !important;
+    background-color: #ffffff !important;
+    color: #008000 !important;
+    border: 1.5px solid #008000 !important;
+    padding: 10px 22px !important;
+    border-radius: 30px !important;
+    font-family: "Poppins", sans-serif !important;
+    font-size: 13px !important;
+    font-weight: 600 !important;
+    cursor: pointer !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08) !important;
+    transition: all 0.25s ease-in-out !important;
+    margin-bottom: 18px !important;
+    outline: none !important;
 }
 
-/* Efek Hover (Saat kursor diarahkan) */
-.btn-kembali:hover {
-    background-color: #1e3a8a;
-    color: #ffffff;
-    border-color: #1e3a8a;
-    transform: translateY(-2px); /* Efek terangkat sedikit */
-    box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.2);
+/* Efek Hover Tombol */
+button.btn-kembali:hover {
+    background-color: #008000 !important;
+    color: #ffffff !important;
+    transform: translateY(-2px) !important;
+    box-shadow: 0 6px 16px rgba(0, 128, 0, 0.25) !important;
 }
 
-.btn-kembali i {
-    font-size: 1rem;
-    transition: transform 0.2s ease;
+button.btn-kembali i {
+    font-size: 14px !important;
+    transition: transform 0.2s ease !important;
 }
 
-.btn-kembali:hover i {
-    transform: translateX(-4px); /* Panah bergeser ke kiri */
+button.btn-kembali:hover i {
+    transform: translateX(-4px) !important;
 }
 
-/* Detail Box Container */
+/* Kotak Detail Periode */
 .periode-detail-box {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
-    padding: 20px 25px;
-    border-radius: 16px;
-    border: 1px solid #e2e8f0;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+    display: flex !important;
+    align-items: center !important;
+    gap: 18px !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    padding: 18px 22px !important;
+    border-radius: 18px !important;
+    border: 1px solid rgba(0, 0, 0, 0.08) !important;
+    box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12) !important;
 }
 
 .periode-icon {
-    width: 55px;
-    height: 55px;
-    background-color: #eff6ff;
-    color: #2563eb;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.6rem;
-    flex-shrink: 0;
+    width: 50px !important;
+    height: 50px !important;
+    background-color: rgba(0, 128, 0, 0.1) !important;
+    color: #008000 !important;
+    border-radius: 14px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 22px !important;
+    flex-shrink: 0 !important;
 }
 
-.periode-detail-box h2 {
-    font-size: 0.9rem;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    color: #64748b;
-    margin: 0 0 4px 0;
+.periode-info-text h2 {
+    font-size: 12px !important;
+    text-transform: uppercase !important;
+    letter-spacing: 0.5px !important;
+    color: #555555 !important;
+    margin: 0 0 2px 0 !important;
+    text-shadow: none !important;
 }
 
-.periode-detail-box h3 {
-    font-size: 1.4rem;
-    color: #0f172a;
-    margin: 0 0 4px 0;
-    font-weight: 700;
+.periode-info-text h3 {
+    font-size: 20px !important;
+    color: #008000 !important;
+    margin: 0 0 2px 0 !important;
+    font-weight: 700 !important;
+    text-shadow: none !important;
 }
 
-.periode-detail-box p {
-    font-size: 0.9rem;
-    color: #2563eb;
-    margin: 0;
-    font-weight: 500;
+.periode-info-text p {
+    font-size: 13px !important;
+    color: #111111 !important;
+    margin: 0 !important;
+    font-weight: 600 !important;
+    text-shadow: none !important;
+}
+
+/* Responsif Layar Kecil (HP) */
+@media (max-width: 600px) {
+    button.btn-kembali {
+        padding: 8px 16px !important;
+        font-size: 11px !important;
+    }
+    
+    .periode-detail-box {
+        padding: 12px 15px !important;
+        gap: 12px !important;
+    }
+    
+    .periode-icon {
+        width: 40px !important;
+        height: 40px !important;
+        font-size: 18px !important;
+    }
+
+    .periode-info-text h2 {
+        font-size: 10px !important;
+    }
+
+    .periode-info-text h3 {
+        font-size: 15px !important;
+    }
+
+    .periode-info-text p {
+        font-size: 11px !important;
+    }
 }
