@@ -1,6 +1,6 @@
 // ========================================================
 // DEWAN PROFESOR UNIVERSITAS ANDALAS
-// SCRIPT.JS (OPTIMIZED & SECURE VERSION)
+// SCRIPT.JS (LENGKAP & OPTIMIZED FOTO DRIVE)
 // ========================================================
 
 const API_URL = "https://script.google.com/macros/s/AKfycbyAFoztVoX6ZJ7ANsDTFLDJ5WcBOT8SneZZ9IgnAqLyu0Kz0ufoJERtdhe5iq0OCYH7qA/exec";
@@ -24,7 +24,7 @@ const namaBulan = [
     "Juli", "Agustus", "September", "Oktober", "November", "Desember"
 ];
 
-// Helper: Escape HTML untuk mencegah XSS
+// Helper: Escape HTML untuk mencegah celah keamanan (XSS)
 function escapeHTML(str) {
     if (!str) return "";
     return String(str)
@@ -35,23 +35,29 @@ function escapeHTML(str) {
         .replace(/'/g, "&#039;");
 }
 
-// Helper: Konversi Link Google Drive ke Thumbnail URL yang Stabil
+// Helper Utama: Ekstraksi & Konversi URL Google Drive ke CDN Gambar yang Bebas Blokir
 function ubahLinkGoogleDrive(url) {
     if (!url) return "";
     url = String(url).trim();
 
     let fileId = "";
-    const matchFile = url.match(/drive\.google\.com\/file\/d\/([^\/?]+)/i);
-    const matchOpen = url.match(/drive\.google\.com\/open\?id=([^&]+)/i);
-    const matchUC = url.match(/drive\.google\.com\/uc\?(?:[^#]*&)?id=([^&#]+)/i);
-    const matchID = /^[a-zA-Z0-9_-]{20,}$/.test(url);
 
-    if (matchFile) fileId = matchFile[1];
-    else if (matchOpen) fileId = matchOpen[1];
-    else if (matchUC) fileId = matchUC[1];
-    else if (matchID) fileId = url;
+    // 1. Ekstrak dari parameter id= (misal: uc?export=view&id=XXXX)
+    const matchParamId = url.match(/[?&]id=([a-zA-Z0-9_-]+)/i);
+    // 2. Ekstrak dari format path /file/d/XXXX
+    const matchPathId = url.match(/\/d\/([a-zA-Z0-9_-]+)/i);
+    // 3. Ekstrak jika nilainya adalah ID mentah Drive
+    const matchRawId = /^[a-zA-Z0-9_-]{20,}$/.test(url);
 
-    // Menggunakan CDN Googleusercontent agar tidak terblokir HTTP 403
+    if (matchParamId) {
+        fileId = matchParamId[1];
+    } else if (matchPathId) {
+        fileId = matchPathId[1];
+    } else if (matchRawId) {
+        fileId = url;
+    }
+
+    // Menggunakan CDN Googleusercontent yang stabil & bypass error HTTP 403 / CORS
     if (fileId) {
         return `https://lh3.googleusercontent.com/d/${fileId}`;
     }
@@ -87,7 +93,7 @@ function ubahTanggal(teks) {
     return new Date(tahun, bulan, tanggal);
 }
 
-// Ambil Data via JSONP dengan Timeout
+// Ambil Data dari Google Sheets via JSONP
 function ambilDataDariGoogleSheets() {
     if (list) {
         list.innerHTML = `
@@ -102,7 +108,7 @@ function ambilDataDariGoogleSheets() {
     const callbackName = "googleSheetsCallback_" + Date.now();
     let scriptTag = null;
 
-    // Set Timeout 15 Detik
+    // Timeout 15 detik untuk antisipasi koneksi lambat
     const timeoutId = setTimeout(() => {
         cleanup();
         tampilkanErrorDatabase();
@@ -127,13 +133,13 @@ function ambilDataDariGoogleSheets() {
                 nama: item.nama || "",
                 fakultas: item.fakultas || "",
                 foto: ubahLinkGoogleDrive(item.foto),
-                pdf: item.buku || "",
-                youtube: item.video || ""
+                pdf: item.buku || item.linkbukuorasi || "",
+                youtube: item.video || item.linkvideo || ""
             }));
 
             mulaiPortal();
         } catch (error) {
-            console.error("Kesalahan data:", error);
+            console.error("Kesalahan parsing data:", error);
             tampilkanErrorDatabase();
         }
     };
@@ -142,7 +148,7 @@ function ambilDataDariGoogleSheets() {
     scriptTag.src = `${API_URL}?action=data&callback=${callbackName}`;
     scriptTag.onerror = function() {
         cleanup();
-        console.error("Gagal mengambil data dari Apps Script.");
+        console.error("Gagal terhubung ke Google Apps Script.");
         tampilkanErrorDatabase();
     };
 
@@ -186,7 +192,7 @@ function mulaiPortal() {
     tampilkanData(profesorTerbaru);
 }
 
-// Render Card Profesor (Optimized dengan String Buffer)
+// Render Kartu Profesor ke Halaman Web
 function tampilkanData(data) {
     if (!list) return;
 
@@ -208,8 +214,9 @@ function tampilkanData(data) {
         const fakultas = escapeHTML(item.fakultas);
         const periode = escapeHTML(item.periode);
 
+        // Tag Foto dengan atribut referrerpolicy="no-referrer" agar foto dari Drive tidak terblokir
         const fotoProfesor = (item.foto && item.foto.trim() !== "")
-            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${nama}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${nama}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                <div class="photo-placeholder" style="display:none;"><i class="fa-solid fa-user"></i></div>`
             : `<div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>`;
 
@@ -240,7 +247,7 @@ function tampilkanData(data) {
     list.innerHTML = htmlBuffer;
 }
 
-// Event Listeners
+// Event Search
 if (searchInput) {
     searchInput.addEventListener("keyup", function() {
         const keyword = searchInput.value.toLowerCase().trim();
@@ -256,6 +263,7 @@ if (searchInput) {
     });
 }
 
+// Navigation Tabs
 const btnBeranda = document.getElementById("btnBeranda");
 const btnArsip = document.getElementById("btnArsip");
 
@@ -316,7 +324,7 @@ function bukaPeriode(periodeTarget) {
         const periode = escapeHTML(item.periode);
 
         const fotoProfesor = (item.foto && item.foto.trim() !== "")
-            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${nama}" loading="lazy" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${nama}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                <div class="photo-placeholder" style="display:none;"><i class="fa-solid fa-user"></i></div>`
             : `<div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>`;
 
@@ -387,7 +395,6 @@ function tampilkanArsip() {
 
         periodeUnik.forEach(periode => {
             const jumlah = kelompokTahun[tahun].filter(item => item.periode === periode).length;
-            // Menggunakan data attribute / safe escaping untuk onclick event
             const periodeSafe = escapeHTML(periode).replace(/'/g, "\\'");
 
             htmlBuffer += `
@@ -405,5 +412,5 @@ function tampilkanArsip() {
     list.innerHTML = htmlBuffer;
 }
 
-// Inisialisasi
+// Inisialisasi Pertama
 ambilDataDariGoogleSheets();
