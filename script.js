@@ -303,14 +303,17 @@ function bukaPeriode(periodeTarget) {
     if (periodeBox) periodeBox.style.display = "none";
     if (searchInput) searchInput.value = "";
 
+    // PERBAIKAN: Struktur HTML tombol kembali & header detail periode
     let htmlHeader = `
         <div class="periode-detail">
             <button class="btn-kembali" onclick="tampilkanArsip()">
                 <i class="fa-solid fa-arrow-left"></i> Kembali ke Arsip
             </button>
             <div class="periode-detail-box">
-                <div class="periode-icon"><i class="fa-regular fa-calendar-days"></i></div>
-                <div>
+                <div class="periode-icon">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </div>
+                <div class="periode-info-text">
                     <h2>Pengukuhan Guru Besar</h2>
                     <h3>${escapeHTML(periodeTarget)}</h3>
                     <p>${dataPeriode.length} Guru Besar Dikukuhkan</p>
@@ -355,8 +358,8 @@ function bukaPeriode(periodeTarget) {
     });
 
     list.innerHTML = htmlHeader + `<div>${htmlCards}</div>`;
+    if (countInfo) countInfo.textContent = "";
 }
-
 function tampilkanArsip() {
     let htmlBuffer = `
         <div class="arsip-header">
