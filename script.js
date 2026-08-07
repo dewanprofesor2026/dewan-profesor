@@ -1,7 +1,7 @@
 // ========================================================
 // DEWAN PROFESOR UNIVERSITAS ANDALAS
 // SCRIPT.JS
-// DATABASE GOOGLE SHEETS
+// DATABASE GOOGLE SHEETS + GOOGLE DRIVE
 // ========================================================
 
 
@@ -39,10 +39,7 @@ const totalVideo =
 
 
 // ========================================================
-// DATA GOOGLE SHEETS
-// ========================================================
-// SENGAJA menggunakan nama "dataProfesor"
-// agar tidak bentrok dengan data.js
+// DATA GLOBAL
 // ========================================================
 
 let dataProfesor = [];
@@ -53,7 +50,7 @@ let periodeTerbaru = "";
 
 
 // ========================================================
-// NAMA BULAN INDONESIA
+// NAMA BULAN
 // ========================================================
 
 const namaBulan = [
@@ -73,6 +70,129 @@ const namaBulan = [
 
 
 // ========================================================
+// FUNGSI GOOGLE DRIVE
+// ========================================================
+// Mengubah berbagai bentuk link Google Drive
+// menjadi link gambar yang bisa digunakan <img>
+// ========================================================
+
+function ubahLinkGoogleDrive(url) {
+
+    if (!url) {
+        return "";
+    }
+
+    url = String(url).trim();
+
+    if (url === "") {
+        return "";
+    }
+
+
+    // ----------------------------------------------------
+    // Jika sudah berupa URL uc?export=view&id=
+    // ----------------------------------------------------
+
+    if (
+        url.includes("drive.google.com/uc") &&
+        url.includes("id=")
+    ) {
+
+        return url;
+
+    }
+
+
+    // ----------------------------------------------------
+    // Format:
+    // https://drive.google.com/file/d/FILE_ID/view
+    // ----------------------------------------------------
+
+    let match =
+        url.match(
+            /drive\.google\.com\/file\/d\/([^\/?]+)/i
+        );
+
+
+    if (match && match[1]) {
+
+        return (
+            "https://drive.google.com/uc?export=view&id=" +
+            match[1]
+        );
+
+    }
+
+
+    // ----------------------------------------------------
+    // Format:
+    // https://drive.google.com/open?id=FILE_ID
+    // ----------------------------------------------------
+
+    match =
+        url.match(
+            /drive\.google\.com\/open\?id=([^&]+)/i
+        );
+
+
+    if (match && match[1]) {
+
+        return (
+            "https://drive.google.com/uc?export=view&id=" +
+            match[1]
+        );
+
+    }
+
+
+    // ----------------------------------------------------
+    // Format:
+    // https://drive.google.com/uc?id=FILE_ID
+    // ----------------------------------------------------
+
+    match =
+        url.match(
+            /drive\.google\.com\/uc\?(?:[^#]*&)?id=([^&#]+)/i
+        );
+
+
+    if (match && match[1]) {
+
+        return (
+            "https://drive.google.com/uc?export=view&id=" +
+            match[1]
+        );
+
+    }
+
+
+    // ----------------------------------------------------
+    // Jika hanya FILE ID
+    // ----------------------------------------------------
+
+    if (
+        /^[a-zA-Z0-9_-]{20,}$/.test(url)
+    ) {
+
+        return (
+            "https://drive.google.com/uc?export=view&id=" +
+            url
+        );
+
+    }
+
+
+    // ----------------------------------------------------
+    // Jika bukan Google Drive
+    // kembalikan URL asli
+    // ----------------------------------------------------
+
+    return url;
+
+}
+
+
+// ========================================================
 // FORMAT TANGGAL
 // ========================================================
 
@@ -88,19 +208,23 @@ function formatTanggal(tanggal) {
         return tanggal;
     }
 
+
+    // Gunakan UTC karena data dari Sheets
+    // bisa berbentuk ISO UTC
+
     return (
-        date.getDate() +
+        date.getUTCDate() +
         " " +
-        namaBulan[date.getMonth()] +
+        namaBulan[date.getUTCMonth()] +
         " " +
-        date.getFullYear()
+        date.getUTCFullYear()
     );
 
 }
 
 
 // ========================================================
-// KONVERSI TANGGAL INDONESIA KE DATE
+// KONVERSI TANGGAL INDONESIA
 // ========================================================
 
 function ubahTanggal(teks) {
@@ -109,13 +233,18 @@ function ubahTanggal(teks) {
         return new Date(0);
     }
 
-    // Jika format sudah ISO
+
+    // ----------------------------------------------------
+    // Jika format ISO
+    // ----------------------------------------------------
+
     if (
         teks.includes("T") ||
-        teks.includes("-")
+        /^\d{4}-\d{2}-\d{2}/.test(teks)
     ) {
 
-        const date = new Date(teks);
+        const date =
+            new Date(teks);
 
         if (!isNaN(date.getTime())) {
             return date;
@@ -124,8 +253,10 @@ function ubahTanggal(teks) {
     }
 
 
+    // ----------------------------------------------------
     // Format:
     // 25 Oktober 2026
+    // ----------------------------------------------------
 
     const bagian =
         teks.trim().split(" ");
@@ -153,7 +284,9 @@ function ubahTanggal(teks) {
         bulan < 0 ||
         isNaN(tahun)
     ) {
+
         return new Date(0);
+
     }
 
 
@@ -167,14 +300,12 @@ function ubahTanggal(teks) {
 
 
 // ========================================================
-// AMBIL DATA DARI GOOGLE SHEETS
+// AMBIL DATA GOOGLE SHEETS
 // MENGGUNAKAN JSONP
 // ========================================================
 
 function ambilDataDariGoogleSheets() {
 
-
-    // Tampilkan loading
 
     if (list) {
 
@@ -199,123 +330,133 @@ function ambilDataDariGoogleSheets() {
     }
 
 
-    // Nama callback unik
-
     const callbackName =
         "googleSheetsCallback_" +
         Date.now();
+
+
+    let scriptTag = null;
 
 
     // ====================================================
     // CALLBACK
     // ====================================================
 
-    window[callbackName] = function(data) {
+    window[callbackName] =
+        function(data) {
 
 
-        try {
+            try {
 
 
-            if (!Array.isArray(data)) {
+                if (!Array.isArray(data)) {
 
-                throw new Error(
-                    "Format data Google Sheets tidak valid."
+                    throw new Error(
+                        "Format data tidak valid."
+                    );
+
+                }
+
+
+                // =================================================
+                // SIMPAN DATA
+                // =================================================
+
+                dataProfesor =
+                    data.map(
+                        function(item) {
+
+
+                            return {
+
+                                id:
+                                    item.id || "",
+
+
+                                periode:
+                                    formatTanggal(
+                                        item.periode
+                                    ),
+
+
+                                nama:
+                                    item.nama || "",
+
+
+                                fakultas:
+                                    item.fakultas || "",
+
+
+                                // =================================
+                                // PERBAIKAN GOOGLE DRIVE
+                                // =================================
+
+                                foto:
+                                    ubahLinkGoogleDrive(
+                                        item.foto
+                                    ),
+
+
+                                pdf:
+                                    item.buku || "",
+
+
+                                youtube:
+                                    item.video || ""
+
+                            };
+
+                        }
+                    );
+
+
+                // =================================================
+                // MULAI PORTAL
+                // =================================================
+
+                mulaiPortal();
+
+
+            } catch (error) {
+
+
+                console.error(
+                    "Kesalahan data:",
+                    error
                 );
+
+
+                tampilkanErrorDatabase();
 
             }
 
 
             // =================================================
-            // SIMPAN DATA DARI GOOGLE SHEETS
+            // BERSIHKAN
             // =================================================
 
-            dataProfesor = data.map(function(item) {
+            delete window[callbackName];
 
 
-                return {
+            if (
+                scriptTag &&
+                scriptTag.parentNode
+            ) {
 
-                    id:
-                        item.id || "",
+                scriptTag.parentNode.removeChild(
+                    scriptTag
+                );
 
+            }
 
-                    periode:
-                        formatTanggal(
-                            item.periode
-                        ),
-
-
-                    nama:
-                        item.nama || "",
-
-
-                    fakultas:
-                        item.fakultas || "",
-
-
-                    foto:
-                        item.foto || "",
-
-
-                    pdf:
-                        item.buku || "",
-
-
-                    youtube:
-                        item.video || ""
-
-                };
-
-
-            });
-
-
-            // =================================================
-            // MULAI PORTAL
-            // =================================================
-
-            mulaiPortal();
-
-
-        } catch (error) {
-
-
-            console.error(
-                "Kesalahan data:",
-                error
-            );
-
-
-            tampilkanErrorDatabase();
-
-        }
-
-
-        // =================================================
-        // BERSIHKAN CALLBACK
-        // =================================================
-
-        delete window[callbackName];
-
-
-        if (
-            scriptTag &&
-            scriptTag.parentNode
-        ) {
-
-            scriptTag.parentNode.removeChild(
-                scriptTag
-            );
-
-        }
-
-    };
+        };
 
 
     // ====================================================
-    // SCRIPT TAG JSONP
+    // SCRIPT JSONP
     // ====================================================
 
-    const scriptTag =
+    scriptTag =
         document.createElement("script");
 
 
@@ -325,31 +466,33 @@ function ambilDataDariGoogleSheets() {
         callbackName;
 
 
-    scriptTag.onerror = function() {
+    scriptTag.onerror =
+        function() {
 
 
-        console.error(
-            "Tidak dapat mengambil data dari Apps Script."
-        );
-
-
-        tampilkanErrorDatabase();
-
-
-        delete window[callbackName];
-
-
-        if (
-            scriptTag.parentNode
-        ) {
-
-            scriptTag.parentNode.removeChild(
-                scriptTag
+            console.error(
+                "Gagal mengambil data dari Apps Script."
             );
 
-        }
 
-    };
+            tampilkanErrorDatabase();
+
+
+            delete window[callbackName];
+
+
+            if (
+                scriptTag &&
+                scriptTag.parentNode
+            ) {
+
+                scriptTag.parentNode.removeChild(
+                    scriptTag
+                );
+
+            }
+
+        };
 
 
     document.body.appendChild(
@@ -399,10 +542,6 @@ function tampilkanErrorDatabase() {
 function mulaiPortal() {
 
 
-    // ====================================================
-    // JIKA BELUM ADA DATA
-    // ====================================================
-
     if (dataProfesor.length === 0) {
 
 
@@ -428,7 +567,6 @@ function mulaiPortal() {
 
         tampilkanData([]);
 
-
         return;
 
     }
@@ -444,7 +582,9 @@ function mulaiPortal() {
 
             dataProfesor.map(
                 function(item) {
+
                     return item.periode;
+
                 }
             )
 
@@ -454,7 +594,7 @@ function mulaiPortal() {
 
 
     // ====================================================
-    // URUTKAN PERIODE TERBARU
+    // URUTKAN PERIODE
     // ====================================================
 
     daftarPeriode.sort(
@@ -471,16 +611,12 @@ function mulaiPortal() {
     );
 
 
-    // ====================================================
-    // PERIODE TERBARU
-    // ====================================================
-
     periodeTerbaru =
         daftarPeriode[0];
 
 
     // ====================================================
-    // DATA PROFESOR TERBARU
+    // DATA TERBARU
     // ====================================================
 
     profesorTerbaru =
@@ -499,7 +635,7 @@ function mulaiPortal() {
 
 
     // ====================================================
-    // INFORMASI PERIODE
+    // INFORMASI
     // ====================================================
 
     periodeAktif.textContent =
@@ -551,10 +687,6 @@ function mulaiPortal() {
         ).length;
 
 
-    // ====================================================
-    // TAMPILKAN PERIODE TERBARU
-    // ====================================================
-
     tampilkanData(
         profesorTerbaru
     );
@@ -563,7 +695,7 @@ function mulaiPortal() {
 
 
 // ========================================================
-// PENCARIAN GURU BESAR
+// PENCARIAN
 // ========================================================
 
 if (searchInput) {
@@ -579,9 +711,6 @@ if (searchInput) {
                     .trim();
 
 
-            // Jika pencarian kosong
-            // kembali ke periode terbaru
-
             if (keyword === "") {
 
                 tampilkanData(
@@ -592,10 +721,6 @@ if (searchInput) {
 
             }
 
-
-            // =================================================
-            // CARI NAMA
-            // =================================================
 
             const hasil =
                 dataProfesor.filter(
@@ -625,9 +750,7 @@ if (searchInput) {
                 hasil
             );
 
-
         }
-
     );
 
 }
@@ -638,7 +761,9 @@ if (searchInput) {
 // ========================================================
 
 const btnBeranda =
-    document.getElementById("btnBeranda");
+    document.getElementById(
+        "btnBeranda"
+    );
 
 
 if (btnBeranda) {
@@ -694,7 +819,6 @@ if (btnBeranda) {
             );
 
         }
-
     );
 
 }
@@ -705,7 +829,9 @@ if (btnBeranda) {
 // ========================================================
 
 const btnArsip =
-    document.getElementById("btnArsip");
+    document.getElementById(
+        "btnArsip"
+    );
 
 
 if (btnArsip) {
@@ -753,7 +879,6 @@ if (btnArsip) {
             tampilkanArsip();
 
         }
-
     );
 
 }
@@ -775,7 +900,7 @@ function tampilkanData(data) {
 
 
     // ====================================================
-    // DATA KOSONG
+    // TIDAK ADA DATA
     // ====================================================
 
     if (
@@ -810,7 +935,7 @@ function tampilkanData(data) {
 
 
     // ====================================================
-    // CARD PROFESOR
+    // CARD
     // ====================================================
 
     data.forEach(
@@ -842,7 +967,18 @@ function tampilkanData(data) {
 
                         loading="lazy"
 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+
                     >
+
+                    <div
+                        class="photo-placeholder"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
 
                 `;
 
@@ -948,18 +1084,15 @@ function tampilkanData(data) {
 
                     ${fotoProfesor}
 
-
                     <div class="info">
 
                         <h3>
                             ${item.nama}
                         </h3>
 
-
                         <p class="fakultas">
                             ${item.fakultas}
                         </p>
-
 
                         <p class="periode-profesor">
 
@@ -969,7 +1102,6 @@ function tampilkanData(data) {
                             ${item.periode}
 
                         </p>
-
 
                         <div class="buttons">
 
@@ -985,9 +1117,7 @@ function tampilkanData(data) {
 
             `;
 
-
         }
-
     );
 
 }
@@ -1054,10 +1184,6 @@ function bukaPeriode(periode) {
     }
 
 
-    // ====================================================
-    // HEADER PERIODE
-    // ====================================================
-
     list.innerHTML = `
 
         <div class="periode-detail">
@@ -1081,18 +1207,15 @@ function bukaPeriode(periode) {
                     📅
                 </div>
 
-
                 <div>
 
                     <h2>
                         Pengukuhan Guru Besar
                     </h2>
 
-
                     <h3>
                         ${periode}
                     </h3>
-
 
                     <p>
 
@@ -1110,10 +1233,6 @@ function bukaPeriode(periode) {
 
     `;
 
-
-    // ====================================================
-    // CARD PROFESOR
-    // ====================================================
 
     const containerData =
         document.createElement("div");
@@ -1144,7 +1263,18 @@ function bukaPeriode(periode) {
 
                         loading="lazy"
 
+                        onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"
+
                     >
+
+                    <div
+                        class="photo-placeholder"
+                        style="display:none;"
+                    >
+
+                        <i class="fa-solid fa-user"></i>
+
+                    </div>
 
                 `;
 
@@ -1238,18 +1368,15 @@ function bukaPeriode(periode) {
 
                     ${fotoProfesor}
 
-
                     <div class="info">
 
                         <h3>
                             ${item.nama}
                         </h3>
 
-
                         <p class="fakultas">
                             ${item.fakultas}
                         </p>
-
 
                         <p class="periode-profesor">
 
@@ -1259,7 +1386,6 @@ function bukaPeriode(periode) {
                             ${item.periode}
 
                         </p>
-
 
                         <div class="buttons">
 
@@ -1275,9 +1401,7 @@ function bukaPeriode(periode) {
 
             `;
 
-
         }
-
     );
 
 
@@ -1305,11 +1429,9 @@ function tampilkanArsip() {
 
             </div>
 
-
             <h2>
                 Arsip Pengukuhan
             </h2>
-
 
             <p>
 
@@ -1325,7 +1447,7 @@ function tampilkanArsip() {
 
 
     // ====================================================
-    // KELOMPOK BERDASARKAN TAHUN
+    // KELOMPOK TAHUN
     // ====================================================
 
     const kelompokTahun = {};
@@ -1366,12 +1488,11 @@ function tampilkanArsip() {
             }
 
         }
-
     );
 
 
     // ====================================================
-    // URUTKAN TAHUN TERBARU
+    // URUT TAHUN
     // ====================================================
 
     const tahunUrut =
@@ -1390,7 +1511,7 @@ function tampilkanArsip() {
 
 
     // ====================================================
-    // JIKA ARSIP KOSONG
+    // JIKA KOSONG
     // ====================================================
 
     if (
@@ -1423,7 +1544,7 @@ function tampilkanArsip() {
 
 
     // ====================================================
-    // TAMPILKAN TAHUN
+    // TAHUN
     // ====================================================
 
     tahunUrut.forEach(
@@ -1443,33 +1564,23 @@ function tampilkanArsip() {
             `;
 
 
-            // =================================================
-            // PERIODE UNIK
-            // =================================================
-
             const periodeUnik = [
 
                 ...new Set(
 
                     kelompokTahun[tahun]
                         .map(
-
                             function(item) {
 
                                 return item.periode;
 
                             }
-
                         )
 
                 )
 
             ];
 
-
-            // =================================================
-            // URUTKAN PERIODE
-            // =================================================
 
             periodeUnik.sort(
 
@@ -1485,10 +1596,6 @@ function tampilkanArsip() {
             );
 
 
-            // =================================================
-            // TAMPILKAN PERIODE
-            // =================================================
-
             periodeUnik.forEach(
                 function(periode) {
 
@@ -1497,7 +1604,6 @@ function tampilkanArsip() {
 
                         kelompokTahun[tahun]
                             .filter(
-
                                 function(item) {
 
                                     return (
@@ -1506,7 +1612,6 @@ function tampilkanArsip() {
                                     );
 
                                 }
-
                             ).length;
 
 
@@ -1530,7 +1635,6 @@ function tampilkanArsip() {
 
                                 </h3>
 
-
                                 <p>
 
                                     ${jumlah}
@@ -1540,7 +1644,6 @@ function tampilkanArsip() {
                                 </p>
 
                             </div>
-
 
                             <div class="arsip-arrow">
 
@@ -1552,21 +1655,17 @@ function tampilkanArsip() {
 
                     `;
 
-
                 }
-
             );
 
-
         }
-
     );
 
 }
 
 
 // ========================================================
-// MULAI MENGAMBIL DATA
+// JALANKAN
 // ========================================================
 
 ambilDataDariGoogleSheets();
