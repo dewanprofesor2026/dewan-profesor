@@ -305,9 +305,11 @@ function bukaPeriode(periodeTarget) {
 
     let htmlHeader = `
         <div class="periode-detail">
-            <button class="btn-kembali" onclick="tampilkanArsip()">← Kembali ke Arsip</button>
+            <button class="btn-kembali" onclick="tampilkanArsip()">
+                <i class="fa-solid fa-arrow-left"></i> Kembali ke Arsip
+            </button>
             <div class="periode-detail-box">
-                <div class="periode-icon">📅</div>
+                <div class="periode-icon"><i class="fa-regular fa-calendar-days"></i></div>
                 <div>
                     <h2>Pengukuhan Guru Besar</h2>
                     <h3>${escapeHTML(periodeTarget)}</h3>
