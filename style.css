@@ -1014,3 +1014,94 @@ footer p {
         padding: 5px 6px;
     }
 }
+
+/* ========================================================
+   STYLING TOMBOL KEMBALI & DETAIL PERIODE
+   ======================================================== */
+
+.periode-detail {
+    margin-bottom: 25px;
+}
+
+/* Tombol Kembali Modern */
+.btn-kembali {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #ffffff;
+    color: #1e3a8a; /* Warna biru gelap / sesuaikan dengan tema Anda */
+    border: 1px solid #e2e8f0;
+    padding: 10px 20px;
+    border-radius: 30px; /* Sudut membulat modern */
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: all 0.25s ease-in-out;
+    margin-bottom: 20px;
+}
+
+/* Efek Hover (Saat kursor diarahkan) */
+.btn-kembali:hover {
+    background-color: #1e3a8a;
+    color: #ffffff;
+    border-color: #1e3a8a;
+    transform: translateY(-2px); /* Efek terangkat sedikit */
+    box-shadow: 0 10px 15px -3px rgba(30, 58, 138, 0.2);
+}
+
+.btn-kembali i {
+    font-size: 1rem;
+    transition: transform 0.2s ease;
+}
+
+.btn-kembali:hover i {
+    transform: translateX(-4px); /* Panah bergeser ke kiri */
+}
+
+/* Detail Box Container */
+.periode-detail-box {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+    padding: 20px 25px;
+    border-radius: 16px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+}
+
+.periode-icon {
+    width: 55px;
+    height: 55px;
+    background-color: #eff6ff;
+    color: #2563eb;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+}
+
+.periode-detail-box h2 {
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #64748b;
+    margin: 0 0 4px 0;
+}
+
+.periode-detail-box h3 {
+    font-size: 1.4rem;
+    color: #0f172a;
+    margin: 0 0 4px 0;
+    font-weight: 700;
+}
+
+.periode-detail-box p {
+    font-size: 0.9rem;
+    color: #2563eb;
+    margin: 0;
+    font-weight: 500;
+}
