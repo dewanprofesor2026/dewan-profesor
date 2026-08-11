@@ -1202,3 +1202,14 @@ button.btn-kembali:hover i {
         font-size: 11px !important;
     }
 }
+
+/* Pastikan ini ada di file CSS Anda */
+#listProfesor {
+    min-height: auto !important; /* Jangan gunakan fixed height */
+    padding-bottom: 50px;       /* Beri napas di bagian bawah */
+}
+
+/* Jika container utama punya CSS ini, hapus atau ubah */
+body, html {
+    overflow-y: auto !important;
+}
