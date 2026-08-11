@@ -3,21 +3,26 @@
 // SCRIPT.JS LENGKAP
 //
 // FITUR:
-// 1. Ambil data Google Sheets via JSONP
-// 2. Foto Google Drive
-// 3. Search realtime
-// 4. Enter untuk mencari
-// 5. Highlight hasil pencarian
-// 6. Scroll ke kartu profesor
-// 7. Pemulihan tampilan setelah auto-zoom HP
-// 8. Beranda
-// 9. Arsip Pengukuhan
-// 10. Detail periode
-// 11. Tombol kembali
-// 12. Slideshow foto profesor
-// 13. Foto kiri - tengah - kanan
-// 14. Foto kiri/kanan berhimpit dengan foto tengah
-// 15. Foto tengah memiliki efek bayangan
+// 1. Google Sheets JSONP
+// 2. Google Drive Photo
+// 3. Slideshow Foto Profesor 3D
+// 4. Slideshow tanpa nama
+// 5. Foto tengah besar
+// 6. Foto kiri/kanan berhimpit dengan tengah
+// 7. Efek bayangan foto
+// 8. Auto slide 3,5 detik
+// 9. Tombol kiri / kanan
+// 10. Indicator dots
+// 11. Klik foto slideshow → pencarian
+// 12. Search realtime
+// 13. Enter untuk pencarian
+// 14. Highlight hasil
+// 15. Scroll ke kartu profesor
+// 16. Pemulihan auto-zoom HP
+// 17. Beranda
+// 18. Arsip Pengukuhan
+// 19. Detail periode
+// 20. Statistik
 // ========================================================
 
 
@@ -30,39 +35,7 @@ const API_URL =
 
 
 // ========================================================
-// ELEMENT HTML
-// ========================================================
-
-const list =
-    document.getElementById("listProfesor");
-
-const searchInput =
-    document.getElementById("searchInput");
-
-const periodeAktif =
-    document.getElementById("periodeAktif");
-
-const jumlahPeriode =
-    document.getElementById("jumlahPeriode");
-
-const totalProfesor =
-    document.getElementById("totalProfesor");
-
-const totalBuku =
-    document.getElementById("totalBuku");
-
-const totalVideo =
-    document.getElementById("totalVideo");
-
-const btnBeranda =
-    document.getElementById("btnBeranda");
-
-const btnArsip =
-    document.getElementById("btnArsip");
-
-
-// ========================================================
-// DATA GLOBAL
+// VARIABEL GLOBAL
 // ========================================================
 
 let dataProfesor = [];
@@ -71,14 +44,11 @@ let profesorTerbaru = [];
 
 let periodeTerbaru = "";
 
-
-// ========================================================
-// SLIDESHOW
-// ========================================================
-
 let slideshowIndex = 0;
 
 let slideshowTimer = null;
+
+let slideshowData = [];
 
 
 // ========================================================
@@ -99,6 +69,21 @@ const namaBulan = [
     "November",
     "Desember"
 ];
+
+
+// ========================================================
+// ELEMENT HTML
+// ========================================================
+
+let list;
+let searchInput;
+let periodeAktif;
+let jumlahPeriode;
+let totalProfesor;
+let totalBuku;
+let totalVideo;
+let btnBeranda;
+let btnArsip;
 
 
 // ========================================================
@@ -124,7 +109,21 @@ function escapeHTML(str) {
 
 
 // ========================================================
-// KONVERSI LINK GOOGLE DRIVE
+// ESCAPE REGEX
+// ========================================================
+
+function escapeRegex(text) {
+
+    return String(text).replace(
+        /[-\/\\^$*+?.()|[\]{}]/g,
+        "\\$&"
+    );
+
+}
+
+
+// ========================================================
+// GOOGLE DRIVE → GOOGLEUSERCONTENT
 // ========================================================
 
 function ubahLinkGoogleDrive(url) {
@@ -137,57 +136,38 @@ function ubahLinkGoogleDrive(url) {
 
     let fileId = "";
 
-
-    // Format ?id=XXXX
-
     const matchParamId =
         url.match(
             /[?&]id=([a-zA-Z0-9_-]+)/i
         );
-
-
-    // Format /file/d/XXXX
 
     const matchPathId =
         url.match(
             /\/d\/([a-zA-Z0-9_-]+)/i
         );
 
-
-    // Format ID langsung
-
     const matchRawId =
         /^[a-zA-Z0-9_-]{20,}$/.test(url);
 
-
     if (matchParamId) {
 
-        fileId =
-            matchParamId[1];
+        fileId = matchParamId[1];
+
+    } else if (matchPathId) {
+
+        fileId = matchPathId[1];
+
+    } else if (matchRawId) {
+
+        fileId = url;
 
     }
-
-    else if (matchPathId) {
-
-        fileId =
-            matchPathId[1];
-
-    }
-
-    else if (matchRawId) {
-
-        fileId =
-            url;
-
-    }
-
 
     if (fileId) {
 
         return `https://lh3.googleusercontent.com/d/${fileId}`;
 
     }
-
 
     return url;
 }
@@ -203,96 +183,65 @@ function formatTanggal(tanggal) {
         return "";
     }
 
-    const date =
-        new Date(tanggal);
-
+    const date = new Date(tanggal);
 
     if (isNaN(date.getTime())) {
-
         return tanggal;
-
     }
-
 
     return `${date.getUTCDate()} ${
         namaBulan[date.getUTCMonth()]
-    } ${
-        date.getUTCFullYear()
-    }`;
+    } ${date.getUTCFullYear()}`;
 }
 
 
 // ========================================================
-// UBAH TANGGAL INDONESIA MENJADI DATE
+// UBAH TANGGAL INDONESIA KE DATE
 // ========================================================
 
 function ubahTanggal(teks) {
 
     if (!teks) {
-
         return new Date(0);
-
     }
-
-
-    // Format ISO
 
     if (
         teks.includes("T") ||
         /^\d{4}-\d{2}-\d{2}/.test(teks)
     ) {
 
-        const date =
-            new Date(teks);
-
+        const date = new Date(teks);
 
         if (!isNaN(date.getTime())) {
-
             return date;
-
         }
-
     }
-
-
-    // Format:
-    // 25 Oktober 2026
 
     const bagian =
-        teks.trim().split(" ");
-
+        String(teks)
+            .trim()
+            .split(" ");
 
     if (bagian.length < 3) {
-
         return new Date(0);
-
     }
-
 
     const tanggal =
         parseInt(bagian[0]);
 
-
     const bulan =
-        namaBulan.indexOf(
-            bagian[1]
-        );
-
+        namaBulan.indexOf(bagian[1]);
 
     const tahun =
         parseInt(bagian[2]);
-
 
     if (
         isNaN(tanggal) ||
         bulan < 0 ||
         isNaN(tahun)
     ) {
-
         return new Date(0);
-
     }
-
 
     return new Date(
         tahun,
@@ -303,20 +252,1110 @@ function ubahTanggal(teks) {
 
 
 // ========================================================
-// ESCAPE REGEX
+// INISIALISASI ELEMENT
 // ========================================================
 
-function escapeRegex(text) {
+function initElements() {
 
-    return text.replace(
-        /[-\/\\^$*+?.()|[\]{}]/g,
-        "\\$&"
+    list =
+        document.getElementById(
+            "listProfesor"
+        );
+
+    searchInput =
+        document.getElementById(
+            "searchInput"
+        );
+
+    periodeAktif =
+        document.getElementById(
+            "periodeAktif"
+        );
+
+    jumlahPeriode =
+        document.getElementById(
+            "jumlahPeriode"
+        );
+
+    totalProfesor =
+        document.getElementById(
+            "totalProfesor"
+        );
+
+    totalBuku =
+        document.getElementById(
+            "totalBuku"
+        );
+
+    totalVideo =
+        document.getElementById(
+            "totalVideo"
+        );
+
+    btnBeranda =
+        document.getElementById(
+            "btnBeranda"
+        );
+
+    btnArsip =
+        document.getElementById(
+            "btnArsip"
+        );
+}
+
+
+// ========================================================
+// CSS SLIDESHOW
+// CSS DIBUAT OTOMATIS DARI JAVASCRIPT
+// ========================================================
+
+function buatCSSSlideshow() {
+
+    if (
+        document.getElementById(
+            "cssSlideshowProfesor"
+        )
+    ) {
+        return;
+    }
+
+    const style =
+        document.createElement("style");
+
+    style.id =
+        "cssSlideshowProfesor";
+
+    style.textContent = `
+
+        /* ==========================================
+           SLIDESHOW UTAMA
+        ========================================== */
+
+        .profesor-slideshow {
+
+            width: 100%;
+
+            max-width: 1100px;
+
+            margin: 25px auto 30px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+            overflow: hidden;
+
+            min-height: 300px;
+
+            perspective: 1200px;
+
+        }
+
+
+        /* ==========================================
+           AREA SLIDES
+        ========================================== */
+
+        .profesor-slide-stage {
+
+            width: 100%;
+
+            height: 300px;
+
+            position: relative;
+
+            display: flex;
+
+            align-items: center;
+
+            justify-content: center;
+
+        }
+
+
+        /* ==========================================
+           FOTO
+        ========================================== */
+
+        .profesor-slide-card {
+
+            position: absolute;
+
+            width: 170px;
+
+            height: 230px;
+
+            border-radius: 18px;
+
+            overflow: hidden;
+
+            background: #ffffff;
+
+            border: 4px solid #ffffff;
+
+            box-shadow:
+                0 15px 35px
+                rgba(0,0,0,0.35);
+
+            transition:
+                transform 0.55s ease,
+                opacity 0.55s ease,
+                filter 0.55s ease,
+                box-shadow 0.55s ease;
+
+            cursor: pointer;
+
+            user-select: none;
+
+        }
+
+
+        .profesor-slide-card img {
+
+            width: 100%;
+
+            height: 100%;
+
+            display: block;
+
+            object-fit: cover;
+
+            object-position: center top;
+
+        }
+
+
+        /* ==========================================
+           FOTO TENGAH
+        ========================================== */
+
+        .profesor-slide-card.center {
+
+            width: 190px;
+
+            height: 255px;
+
+            z-index: 5;
+
+            opacity: 1;
+
+            transform:
+                translateX(0)
+                translateZ(80px)
+                scale(1);
+
+            box-shadow:
+                0 20px 45px
+                rgba(0,0,0,0.45);
+
+        }
+
+
+        /* ==========================================
+           FOTO KIRI
+        ========================================== */
+
+        .profesor-slide-card.left {
+
+            z-index: 3;
+
+            opacity: 0.92;
+
+            transform:
+                translateX(-125px)
+                translateZ(0)
+                scale(0.82);
+
+            filter: brightness(0.88);
+
+        }
+
+
+        /* ==========================================
+           FOTO KANAN
+        ========================================== */
+
+        .profesor-slide-card.right {
+
+            z-index: 3;
+
+            opacity: 0.92;
+
+            transform:
+                translateX(125px)
+                translateZ(0)
+                scale(0.82);
+
+            filter: brightness(0.88);
+
+        }
+
+
+        /* ==========================================
+           FOTO YANG TIDAK TERLIHAT
+        ========================================== */
+
+        .profesor-slide-card.hidden {
+
+            z-index: 1;
+
+            opacity: 0;
+
+            pointer-events: none;
+
+            transform:
+                translateX(0)
+                translateZ(-150px)
+                scale(0.5);
+
+        }
+
+
+        /* ==========================================
+           TOMBOL NAVIGASI
+        ========================================== */
+
+        .profesor-slide-arrow {
+
+            position: absolute;
+
+            top: 50%;
+
+            transform:
+                translateY(-50%);
+
+            width: 42px;
+
+            height: 42px;
+
+            border: none;
+
+            border-radius: 50%;
+
+            background:
+                rgba(255,255,255,0.92);
+
+            color: #008000;
+
+            font-size: 20px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            z-index: 10;
+
+            box-shadow:
+                0 5px 15px
+                rgba(0,0,0,0.20);
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .profesor-slide-arrow:hover {
+
+            transform:
+                translateY(-50%)
+                scale(1.08);
+
+            background: #ffffff;
+
+            box-shadow:
+                0 8px 20px
+                rgba(0,0,0,0.30);
+
+        }
+
+
+        .profesor-slide-arrow.left-arrow {
+
+            left: 20px;
+
+        }
+
+
+        .profesor-slide-arrow.right-arrow {
+
+            right: 20px;
+
+        }
+
+
+        /* ==========================================
+           DOTS
+        ========================================== */
+
+        .profesor-slide-dots {
+
+            position: absolute;
+
+            bottom: 4px;
+
+            left: 50%;
+
+            transform:
+                translateX(-50%);
+
+            display: flex;
+
+            gap: 7px;
+
+            z-index: 12;
+
+        }
+
+
+        .profesor-slide-dot {
+
+            width: 8px;
+
+            height: 8px;
+
+            border-radius: 50%;
+
+            border: none;
+
+            padding: 0;
+
+            background:
+                rgba(255,255,255,0.60);
+
+            cursor: pointer;
+
+            transition:
+                0.25s ease;
+
+        }
+
+
+        .profesor-slide-dot.active {
+
+            width: 22px;
+
+            border-radius: 10px;
+
+            background: #008000;
+
+        }
+
+
+        /* ==========================================
+           MOBILE
+        ========================================== */
+
+        @media (max-width: 700px) {
+
+            .profesor-slideshow {
+
+                min-height: 250px;
+
+                margin-top: 15px;
+
+            }
+
+
+            .profesor-slide-stage {
+
+                height: 250px;
+
+            }
+
+
+            .profesor-slide-card {
+
+                width: 130px;
+
+                height: 180px;
+
+                border-radius: 14px;
+
+            }
+
+
+            .profesor-slide-card.center {
+
+                width: 150px;
+
+                height: 205px;
+
+            }
+
+
+            .profesor-slide-card.left {
+
+                transform:
+                    translateX(-90px)
+                    translateZ(0)
+                    scale(0.80);
+
+            }
+
+
+            .profesor-slide-card.right {
+
+                transform:
+                    translateX(90px)
+                    translateZ(0)
+                    scale(0.80);
+
+            }
+
+
+            .profesor-slide-arrow {
+
+                width: 36px;
+
+                height: 36px;
+
+                font-size: 17px;
+
+            }
+
+
+            .profesor-slide-arrow.left-arrow {
+
+                left: 8px;
+
+            }
+
+
+            .profesor-slide-arrow.right-arrow {
+
+                right: 8px;
+
+            }
+
+        }
+
+    `;
+
+    document.head.appendChild(style);
+}
+
+
+// ========================================================
+// MEMBUAT HTML SLIDESHOW
+// DITEMPATKAN SETELAH HEADER
+// ========================================================
+
+function buatHTMLSlideshow() {
+
+    if (
+        document.getElementById(
+            "profesorSlideshow"
+        )
+    ) {
+        return;
+    }
+
+    const header =
+        document.querySelector("header");
+
+    if (!header) {
+        return;
+    }
+
+    const paragrafHeader =
+        header.querySelector("p");
+
+    const slideshow =
+        document.createElement("section");
+
+    slideshow.id =
+        "profesorSlideshow";
+
+    slideshow.className =
+        "profesor-slideshow";
+
+    slideshow.innerHTML = `
+
+        <button
+            type="button"
+            class="profesor-slide-arrow left-arrow"
+            id="slideshowPrev"
+            aria-label="Foto sebelumnya"
+        >
+            ‹
+        </button>
+
+
+        <div
+            class="profesor-slide-stage"
+            id="profesorSlideStage"
+        ></div>
+
+
+        <button
+            type="button"
+            class="profesor-slide-arrow right-arrow"
+            id="slideshowNext"
+            aria-label="Foto berikutnya"
+        >
+            ›
+        </button>
+
+
+        <div
+            class="profesor-slide-dots"
+            id="profesorSlideDots"
+        ></div>
+
+    `;
+
+    if (paragrafHeader) {
+
+        paragrafHeader.insertAdjacentElement(
+            "afterend",
+            slideshow
+        );
+
+    } else {
+
+        header.appendChild(
+            slideshow
+        );
+
+    }
+
+    const prev =
+        document.getElementById(
+            "slideshowPrev"
+        );
+
+    const next =
+        document.getElementById(
+            "slideshowNext"
+        );
+
+    if (prev) {
+
+        prev.addEventListener(
+            "click",
+            function() {
+
+                slideshowSebelumnya();
+
+                restartSlideshow();
+
+            }
+        );
+
+    }
+
+    if (next) {
+
+        next.addEventListener(
+            "click",
+            function() {
+
+                slideshowBerikutnya();
+
+                restartSlideshow();
+
+            }
+        );
+
+    }
+
+
+    slideshow.addEventListener(
+        "mouseenter",
+        stopSlideshow
+    );
+
+
+    slideshow.addEventListener(
+        "mouseleave",
+        startSlideshow
     );
 }
 
 
 // ========================================================
-// AUTO ZOOM HP
+// DATA SLIDESHOW
+// MENGGUNAKAN FOTO PROFESOR YANG ADA DI GOOGLE SHEETS
+// ========================================================
+
+function siapkanDataSlideshow() {
+
+    slideshowData =
+        dataProfesor.filter(
+            item =>
+                item.foto &&
+                item.foto.trim() !== ""
+        );
+
+    if (
+        slideshowData.length === 0
+    ) {
+
+        const area =
+            document.getElementById(
+                "profesorSlideshow"
+            );
+
+        if (area) {
+            area.style.display =
+                "none";
+        }
+
+        return;
+    }
+
+    slideshowIndex = 0;
+
+    renderSlideshow();
+
+    startSlideshow();
+}
+
+
+// ========================================================
+// RENDER SLIDESHOW
+// ========================================================
+
+function renderSlideshow() {
+
+    const stage =
+        document.getElementById(
+            "profesorSlideStage"
+        );
+
+    const dots =
+        document.getElementById(
+            "profesorSlideDots"
+        );
+
+    if (!stage) {
+        return;
+    }
+
+    stage.innerHTML = "";
+
+    if (dots) {
+        dots.innerHTML = "";
+    }
+
+    const jumlah =
+        slideshowData.length;
+
+
+    // ====================================================
+    // BUAT 3 FOTO:
+    // KIRI - TENGAH - KANAN
+    // ====================================================
+
+    for (
+        let posisi = -1;
+        posisi <= 1;
+        posisi++
+    ) {
+
+        if (jumlah === 1 && posisi !== 0) {
+            continue;
+        }
+
+        const index =
+            (
+                slideshowIndex +
+                posisi +
+                jumlah
+            ) % jumlah;
+
+        const item =
+            slideshowData[index];
+
+        const card =
+            document.createElement("div");
+
+        card.className =
+            "profesor-slide-card";
+
+
+        if (posisi === 0) {
+
+            card.classList.add(
+                "center"
+            );
+
+        } else if (posisi === -1) {
+
+            card.classList.add(
+                "left"
+            );
+
+        } else {
+
+            card.classList.add(
+                "right"
+            );
+
+        }
+
+
+        const img =
+            document.createElement("img");
+
+        img.src =
+            item.foto;
+
+        img.alt =
+            "Foto Guru Besar";
+
+        img.loading =
+            "lazy";
+
+        img.referrerPolicy =
+            "no-referrer";
+
+
+        img.onerror =
+            function() {
+
+                card.style.display =
+                    "none";
+
+            };
+
+
+        card.appendChild(img);
+
+
+        // ================================================
+        // KLIK FOTO
+        // LANGSUNG CARI PROFESOR
+        // ================================================
+
+        card.addEventListener(
+            "click",
+            function() {
+
+                if (posisi === 0) {
+
+                    cariProfesorDariSlideshow(
+                        item
+                    );
+
+                } else if (
+                    posisi === -1
+                ) {
+
+                    slideshowSebelumnya();
+
+                    restartSlideshow();
+
+                } else {
+
+                    slideshowBerikutnya();
+
+                    restartSlideshow();
+
+                }
+
+            }
+        );
+
+
+        stage.appendChild(card);
+
+    }
+
+
+    // ====================================================
+    // DOTS
+    // ====================================================
+
+    if (dots && jumlah > 1) {
+
+        slideshowData.forEach(
+            (item, index) => {
+
+                const dot =
+                    document.createElement(
+                        "button"
+                    );
+
+                dot.type =
+                    "button";
+
+                dot.className =
+                    "profesor-slide-dot";
+
+                if (
+                    index ===
+                    slideshowIndex
+                ) {
+
+                    dot.classList.add(
+                        "active"
+                    );
+
+                }
+
+                dot.setAttribute(
+                    "aria-label",
+                    `Foto ${index + 1}`
+                );
+
+                dot.addEventListener(
+                    "click",
+                    function() {
+
+                        slideshowIndex =
+                            index;
+
+                        renderSlideshow();
+
+                        restartSlideshow();
+
+                    }
+                );
+
+                dots.appendChild(dot);
+
+            }
+        );
+
+    }
+
+}
+
+
+// ========================================================
+// SLIDE BERIKUTNYA
+// ========================================================
+
+function slideshowBerikutnya() {
+
+    if (
+        slideshowData.length <= 1
+    ) {
+        return;
+    }
+
+    slideshowIndex =
+        (
+            slideshowIndex + 1
+        ) %
+        slideshowData.length;
+
+    renderSlideshow();
+}
+
+
+// ========================================================
+// SLIDE SEBELUMNYA
+// ========================================================
+
+function slideshowSebelumnya() {
+
+    if (
+        slideshowData.length <= 1
+    ) {
+        return;
+    }
+
+    slideshowIndex =
+        (
+            slideshowIndex - 1 +
+            slideshowData.length
+        ) %
+        slideshowData.length;
+
+    renderSlideshow();
+}
+
+
+// ========================================================
+// AUTO SLIDESHOW
+// 3,5 DETIK
+// ========================================================
+
+function startSlideshow() {
+
+    stopSlideshow();
+
+    if (
+        slideshowData.length <= 1
+    ) {
+        return;
+    }
+
+    slideshowTimer =
+        setInterval(
+            function() {
+
+                slideshowBerikutnya();
+
+            },
+            3500
+        );
+}
+
+
+// ========================================================
+// STOP SLIDESHOW
+// ========================================================
+
+function stopSlideshow() {
+
+    if (slideshowTimer) {
+
+        clearInterval(
+            slideshowTimer
+        );
+
+        slideshowTimer = null;
+
+    }
+
+}
+
+
+// ========================================================
+// RESTART SLIDESHOW
+// ========================================================
+
+function restartSlideshow() {
+
+    stopSlideshow();
+
+    startSlideshow();
+
+}
+
+
+// ========================================================
+// JIKA TAB BROWSER DITINGGALKAN
+// HENTIKAN SLIDESHOW
+// ========================================================
+
+document.addEventListener(
+    "visibilitychange",
+    function() {
+
+        if (
+            document.hidden
+        ) {
+
+            stopSlideshow();
+
+        } else {
+
+            startSlideshow();
+
+        }
+
+    }
+);
+
+
+// ========================================================
+// KLIK FOTO TENGAH
+// CARI PROFESOR
+// ========================================================
+
+function cariProfesorDariSlideshow(
+    profesor
+) {
+
+    if (!searchInput || !profesor) {
+        return;
+    }
+
+    searchInput.value =
+        profesor.nama;
+
+    searchInput.dispatchEvent(
+        new Event("input", {
+            bubbles: true
+        })
+    );
+
+    searchInput.blur();
+
+
+    const hasil =
+        dataProfesor.filter(
+            item =>
+                item.id === profesor.id
+                ||
+                item.nama === profesor.nama
+        );
+
+
+    if (hasil.length > 0) {
+
+        tampilkanData(
+            hasil
+        );
+
+        setTimeout(
+            function() {
+
+                const kartu =
+                    document.querySelector(
+                        "#listProfesor .card"
+                    );
+
+                if (!kartu) {
+                    return;
+                }
+
+                const posisi =
+                    kartu
+                        .getBoundingClientRect()
+                        .top +
+                    window.pageYOffset;
+
+                window.scrollTo({
+
+                    top:
+                        Math.max(
+                            0,
+                            posisi - 20
+                        ),
+
+                    behavior:
+                        "smooth"
+
+                });
+
+                kartu.style.transition =
+                    "all 0.3s ease";
+
+                kartu.style.boxShadow =
+                    "0 0 0 4px #008000, 0 12px 30px rgba(0,0,0,0.25)";
+
+
+                setTimeout(
+                    function() {
+
+                        kartu.style.boxShadow =
+                            "";
+
+                    },
+                    2000
+                );
+
+            },
+            150
+        );
+
+    }
+
+}
+
+
+// ========================================================
+// PEMULIHAN ZOOM HP
 // ========================================================
 
 function pulihkanZoomHP() {
@@ -324,7 +1363,6 @@ function pulihkanZoomHP() {
     if (!searchInput) {
         return;
     }
-
 
     const scrollX =
         window.scrollX;
@@ -340,9 +1378,7 @@ function pulihkanZoomHP() {
 
         document.body.focus();
 
-    }
-
-    catch (error) {
+    } catch (error) {
 
         console.log(
             "Body tidak dapat difokuskan."
@@ -357,49 +1393,59 @@ function pulihkanZoomHP() {
     );
 
 
-    setTimeout(() => {
+    setTimeout(
+        function() {
 
-        window.scrollTo({
+            window.scrollTo({
 
-            left: scrollX,
+                left: scrollX,
 
-            top: scrollY,
+                top: scrollY,
 
-            behavior: "instant"
+                behavior: "instant"
 
-        });
+            });
 
-    }, 50);
-
-
-    setTimeout(() => {
-
-        window.scrollTo({
-
-            left: scrollX,
-
-            top: scrollY,
-
-            behavior: "instant"
-
-        });
-
-    }, 150);
+        },
+        50
+    );
 
 
-    setTimeout(() => {
+    setTimeout(
+        function() {
 
-        window.scrollTo({
+            window.scrollTo({
 
-            left: scrollX,
+                left: scrollX,
 
-            top: scrollY,
+                top: scrollY,
 
-            behavior: "instant"
+                behavior: "instant"
 
-        });
+            });
 
-    }, 300);
+        },
+        150
+    );
+
+
+    setTimeout(
+        function() {
+
+            window.scrollTo({
+
+                left: scrollX,
+
+                top: scrollY,
+
+                behavior: "instant"
+
+            });
+
+        },
+        300
+    );
+
 }
 
 
@@ -414,27 +1460,25 @@ function resetViewportHP() {
             'meta[name="viewport"]'
         );
 
-
     if (!viewport) {
         return;
     }
-
 
     const isiAsli =
         viewport.getAttribute(
             "content"
         );
 
-
     viewport.setAttribute(
         "content",
         isiAsli
     );
+
 }
 
 
 // ========================================================
-// SELESAI SEARCH
+// SELESAI SEARCH HP
 // ========================================================
 
 function selesaiSearchHP() {
@@ -445,376 +1489,50 @@ function selesaiSearchHP() {
 
     }
 
-
     resetViewportHP();
 
     pulihkanZoomHP();
+
 }
 
 
 // ========================================================
-// ========================================================
-// SLIDESHOW FOTO PROFESOR
-// ========================================================
+// TAMPILKAN ERROR DATABASE
 // ========================================================
 
+function tampilkanErrorDatabase() {
 
-// ========================================================
-// MEMBUAT CONTAINER SLIDESHOW
-// ========================================================
-
-function siapkanSlideshow() {
-
-    let slideshow =
-        document.getElementById(
-            "professorSlideshow"
-        );
-
-
-    // Jika HTML belum memiliki container,
-    // kita buat otomatis.
-
-    if (!slideshow) {
-
-        const header =
-            document.querySelector("header");
-
-
-        if (!header) {
-
-            return null;
-
-        }
-
-
-        slideshow =
-            document.createElement("div");
-
-
-        slideshow.id =
-            "professorSlideshow";
-
-
-        // Masukkan tepat setelah paragraf
-        // "Portal Digital Pengukuhan Guru Besar"
-
-        const semuaP =
-            header.querySelectorAll("p");
-
-
-        if (semuaP.length > 0) {
-
-            const pTerakhir =
-                semuaP[
-                    semuaP.length - 1
-                ];
-
-
-            pTerakhir.insertAdjacentElement(
-                "afterend",
-                slideshow
-            );
-
-        }
-
-        else {
-
-            header.appendChild(
-                slideshow
-            );
-
-        }
-
-    }
-
-
-    return slideshow;
-}
-
-
-// ========================================================
-// RENDER SLIDESHOW
-// ========================================================
-
-function renderSlideshow() {
-
-    const slideshow =
-        siapkanSlideshow();
-
-
-    if (!slideshow) {
-
+    if (!list) {
         return;
-
     }
 
+    list.innerHTML = `
 
-    // Hentikan timer lama
+        <div class="data-kosong">
 
-    if (slideshowTimer) {
+            <i
+                class="fa-solid fa-circle-exclamation"
+            ></i>
 
-        clearInterval(
-            slideshowTimer
-        );
+            <h3>
+                Data tidak dapat dimuat
+            </h3>
 
-        slideshowTimer = null;
-
-    }
-
-
-    // Hanya ambil profesor yang memiliki foto
-
-    const daftarFoto =
-        dataProfesor.filter(
-            item =>
-                item.foto &&
-                item.foto.trim() !== ""
-        );
-
-
-    // Jika tidak ada foto
-
-    if (
-        daftarFoto.length === 0
-    ) {
-
-        slideshow.innerHTML = "";
-
-        return;
-
-    }
-
-
-    // Jika foto hanya satu
-
-    if (
-        daftarFoto.length === 1
-    ) {
-
-        slideshow.innerHTML = `
-
-            <div class="slideshow-track">
-
-                <div class="slide center">
-
-                    <img
-                        src="${escapeHTML(
-                            daftarFoto[0].foto
-                        )}"
-                        alt=""
-                        referrerpolicy="no-referrer"
-                    >
-
-                </div>
-
-            </div>
-
-        `;
-
-        return;
-
-    }
-
-
-    // Mulai dari foto pertama
-
-    slideshowIndex = 0;
-
-
-    // Buat struktur
-
-    slideshow.innerHTML = `
-
-        <div
-            class="slideshow-track"
-            id="slideshowTrack"
-        ></div>
-
-    `;
-
-
-    tampilkanSlide();
-
-
-    // Pindah otomatis setiap 3,5 detik
-
-    slideshowTimer =
-        setInterval(
-            () => {
-
-                slideshowIndex++;
-
-                if (
-                    slideshowIndex >=
-                    daftarFoto.length
-                ) {
-
-                    slideshowIndex = 0;
-
-                }
-
-                tampilkanSlide();
-
-            },
-            3500
-        );
-}
-
-
-// ========================================================
-// TAMPILKAN 3 FOTO
-// KIRI - TENGAH - KANAN
-// ========================================================
-
-function tampilkanSlide() {
-
-    const track =
-        document.getElementById(
-            "slideshowTrack"
-        );
-
-
-    if (!track) {
-
-        return;
-
-    }
-
-
-    const daftarFoto =
-        dataProfesor.filter(
-            item =>
-                item.foto &&
-                item.foto.trim() !== ""
-        );
-
-
-    if (
-        daftarFoto.length === 0
-    ) {
-
-        return;
-
-    }
-
-
-    const jumlah =
-        daftarFoto.length;
-
-
-    // Foto tengah
-
-    const tengah =
-        slideshowIndex;
-
-
-    // Foto kiri
-
-    const kiri =
-        (
-            tengah - 1 + jumlah
-        ) % jumlah;
-
-
-    // Foto kanan
-
-    const kanan =
-        (
-            tengah + 1
-        ) % jumlah;
-
-
-    // Jika hanya dua foto,
-    // tetap tampilkan dengan aman.
-
-    let html = "";
-
-
-    // ====================================================
-    // FOTO KIRI
-    // ====================================================
-
-    html += `
-
-        <div
-            class="slide left"
-        >
-
-            <img
-                src="${escapeHTML(
-                    daftarFoto[kiri].foto
-                )}"
-                alt=""
-                referrerpolicy="no-referrer"
-                onerror="
-                    this.parentElement.style.display='none';
-                "
-            >
+            <p>
+                Database Guru Besar sedang
+                tidak dapat diakses.
+            </p>
 
         </div>
 
     `;
 
-
-    // ====================================================
-    // FOTO TENGAH
-    // ====================================================
-
-    html += `
-
-        <div
-            class="slide center"
-        >
-
-            <img
-                src="${escapeHTML(
-                    daftarFoto[tengah].foto
-                )}"
-                alt=""
-                referrerpolicy="no-referrer"
-                onerror="
-                    this.parentElement.style.display='none';
-                "
-            >
-
-        </div>
-
-    `;
-
-
-    // ====================================================
-    // FOTO KANAN
-    // ====================================================
-
-    html += `
-
-        <div
-            class="slide right"
-        >
-
-            <img
-                src="${escapeHTML(
-                    daftarFoto[kanan].foto
-                )}"
-                alt=""
-                referrerpolicy="no-referrer"
-                onerror="
-                    this.parentElement.style.display='none';
-                "
-            >
-
-        </div>
-
-    `;
-
-
-    track.innerHTML =
-        html;
 }
 
 
 // ========================================================
-// AMBIL DATA GOOGLE SHEETS VIA JSONP
+// AMBIL DATA GOOGLE SHEETS
+// JSONP
 // ========================================================
 
 function ambilDataDariGoogleSheets() {
@@ -854,7 +1572,7 @@ function ambilDataDariGoogleSheets() {
 
     const timeoutId =
         setTimeout(
-            () => {
+            function() {
 
                 cleanup();
 
@@ -896,10 +1614,6 @@ function ambilDataDariGoogleSheets() {
 
     }
 
-
-    // ====================================================
-    // CALLBACK
-    // ====================================================
 
     window[callbackName] =
         function(data) {
@@ -962,17 +1676,7 @@ function ambilDataDariGoogleSheets() {
 
                 mulaiPortal();
 
-
-                // =================================================
-                // AKTIFKAN SLIDESHOW SETELAH DATA SELESAI DIMUAT
-                // =================================================
-
-                renderSlideshow();
-
-
-            }
-
-            catch (error) {
+            } catch (error) {
 
                 console.error(
                     "Kesalahan parsing data:",
@@ -985,10 +1689,6 @@ function ambilDataDariGoogleSheets() {
 
         };
 
-
-    // ====================================================
-    // SCRIPT JSONP
-    // ====================================================
 
     scriptTag =
         document.createElement(
@@ -1005,11 +1705,9 @@ function ambilDataDariGoogleSheets() {
 
             cleanup();
 
-
             console.error(
                 "Gagal terhubung ke Google Apps Script."
             );
-
 
             tampilkanErrorDatabase();
 
@@ -1019,42 +1717,7 @@ function ambilDataDariGoogleSheets() {
     document.body.appendChild(
         scriptTag
     );
-}
 
-
-// ========================================================
-// ERROR DATABASE
-// ========================================================
-
-function tampilkanErrorDatabase() {
-
-    if (!list) {
-
-        return;
-
-    }
-
-
-    list.innerHTML = `
-
-        <div class="data-kosong">
-
-            <i
-                class="fa-solid fa-circle-exclamation"
-            ></i>
-
-            <h3>
-                Data tidak dapat dimuat
-            </h3>
-
-            <p>
-                Database Guru Besar sedang
-                tidak dapat diakses.
-            </p>
-
-        </div>
-
-    `;
 }
 
 
@@ -1075,14 +1738,12 @@ function mulaiPortal() {
 
         }
 
-
         if (jumlahPeriode) {
 
             jumlahPeriode.textContent =
                 "Belum ada Guru Besar";
 
         }
-
 
         if (totalProfesor) {
 
@@ -1091,14 +1752,12 @@ function mulaiPortal() {
 
         }
 
-
         if (totalBuku) {
 
             totalBuku.textContent =
                 "0";
 
         }
-
 
         if (totalVideo) {
 
@@ -1107,13 +1766,16 @@ function mulaiPortal() {
 
         }
 
-
         tampilkanData([]);
 
         return;
 
     }
 
+
+    // ====================================================
+    // SIAPKAN PERIODE
+    // ====================================================
 
     const daftarPeriode =
         [
@@ -1144,6 +1806,10 @@ function mulaiPortal() {
                 periodeTerbaru
         );
 
+
+    // ====================================================
+    // UPDATE STATISTIK
+    // ====================================================
 
     if (periodeAktif) {
 
@@ -1193,22 +1859,36 @@ function mulaiPortal() {
     }
 
 
+    // ====================================================
+    // TAMPILKAN DATA
+    // ====================================================
+
     tampilkanData(
         profesorTerbaru
     );
+
+
+    // ====================================================
+    // SLIDESHOW
+    // ====================================================
+
+    buatCSSSlideshow();
+
+    buatHTMLSlideshow();
+
+    siapkanDataSlideshow();
+
 }
 
 
 // ========================================================
-// RENDER DATA PROFESOR
+// RENDER KARTU PROFESOR
 // ========================================================
 
 function tampilkanData(data) {
 
     if (!list) {
-
         return;
-
     }
 
 
@@ -1257,13 +1937,8 @@ function tampilkanData(data) {
     data.forEach(
         item => {
 
-
-            // =================================================
-            // HIGHLIGHT
-            // =================================================
-
             const highlightText =
-                text => {
+                function(text) {
 
                     if (!keyword) {
 
@@ -1309,9 +1984,9 @@ function tampilkanData(data) {
                 );
 
 
-            // =================================================
+            // ==========================================
             // FOTO
-            // =================================================
+            // ==========================================
 
             const fotoProfesor =
                 (
@@ -1324,13 +1999,9 @@ function tampilkanData(data) {
                 `
 
                 <img
-                    src="${escapeHTML(
-                        item.foto
-                    )}"
+                    src="${escapeHTML(item.foto)}"
                     class="photo"
-                    alt="${escapeHTML(
-                        item.nama
-                    )}"
+                    alt="${escapeHTML(item.nama)}"
                     loading="lazy"
                     referrerpolicy="no-referrer"
                     onerror="
@@ -1369,9 +2040,9 @@ function tampilkanData(data) {
                 `;
 
 
-            // =================================================
+            // ==========================================
             // BUKU
-            // =================================================
+            // ==========================================
 
             const tombolBuku =
                 (
@@ -1384,9 +2055,7 @@ function tampilkanData(data) {
                 `
 
                 <a
-                    href="${escapeHTML(
-                        item.pdf
-                    )}"
+                    href="${escapeHTML(item.pdf)}"
                     class="btn btn-book"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1407,9 +2076,9 @@ function tampilkanData(data) {
                 "";
 
 
-            // =================================================
+            // ==========================================
             // YOUTUBE
-            // =================================================
+            // ==========================================
 
             const tombolYoutube =
                 (
@@ -1422,9 +2091,7 @@ function tampilkanData(data) {
                 `
 
                 <a
-                    href="${escapeHTML(
-                        item.youtube
-                    )}"
+                    href="${escapeHTML(item.youtube)}"
                     class="btn"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -1445,9 +2112,9 @@ function tampilkanData(data) {
                 "";
 
 
-            // =================================================
+            // ==========================================
             // CARD
-            // =================================================
+            // ==========================================
 
             htmlBuffer += `
 
@@ -1463,18 +2130,12 @@ function tampilkanData(data) {
                         </h3>
 
 
-                        <p
-                            class="fakultas"
-                        >
-
+                        <p class="fakultas">
                             ${fakultas}
-
                         </p>
 
 
-                        <p
-                            class="periode-profesor"
-                        >
+                        <p class="periode-profesor">
 
                             <i
                                 class="fa-regular fa-calendar"
@@ -1486,9 +2147,7 @@ function tampilkanData(data) {
                         </p>
 
 
-                        <div
-                            class="buttons"
-                        >
+                        <div class="buttons">
 
                             ${tombolBuku}
 
@@ -1508,6 +2167,7 @@ function tampilkanData(data) {
 
     list.innerHTML =
         htmlBuffer;
+
 }
 
 
@@ -1515,18 +2175,21 @@ function tampilkanData(data) {
 // SEARCH
 // ========================================================
 
-if (searchInput) {
+function pasangEventSearch() {
+
+    if (!searchInput) {
+        return;
+    }
 
 
     // ====================================================
-    // FOCUS SEARCH
+    // FOCUS
+    // AUTO ZOOM HP TETAP DIBIARKAN
     // ====================================================
 
     searchInput.addEventListener(
         "focus",
         function() {
-
-            // Jangan cegah auto zoom HP.
 
             console.log(
                 "Search aktif."
@@ -1537,7 +2200,7 @@ if (searchInput) {
 
 
     // ====================================================
-    // INPUT REALTIME
+    // REALTIME INPUT
     // ====================================================
 
     searchInput.addEventListener(
@@ -1569,17 +2232,13 @@ if (searchInput) {
 
                         item.nama
                             .toLowerCase()
-                            .includes(
-                                keyword
-                            )
+                            .includes(keyword)
 
                         ||
 
                         item.fakultas
                             .toLowerCase()
-                            .includes(
-                                keyword
-                            )
+                            .includes(keyword)
                 );
 
 
@@ -1602,9 +2261,7 @@ if (searchInput) {
             if (
                 e.key !== "Enter"
             ) {
-
                 return;
-
             }
 
 
@@ -1625,7 +2282,6 @@ if (searchInput) {
                     profesorTerbaru
                 );
 
-
                 selesaiSearchHP();
 
                 return;
@@ -1639,26 +2295,23 @@ if (searchInput) {
 
                         item.nama
                             .toLowerCase()
-                            .includes(
-                                keyword
-                            )
+                            .includes(keyword)
 
                         ||
 
                         item.fakultas
                             .toLowerCase()
-                            .includes(
-                                keyword
-                            )
+                            .includes(keyword)
                 );
 
+
+            // ==========================================
+            // JIKA DITEMUKAN
+            // ==========================================
 
             if (
                 hasil.length > 0
             ) {
-
-
-                // Aktifkan Beranda
 
                 if (btnBeranda) {
 
@@ -1697,8 +2350,6 @@ if (searchInput) {
                 );
 
 
-                // Lepas fokus
-
                 searchInput.blur();
 
 
@@ -1711,9 +2362,7 @@ if (searchInput) {
                             );
 
 
-                        if (
-                            !kartuPertama
-                        ) {
+                        if (!kartuPertama) {
 
                             selesaiSearchHP();
 
@@ -1725,7 +2374,8 @@ if (searchInput) {
                         const elementPosition =
                             kartuPertama
                                 .getBoundingClientRect()
-                                .top +
+                                .top
+                            +
                             window.pageYOffset;
 
 
@@ -1746,8 +2396,6 @@ if (searchInput) {
 
                         });
 
-
-                        // Highlight
 
                         kartuPertama.style.transition =
                             "all 0.3s ease";
@@ -1782,14 +2430,12 @@ if (searchInput) {
                     150
                 );
 
-            }
 
-            else {
+            } else {
 
                 tampilkanData(
                     hasil
                 );
-
 
                 searchInput.blur();
 
@@ -1815,12 +2461,16 @@ if (searchInput) {
 // BERANDA
 // ========================================================
 
-if (btnBeranda) {
+function pasangEventBeranda() {
+
+    if (!btnBeranda) {
+        return;
+    }
+
 
     btnBeranda.addEventListener(
         "click",
         function() {
-
 
             btnBeranda.classList.add(
                 "active"
@@ -1876,12 +2526,16 @@ if (btnBeranda) {
 // ARSIP
 // ========================================================
 
-if (btnArsip) {
+function pasangEventArsip() {
+
+    if (!btnArsip) {
+        return;
+    }
+
 
     btnArsip.addEventListener(
         "click",
         function() {
-
 
             btnArsip.classList.add(
                 "active"
@@ -1922,7 +2576,6 @@ if (btnArsip) {
 
             tampilkanArsip();
 
-
             selesaiSearchHP();
 
         }
@@ -1932,7 +2585,7 @@ if (btnArsip) {
 
 
 // ========================================================
-// BUKA DETAIL PERIODE
+// DETAIL PERIODE
 // ========================================================
 
 function bukaPeriode(
@@ -1990,9 +2643,7 @@ function bukaPeriode(
 
     let htmlHeader = `
 
-        <div
-            class="periode-detail"
-        >
+        <div class="periode-detail">
 
             <button
                 class="btn-kembali"
@@ -2008,13 +2659,9 @@ function bukaPeriode(
             </button>
 
 
-            <div
-                class="periode-detail-box"
-            >
+            <div class="periode-detail-box">
 
-                <div
-                    class="periode-icon"
-                >
+                <div class="periode-icon">
 
                     <i
                         class="fa-regular fa-calendar-days"
@@ -2023,21 +2670,17 @@ function bukaPeriode(
                 </div>
 
 
-                <div
-                    class="periode-info-text"
-                >
+                <div class="periode-info-text">
 
                     <h2>
                         Pengukuhan Guru Besar
                     </h2>
-
 
                     <h3>
                         ${escapeHTML(
                             periodeTarget
                         )}
                     </h3>
-
 
                     <p>
                         ${dataPeriode.length}
@@ -2059,18 +2702,15 @@ function bukaPeriode(
     dataPeriode.forEach(
         item => {
 
-
             const nama =
                 escapeHTML(
                     item.nama
                 );
 
-
             const fakultas =
                 escapeHTML(
                     item.fakultas
                 );
-
 
             const periode =
                 escapeHTML(
@@ -2089,9 +2729,7 @@ function bukaPeriode(
                 `
 
                 <img
-                    src="${escapeHTML(
-                        item.foto
-                    )}"
+                    src="${escapeHTML(item.foto)}"
                     class="photo"
                     alt="${nama}"
                     loading="lazy"
@@ -2143,9 +2781,7 @@ function bukaPeriode(
                 `
 
                 <a
-                    href="${escapeHTML(
-                        item.pdf
-                    )}"
+                    href="${escapeHTML(item.pdf)}"
                     class="btn btn-book"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -2177,9 +2813,7 @@ function bukaPeriode(
                 `
 
                 <a
-                    href="${escapeHTML(
-                        item.youtube
-                    )}"
+                    href="${escapeHTML(item.youtube)}"
                     class="btn"
                     target="_blank"
                     rel="noopener noreferrer"
@@ -2202,34 +2836,21 @@ function bukaPeriode(
 
             htmlCards += `
 
-                <div
-                    class="card"
-                >
+                <div class="card">
 
                     ${fotoProfesor}
 
-
-                    <div
-                        class="info"
-                    >
+                    <div class="info">
 
                         <h3>
                             ${nama}
                         </h3>
 
-
-                        <p
-                            class="fakultas"
-                        >
-
+                        <p class="fakultas">
                             ${fakultas}
-
                         </p>
 
-
-                        <p
-                            class="periode-profesor"
-                        >
+                        <p class="periode-profesor">
 
                             <i
                                 class="fa-regular fa-calendar"
@@ -2240,10 +2861,7 @@ function bukaPeriode(
 
                         </p>
 
-
-                        <div
-                            class="buttons"
-                        >
+                        <div class="buttons">
 
                             ${tombolBuku}
 
@@ -2267,6 +2885,7 @@ function bukaPeriode(
 
 
     selesaiSearchHP();
+
 }
 
 
@@ -2276,15 +2895,43 @@ function bukaPeriode(
 
 function tampilkanArsip() {
 
+    if (btnArsip) {
+
+        btnArsip.classList.add(
+            "active"
+        );
+
+    }
+
+
+    if (btnBeranda) {
+
+        btnBeranda.classList.remove(
+            "active"
+        );
+
+    }
+
+
+    const periodeBox =
+        document.querySelector(
+            ".periode-box"
+        );
+
+
+    if (periodeBox) {
+
+        periodeBox.style.display =
+            "none";
+
+    }
+
+
     let htmlBuffer = `
 
-        <div
-            class="arsip-header"
-        >
+        <div class="arsip-header">
 
-            <div
-                class="arsip-header-icon"
-            >
+            <div class="arsip-header-icon">
 
                 <i
                     class="fa-solid fa-folder-open"
@@ -2292,11 +2939,9 @@ function tampilkanArsip() {
 
             </div>
 
-
             <h2>
                 Arsip Pengukuhan
             </h2>
-
 
             <p>
                 Buku Orasi Ilmiah Guru Besar
@@ -2319,7 +2964,6 @@ function tampilkanArsip() {
                     item.periode
                 );
 
-
             const tahun =
                 date.getFullYear();
 
@@ -2329,7 +2973,6 @@ function tampilkanArsip() {
                 tahun > 1900
             ) {
 
-
                 if (
                     !kelompokTahun[tahun]
                 ) {
@@ -2338,7 +2981,6 @@ function tampilkanArsip() {
                         [];
 
                 }
-
 
                 kelompokTahun[tahun].push(
                     item
@@ -2364,11 +3006,10 @@ function tampilkanArsip() {
 
         list.innerHTML =
             htmlBuffer +
+
             `
 
-            <div
-                class="data-kosong"
-            >
+            <div class="data-kosong">
 
                 <i
                     class="fa-solid fa-folder-open"
@@ -2387,7 +3028,6 @@ function tampilkanArsip() {
 
             `;
 
-
         return;
 
     }
@@ -2396,12 +3036,9 @@ function tampilkanArsip() {
     tahunUrut.forEach(
         tahun => {
 
-
             htmlBuffer += `
 
-                <div
-                    class="tahun-arsip"
-                >
+                <div class="tahun-arsip">
 
                     <h2>
                         ${tahun}
@@ -2434,7 +3071,6 @@ function tampilkanArsip() {
             periodeUnik.forEach(
                 periode => {
 
-
                     const jumlah =
                         kelompokTahun[tahun]
                             .filter(
@@ -2446,10 +3082,12 @@ function tampilkanArsip() {
 
 
                     const periodeSafe =
-                        escapeHTML(
+                        String(
                             periode
-                        )
-                        .replace(
+                        ).replace(
+                            /\\/g,
+                            "\\\\"
+                        ).replace(
                             /'/g,
                             "\\'"
                         );
@@ -2476,7 +3114,6 @@ function tampilkanArsip() {
 
                                 </h3>
 
-
                                 <p>
 
                                     ${jumlah}
@@ -2485,7 +3122,6 @@ function tampilkanArsip() {
                                 </p>
 
                             </div>
-
 
                             <div
                                 class="arsip-arrow"
@@ -2511,18 +3147,57 @@ function tampilkanArsip() {
 
 
     selesaiSearchHP();
+
 }
 
 
 // ========================================================
-// INISIALISASI
+// INISIALISASI WEBSITE
 // ========================================================
 
-ambilDataDariGoogleSheets();
+function initPortal() {
+
+    initElements();
+
+    buatCSSSlideshow();
+
+    buatHTMLSlideshow();
+
+    pasangEventSearch();
+
+    pasangEventBeranda();
+
+    pasangEventArsip();
+
+    ambilDataDariGoogleSheets();
+
+}
 
 
 // ========================================================
-// HALAMAN SELESAI DIMUAT
+// JALANKAN SETELAH HTML SELESAI
+// ========================================================
+
+if (
+    document.readyState ===
+    "loading"
+) {
+
+    document.addEventListener(
+        "DOMContentLoaded",
+        initPortal
+    );
+
+} else {
+
+    initPortal();
+
+}
+
+
+// ========================================================
+// LOAD
+// PASTIKAN SEARCH TIDAK AUTO FOCUS
 // ========================================================
 
 window.addEventListener(
@@ -2537,22 +3212,3 @@ window.addEventListener(
 
     }
 );
-
-
-// ========================================================
-// SEARCH BLUR
-// ========================================================
-
-if (searchInput) {
-
-    searchInput.addEventListener(
-        "blur",
-        function() {
-
-            // Tidak memaksa browser
-            // mengubah zoom secara agresif.
-
-        }
-    );
-
-}
