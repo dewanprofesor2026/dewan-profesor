@@ -1,13 +1,16 @@
 /* =========================================================
-DEWAN PROFESOR UNIVERSITAS ANDALAS
-CSS FINAL
+   DEWAN PROFESOR UNIVERSITAS ANDALAS
+   CSS FINAL - RESPONSIVE HP
 ========================================================= */
 
-/* =========================
-RESET
-========================= */
 
-* {
+/* =========================================================
+   RESET
+========================================================= */
+
+*,
+*::before,
+*::after {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -15,11 +18,16 @@ RESET
 
 html {
     scroll-behavior: smooth;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
 body {
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
+    width: 100%;
+    max-width: 100%;
 
     color: #111;
 
@@ -28,11 +36,28 @@ body {
     background-position: center;
     background-attachment: fixed;
     background-repeat: no-repeat;
+
+    overflow-x: hidden;
 }
 
-/* =========================
-CONTAINER
-========================= */
+
+/* =========================================================
+   SEMUA ELEMEN
+========================================================= */
+
+img {
+    max-width: 100%;
+}
+
+button,
+input {
+    font-family: "Poppins", sans-serif;
+}
+
+
+/* =========================================================
+   CONTAINER
+========================================================= */
 
 .container {
     width: 100%;
@@ -41,16 +66,24 @@ CONTAINER
     margin: 0 auto;
 
     padding: 10px 25px 0;
+
+    box-sizing: border-box;
 }
 
+
 /* =========================================================
-HEADER
+   HEADER
 ========================================================= */
 
 header {
+    width: 100%;
+    max-width: 100%;
+
     text-align: center;
 
     margin-bottom: 18px;
+
+    overflow: hidden;
 }
 
 .logo {
@@ -112,14 +145,16 @@ header p {
         -1px 1px 0 #fff;
 }
 
+
 /* =========================================================
-MENU UTAMA
-BERANDA | ARSIP | SEARCH
+   MENU UTAMA
+   BERANDA | ARSIP | SEARCH
 ========================================================= */
 
 .menu {
     width: 100%;
     max-width: 1000px;
+    min-width: 0;
 
     margin: 20px auto;
 
@@ -127,7 +162,10 @@ BERANDA | ARSIP | SEARCH
 
     display: grid;
 
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns:
+        minmax(0, 1fr)
+        minmax(0, 1fr)
+        minmax(0, 1fr);
 
     gap: 7px;
 
@@ -141,14 +179,22 @@ BERANDA | ARSIP | SEARCH
 
     box-shadow:
         0 8px 25px rgba(0,0,0,0.16);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
+
 /* =========================================================
-TOMBOL BERANDA & ARSIP
+   TOMBOL BERANDA & ARSIP
 ========================================================= */
 
 .menu-btn {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
     height: 48px;
 
     border: none;
@@ -167,7 +213,7 @@ TOMBOL BERANDA & ARSIP
 
     cursor: pointer;
 
-    white-space: nowrap;
+    white-space: normal;
 
     display: flex;
 
@@ -178,6 +224,19 @@ TOMBOL BERANDA & ARSIP
     gap: 7px;
 
     transition: all 0.25s ease;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
+}
+
+.menu-btn span {
+    min-width: 0;
+    max-width: 100%;
+
+    text-align: center;
+
+    overflow-wrap: break-word;
 }
 
 .menu-btn:hover {
@@ -199,12 +258,16 @@ TOMBOL BERANDA & ARSIP
     transform: scale(0.98);
 }
 
+
 /* =========================================================
-SEARCH DI DALAM MENU
+   SEARCH DI DALAM MENU
 ========================================================= */
 
 .search-menu {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
     height: 48px;
 
     padding: 0 17px;
@@ -224,6 +287,8 @@ SEARCH DI DALAM MENU
     overflow: hidden;
 
     transition: all 0.25s ease;
+
+    box-sizing: border-box;
 }
 
 .search-menu:focus-within {
@@ -244,6 +309,7 @@ SEARCH DI DALAM MENU
 .search-menu input {
     width: 100%;
     min-width: 0;
+    max-width: 100%;
 
     height: 100%;
 
@@ -259,19 +325,23 @@ SEARCH DI DALAM MENU
     font-weight: 500;
 
     color: #111;
+
+    box-sizing: border-box;
 }
 
 .search-menu input::placeholder {
     color: #777;
 }
 
+
 /* =========================================================
-PERIODE PENGUKUHAN
+   PERIODE PENGUKUHAN
 ========================================================= */
 
 .periode-box {
     width: 100%;
     max-width: 770px;
+    min-width: 0;
 
     margin: 20px auto 25px;
 
@@ -285,6 +355,10 @@ PERIODE PENGUKUHAN
 
     box-shadow:
         0 8px 22px rgba(0,0,0,0.12);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .periode-box h3 {
@@ -315,14 +389,16 @@ PERIODE PENGUKUHAN
     color: #111;
 }
 
+
 /* =========================================================
-DAFTAR PROFESOR
-SATU KOLOM
+   DAFTAR PROFESOR
+   SATU KOLOM
 ========================================================= */
 
 #listProfesor {
     width: 100%;
     max-width: 1050px;
+    min-width: 0;
 
     margin: 20px auto 40px;
 
@@ -331,14 +407,21 @@ SATU KOLOM
     flex-direction: column;
 
     gap: 18px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
+
 /* =========================================================
-CARD PROFESOR
+   CARD PROFESOR
 ========================================================= */
 
 .card {
     width: 100%;
+    max-width: 100%;
+    min-width: 0;
 
     display: flex;
 
@@ -358,6 +441,10 @@ CARD PROFESOR
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .card:hover {
@@ -367,8 +454,9 @@ CARD PROFESOR
         0 12px 30px rgba(0,0,0,0.17);
 }
 
+
 /* =========================================================
-FOTO PROFESOR
+   FOTO PROFESOR
 ========================================================= */
 
 .card img {
@@ -391,14 +479,19 @@ FOTO PROFESOR
         0 4px 12px rgba(0,0,0,0.15);
 }
 
+
 /* =========================================================
-INFO PROFESOR
+   INFO PROFESOR
 ========================================================= */
 
 .info {
     flex: 1;
 
     min-width: 0;
+
+    max-width: 100%;
+
+    overflow: hidden;
 }
 
 .info h3 {
@@ -411,6 +504,8 @@ INFO PROFESOR
     color: #000;
 
     margin-bottom: 5px;
+
+    overflow-wrap: break-word;
 }
 
 .fakultas {
@@ -421,6 +516,8 @@ INFO PROFESOR
     color: #008000;
 
     margin-bottom: 10px;
+
+    overflow-wrap: break-word;
 }
 
 .periode-profesor {
@@ -431,6 +528,8 @@ INFO PROFESOR
     color: #111;
 
     margin-bottom: 10px;
+
+    overflow-wrap: break-word;
 }
 
 .periode-profesor i {
@@ -439,24 +538,34 @@ INFO PROFESOR
     margin-right: 5px;
 }
 
+
 /* =========================================================
-TOMBOL BUKU & VIDEO
+   TOMBOL BUKU & VIDEO
 ========================================================= */
 
 .buttons {
+    width: 100%;
+    max-width: 100%;
+
     display: flex;
 
     flex-wrap: wrap;
 
     gap: 8px;
+
+    overflow: hidden;
 }
 
 .buttons a {
     text-decoration: none;
+
+    max-width: 100%;
 }
 
 .btn {
     min-height: 39px;
+
+    max-width: 100%;
 
     padding: 8px 14px;
 
@@ -485,6 +594,8 @@ TOMBOL BUKU & VIDEO
     cursor: pointer;
 
     transition: all 0.25s ease;
+
+    box-sizing: border-box;
 }
 
 .btn:hover {
@@ -496,14 +607,15 @@ TOMBOL BUKU & VIDEO
         0 5px 12px rgba(0,0,0,0.15);
 }
 
+
 /* =========================================================
-DATA TIDAK DITEMUKAN
+   DATA TIDAK DITEMUKAN
 ========================================================= */
 
 .data-kosong {
     width: 100%;
-
     max-width: 700px;
+    min-width: 0;
 
     margin: 25px auto;
 
@@ -516,6 +628,10 @@ DATA TIDAK DITEMUKAN
     background: rgba(255,255,255,0.80);
 
     border-radius: 15px;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .data-kosong i {
@@ -538,13 +654,15 @@ DATA TIDAK DITEMUKAN
     font-weight: 600;
 }
 
+
 /* =========================================================
-ARSIP PENGUKUHAN
+   ARSIP PENGUKUHAN
 ========================================================= */
 
 .arsip-header {
     width: 100%;
     max-width: 800px;
+    min-width: 0;
 
     margin: 20px auto 25px;
 
@@ -558,6 +676,10 @@ ARSIP PENGUKUHAN
 
     box-shadow:
         0 8px 22px rgba(0,0,0,0.12);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .arsip-header h2 {
@@ -574,8 +696,9 @@ ARSIP PENGUKUHAN
     color: #444;
 }
 
+
 /* =========================================================
-KELOMPOK TAHUN ARSIP
+   KELOMPOK TAHUN ARSIP
 ========================================================= */
 
 .tahun-arsip {
@@ -587,6 +710,8 @@ KELOMPOK TAHUN ARSIP
     padding-left: 10px;
 
     border-left: 5px solid #008000;
+
+    box-sizing: border-box;
 }
 
 .tahun-arsip h2 {
@@ -599,13 +724,15 @@ KELOMPOK TAHUN ARSIP
     padding-left: 8px;
 }
 
+
 /* =========================================================
-ITEM ARSIP
+   ITEM ARSIP
 ========================================================= */
 
 .arsip-item {
     width: 100%;
     max-width: 1000px;
+    min-width: 0;
 
     margin: 10px auto;
 
@@ -629,6 +756,10 @@ ITEM ARSIP
     cursor: pointer;
 
     transition: all 0.25s ease;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .arsip-item:hover {
@@ -646,27 +777,35 @@ ITEM ARSIP
     color: #111;
 
     margin-bottom: 3px;
+
+    overflow-wrap: break-word;
 }
 
 .arsip-item p {
     font-size: 12px;
 
     color: #444;
+
+    overflow-wrap: break-word;
 }
 
 .arsip-arrow {
     color: #008000;
 
     font-weight: 700;
+
+    flex-shrink: 0;
 }
 
+
 /* =========================================================
-STATISTIK
+   STATISTIK
 ========================================================= */
 
 .statistik-bar {
     width: 100%;
     max-width: 600px;
+    min-width: 0;
 
     margin: 20px auto;
 
@@ -684,10 +823,16 @@ STATISTIK
 
     box-shadow:
         0 7px 20px rgba(0,0,0,0.12);
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .stat {
     flex: 1;
+
+    min-width: 0;
 
     display: flex;
 
@@ -706,6 +851,8 @@ STATISTIK
     font-weight: 600;
 
     text-align: center;
+
+    overflow: hidden;
 }
 
 .stat + .stat {
@@ -716,6 +863,8 @@ STATISTIK
     font-size: 15px;
 
     color: #008000;
+
+    flex-shrink: 0;
 }
 
 .stat span {
@@ -724,14 +873,18 @@ STATISTIK
     font-weight: 700;
 
     color: #008000;
+
+    flex-shrink: 0;
 }
 
+
 /* =========================================================
-FOOTER
+   FOOTER
 ========================================================= */
 
 footer {
     width: 100%;
+    max-width: 100%;
 
     padding: 10px 15px 18px;
 
@@ -750,6 +903,10 @@ footer {
         -1px -1px 0 #fff,
         1px -1px 0 #fff,
         -1px 1px 0 #fff;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 footer p {
@@ -760,8 +917,9 @@ footer p {
     font-weight: inherit;
 }
 
+
 /* =========================================================
-RESPONSIVE TABLET
+   RESPONSIVE TABLET
 ========================================================= */
 
 @media (max-width: 850px) {
@@ -792,21 +950,44 @@ RESPONSIVE TABLET
     }
 }
 
+
 /* =========================================================
-RESPONSIVE HP
+   RESPONSIVE HP
 ========================================================= */
 
 @media (max-width: 600px) {
+
+    html,
+    body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
 
     body {
         background-attachment: scroll;
     }
 
     .container {
-        padding: 8px 10px 0;
+        width: 100%;
+        max-width: 100%;
+
+        padding: 8px 8px 0;
+
+        overflow-x: hidden;
     }
 
-    /* HEADER */
+
+    /* =====================================================
+       HEADER HP
+    ===================================================== */
+
+    header {
+        width: 100%;
+        max-width: 100%;
+
+        overflow: hidden;
+    }
 
     .logo {
         width: 65px;
@@ -815,60 +996,132 @@ RESPONSIVE HP
 
     header h1 {
         font-size: 21px;
+
+        max-width: 100%;
+
+        overflow-wrap: break-word;
     }
 
     header h2 {
         font-size: 18px;
+
+        max-width: 100%;
+
+        overflow-wrap: break-word;
     }
 
     header p {
         font-size: 11px;
+
+        max-width: 100%;
+
+        overflow-wrap: break-word;
     }
 
-    /* MENU */
+
+    /* =====================================================
+       MENU HP
+    ===================================================== */
 
     .menu {
-        grid-template-columns: 1fr 1fr 1fr;
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
 
-        gap: 4px;
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(0, 1fr)
+            minmax(0, 1.2fr);
 
-        padding: 5px;
+        gap: 3px;
+
+        padding: 4px;
 
         border-radius: 27px;
+
+        overflow: hidden;
     }
 
     .menu-btn {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         height: 40px;
 
-        padding: 0 5px;
+        padding: 0 3px;
 
-        font-size: 10px;
+        font-size: 9px;
 
         gap: 3px;
+
+        white-space: normal;
+
+        overflow: hidden;
     }
 
+    .menu-btn span {
+        min-width: 0;
+
+        max-width: 100%;
+
+        text-align: center;
+
+        overflow-wrap: break-word;
+    }
+
+    .menu-btn i {
+        flex-shrink: 0;
+    }
+
+
+    /* =====================================================
+       SEARCH HP
+    ===================================================== */
+
     .search-menu {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         height: 40px;
 
-        padding: 0 8px;
+        padding: 0 7px;
 
         gap: 5px;
+
+        overflow: hidden;
     }
 
     .search-menu i {
         font-size: 14px;
+
+        flex-shrink: 0;
     }
 
     .search-menu input {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         font-size: 10px;
     }
 
-    /* PERIODE */
+
+    /* =====================================================
+       PERIODE HP
+    ===================================================== */
 
     .periode-box {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         margin-top: 15px;
 
         padding: 13px;
+
+        overflow: hidden;
     }
 
     .periode-box h3 {
@@ -877,71 +1130,273 @@ RESPONSIVE HP
 
     .periode-box h2 {
         font-size: 19px;
+
+        overflow-wrap: break-word;
     }
 
     .periode-box p {
         font-size: 11px;
     }
 
-    /* CARD */
 
-    .card {
-        gap: 12px;
+    /* =====================================================
+       LIST PROFESOR HP
+    ===================================================== */
 
-        padding: 13px;
+    #listProfesor {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
 
-        border-radius: 15px;
+        margin-left: 0;
+        margin-right: 0;
+
+        overflow: hidden;
     }
 
-    .card img {
-        width: 85px;
-        height: 110px;
+
+    /* =====================================================
+       CARD PROFESOR HP
+    ===================================================== */
+
+    #listProfesor .card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        display: flex;
+
+        flex-direction: row;
+
+        align-items: flex-start;
+
+        gap: 9px;
+
+        padding: 10px;
+
+        border-radius: 15px;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       FOTO PROFESOR HP
+    ===================================================== */
+
+    #listProfesor .card img {
+        width: 72px;
+        height: 95px;
+
+        min-width: 72px;
+        max-width: 72px;
+
+        flex: 0 0 72px;
+
+        object-fit: cover;
 
         border-radius: 10px;
     }
 
-    .info h3 {
-        font-size: 13px;
+
+    /* =====================================================
+       INFO PROFESOR HP
+    ===================================================== */
+
+    #listProfesor .info {
+        width: 0;
+        max-width: 100%;
+        min-width: 0;
+
+        flex: 1;
+
+        overflow: hidden;
     }
 
-    .fakultas {
-        font-size: 10px;
-
-        margin-bottom: 6px;
-    }
-
-    .periode-profesor {
-        font-size: 10px;
-
-        margin-bottom: 7px;
-    }
-
-    .buttons {
-        gap: 5px;
-    }
-
-    .btn {
-        min-height: 32px;
-
-        padding: 5px 8px;
-
-        font-size: 9px;
-    }
-
-    /* STATISTIK */
-
-    .statistik-bar {
+    #listProfesor .info h3 {
+        width: 100%;
         max-width: 100%;
 
+        font-size: 12px;
+
+        line-height: 1.3;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+    }
+
+    #listProfesor .fakultas {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 9px;
+
+        margin-bottom: 6px;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+    }
+
+    #listProfesor .periode-profesor {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 9px;
+
+        margin-bottom: 7px;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+    }
+
+
+    /* =====================================================
+       TOMBOL HP
+    ===================================================== */
+
+    #listProfesor .buttons {
+        width: 100%;
+        max-width: 100%;
+
+        display: flex;
+
+        flex-wrap: wrap;
+
+        gap: 4px;
+
+        overflow: hidden;
+    }
+
+    #listProfesor .btn {
+        max-width: 100%;
+        min-width: 0;
+
+        min-height: 30px;
+
+        padding: 5px 6px;
+
+        font-size: 8px;
+
+        white-space: normal;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+
+        box-sizing: border-box;
+    }
+
+
+    /* =====================================================
+       DATA KOSONG HP
+    ===================================================== */
+
+    .data-kosong {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 15px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+
+    /* =====================================================
+       ARSIP HP
+    ===================================================== */
+
+    .arsip-header {
+        width: 100%;
+        max-width: 100%;
+
+        padding: 15px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+    .arsip-header h2 {
+        font-size: 18px;
+
+        overflow-wrap: break-word;
+    }
+
+    .arsip-header p {
+        font-size: 11px;
+    }
+
+    .tahun-arsip {
+        width: 100%;
+        max-width: 100%;
+
+        box-sizing: border-box;
+    }
+
+    .tahun-arsip h2 {
+        font-size: 18px;
+    }
+
+    .arsip-item {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 13px 15px;
+
+        gap: 10px;
+
+        box-sizing: border-box;
+
+        overflow: hidden;
+    }
+
+    .arsip-item h3 {
+        font-size: 13px;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+    }
+
+    .arsip-item p {
+        font-size: 10px;
+
+        overflow-wrap: anywhere;
+
+        word-break: break-word;
+    }
+
+
+    /* =====================================================
+       STATISTIK HP
+    ===================================================== */
+
+    .statistik-bar {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         padding: 6px 4px;
+
+        overflow: hidden;
     }
 
     .stat {
+        min-width: 0;
+
         padding: 2px 3px;
 
         font-size: 8px;
 
         gap: 3px;
+
+        overflow: hidden;
     }
 
     .stat i {
@@ -952,11 +1407,15 @@ RESPONSIVE HP
         font-size: 11px;
     }
 
-    /* FOOTER
-       DIPERBESAR DARI 10px MENJADI 18px
-    */
+
+    /* =====================================================
+       FOOTER HP
+    ===================================================== */
 
     footer {
+        width: 100%;
+        max-width: 100%;
+
         font-size: 18px !important;
 
         font-weight: 700 !important;
@@ -964,6 +1423,8 @@ RESPONSIVE HP
         line-height: 1.5 !important;
 
         padding: 12px 10px 20px !important;
+
+        overflow: hidden;
     }
 
     footer p {
@@ -972,48 +1433,63 @@ RESPONSIVE HP
         font-weight: inherit !important;
 
         margin: 0 0 2px 0 !important;
+
+        overflow-wrap: break-word;
     }
 }
 
+
 /* =========================================================
-HP KECIL
+   HP KECIL
 ========================================================= */
 
 @media (max-width: 400px) {
 
     .menu-btn {
-        font-size: 9px;
+        font-size: 8px;
     }
 
     .search-menu input {
         font-size: 9px;
     }
 
-    .card img {
-        width: 75px;
-        height: 100px;
+    .card img,
+    #listProfesor .card img {
+        width: 65px;
+        height: 90px;
+
+        min-width: 65px;
+        max-width: 65px;
+
+        flex: 0 0 65px;
     }
 
-    .info h3 {
-        font-size: 12px;
+    .info h3,
+    #listProfesor .info h3 {
+        font-size: 11px;
     }
 
-    .btn {
+    .fakultas,
+    .periode-profesor {
         font-size: 8px;
-
-        padding: 5px 6px;
     }
 
-    /* FOOTER HP KECIL */
+    .btn,
+    #listProfesor .btn {
+        font-size: 7px;
+
+        padding: 4px 5px;
+    }
 
     footer {
         font-size: 16px !important;
     }
 }
 
+
 /* ========================================================
-PERBAIKAN CSS:
-TOMBOL KEMBALI & DETAIL PERIODE
+   PERBAIKAN:
+   TOMBOL KEMBALI & DETAIL PERIODE
 ======================================================== */
 
 .periode-detail {
@@ -1021,9 +1497,14 @@ TOMBOL KEMBALI & DETAIL PERIODE
     max-width: 1050px;
 
     margin: 10px auto 25px auto !important;
+
+    box-sizing: border-box;
 }
 
-/* Tombol Kembali Modern */
+
+/* ========================================================
+   TOMBOL KEMBALI MODERN
+======================================================== */
 
 button.btn-kembali {
     display: inline-flex !important;
@@ -1060,9 +1541,14 @@ button.btn-kembali {
     margin-bottom: 18px !important;
 
     outline: none !important;
+
+    max-width: 100% !important;
 }
 
-/* Efek Hover Tombol */
+
+/* ========================================================
+   HOVER TOMBOL KEMBALI
+======================================================== */
 
 button.btn-kembali:hover {
     background-color: #008000 !important;
@@ -1085,9 +1571,16 @@ button.btn-kembali:hover i {
     transform: translateX(-4px) !important;
 }
 
-/* Kotak Detail Periode */
+
+/* ========================================================
+   KOTAK DETAIL PERIODE
+======================================================== */
 
 .periode-detail-box {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+
     display: flex !important;
 
     align-items: center !important;
@@ -1104,6 +1597,10 @@ button.btn-kembali:hover i {
 
     box-shadow:
         0 8px 22px rgba(0, 0, 0, 0.12) !important;
+
+    box-sizing: border-box;
+
+    overflow: hidden;
 }
 
 .periode-icon {
@@ -1126,6 +1623,14 @@ button.btn-kembali:hover i {
     font-size: 22px !important;
 
     flex-shrink: 0 !important;
+}
+
+.periode-info-text {
+    min-width: 0;
+
+    max-width: 100%;
+
+    overflow: hidden;
 }
 
 .periode-info-text h2 {
@@ -1152,6 +1657,8 @@ button.btn-kembali:hover i {
     font-weight: 700 !important;
 
     text-shadow: none !important;
+
+    overflow-wrap: break-word;
 }
 
 .periode-info-text p {
@@ -1164,11 +1671,24 @@ button.btn-kembali:hover i {
     font-weight: 600 !important;
 
     text-shadow: none !important;
+
+    overflow-wrap: break-word;
 }
 
-/* Responsif Layar Kecil */
+
+/* ========================================================
+   DETAIL PERIODE - HP
+======================================================== */
 
 @media (max-width: 600px) {
+
+    .periode-detail {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: 0;
+        margin-right: 0;
+    }
 
     button.btn-kembali {
         padding: 8px 16px !important;
@@ -1177,6 +1697,10 @@ button.btn-kembali:hover i {
     }
 
     .periode-detail-box {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
         padding: 12px 15px !important;
 
         gap: 12px !important;
@@ -1188,6 +1712,14 @@ button.btn-kembali:hover i {
         height: 40px !important;
 
         font-size: 18px !important;
+    }
+
+    .periode-info-text {
+        width: 0;
+
+        flex: 1;
+
+        min-width: 0;
     }
 
     .periode-info-text h2 {
@@ -1203,303 +1735,101 @@ button.btn-kembali:hover i {
     }
 }
 
+
 /* =========================================================
-PERBAIKAN HASIL SEARCH DI HP
-MENCEGAH PORTAL MELEBAR / TERPOTONG
+   FIX FINAL:
+   MENCEGAH PORTAL MELEBAR SAAT HASIL SEARCH MUNCUL
 ========================================================= */
 
 html,
 body {
     width: 100%;
     max-width: 100%;
-    overflow-x: hidden;
+    overflow-x: hidden !important;
 }
 
-@media (max-width: 600px) {
-
-    /* Card hasil profesor */
-    .card {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-
-        box-sizing: border-box;
-
-        display: flex;
-        align-items: flex-start;
-
-        gap: 10px;
-        padding: 10px;
-    }
-
-    /* Foto */
-    .card img {
-        width: 75px;
-        height: 100px;
-
-        flex: 0 0 75px;
-
-        object-fit: cover;
-    }
-
-    /* Bagian informasi */
-    .info {
-        width: 0;
-        min-width: 0;
-        flex: 1;
-
-        overflow: hidden;
-    }
-
-    /* Nama profesor */
-    .info h3 {
-        width: 100%;
-
-        font-size: 12px;
-        line-height: 1.3;
-
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-
-    /* Fakultas */
-    .fakultas {
-        font-size: 10px;
-
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-
-    /* Periode */
-    .periode-profesor {
-        font-size: 10px;
-
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-
-    /* Tombol */
-    .buttons {
-        width: 100%;
-
-        display: flex;
-        flex-wrap: wrap;
-
-        gap: 4px;
-
-        max-width: 100%;
-    }
-
-    .btn {
-        max-width: 100%;
-
-        padding: 5px 7px;
-
-        font-size: 8px;
-
-        white-space: normal;
-
-        box-sizing: border-box;
-    }
-
-    /* Hasil pencarian */
-    #listProfesor {
-        width: 100%;
-        max-width: 100%;
-
-        padding: 0;
-
-        margin-left: auto;
-        margin-right: auto;
-
-        box-sizing: border-box;
-    }
-
-    /* Kotak periode */
-    .periode-box {
-        width: 100%;
-        max-width: 100%;
-
-        box-sizing: border-box;
-    }
+#listProfesor,
+#listProfesor *,
+.menu,
+.menu *,
+.periode-box,
+.periode-box *,
+.statistik-bar,
+.statistik-bar *,
+footer,
+footer * {
+    max-width: 100%;
 }
+
 
 /* =========================================================
-   FIX FINAL SEARCH & CARD DI HP
-   AGAR TIDAK TERPOTONG / TIDAK PERLU ZOOM OUT
+   FIX SEARCH HASIL DI HP
 ========================================================= */
-
-* {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    width: 100%;
-    max-width: 100%;
-    margin: 0;
-    padding: 0;
-    overflow-x: hidden;
-}
 
 @media (max-width: 600px) {
 
-    .container {
-        width: 100%;
-        max-width: 100%;
-        padding-left: 8px;
-        padding-right: 8px;
-        overflow-x: hidden;
-    }
-
-    /* MENU */
-    .menu {
-        width: 100%;
-        max-width: 100%;
-        grid-template-columns: 1fr 1fr 1.2fr;
-        gap: 3px;
-        padding: 4px;
-    }
-
-    .menu-btn {
-        width: 100%;
-        min-width: 0;
-        padding-left: 2px;
-        padding-right: 2px;
-        font-size: 9px;
-    }
-
-    .search-menu {
-        width: 100%;
-        min-width: 0;
-        padding: 0 7px;
-    }
-
-    .search-menu input {
-        width: 100%;
-        min-width: 0;
-        font-size: 9px;
-    }
-
-    /* HASIL SEARCH / DAFTAR PROFESOR */
     #listProfesor {
-        width: 100%;
-        max-width: 100%;
-        margin-left: 0;
-        margin-right: 0;
-        padding: 0;
-        overflow: hidden;
+        width: 100% !important;
+        max-width: 100% !important;
+
+        padding: 0 !important;
+
+        margin-left: auto !important;
+        margin-right: auto !important;
+
+        box-sizing: border-box !important;
+
+        overflow-x: hidden !important;
     }
 
-    /* CARD */
     #listProfesor .card {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
+        width: 100% !important;
+        max-width: 100% !important;
 
-        display: flex;
-        flex-direction: row;
-        align-items: flex-start;
+        box-sizing: border-box !important;
 
-        gap: 9px;
-        padding: 10px;
-
-        overflow: hidden;
+        overflow-x: hidden !important;
     }
 
-    /* FOTO */
-    #listProfesor .card img {
-        width: 72px;
-        height: 95px;
-
-        min-width: 72px;
-        max-width: 72px;
-
-        flex: 0 0 72px;
-
-        object-fit: cover;
-    }
-
-    /* INFORMASI */
     #listProfesor .info {
-        width: 0;
-        min-width: 0;
-        max-width: 100%;
+        width: 0 !important;
 
-        flex: 1;
+        min-width: 0 !important;
 
-        overflow: hidden;
+        flex: 1 !important;
+
+        overflow: hidden !important;
     }
 
-    #listProfesor .info h3 {
-        width: 100%;
-        max-width: 100%;
-
-        margin: 0 0 4px 0;
-
-        font-size: 12px;
-        line-height: 1.3;
-
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-
+    #listProfesor .info h3,
     #listProfesor .fakultas,
     #listProfesor .periode-profesor {
-        width: 100%;
-        max-width: 100%;
+        max-width: 100% !important;
 
-        font-size: 9px;
-        line-height: 1.3;
+        overflow-wrap: anywhere !important;
 
-        overflow-wrap: anywhere;
-        word-break: break-word;
+        word-break: break-word !important;
     }
 
-    /* TOMBOL */
     #listProfesor .buttons {
-        width: 100%;
-        max-width: 100%;
+        width: 100% !important;
 
-        display: flex;
-        flex-wrap: wrap;
+        max-width: 100% !important;
 
-        gap: 4px;
+        display: flex !important;
 
-        overflow: hidden;
+        flex-wrap: wrap !important;
+
+        overflow: hidden !important;
     }
 
     #listProfesor .btn {
-        max-width: 100%;
-        min-width: 0;
+        max-width: 100% !important;
 
-        padding: 5px 6px;
+        white-space: normal !important;
 
-        font-size: 8px;
+        overflow-wrap: anywhere !important;
 
-        white-space: normal;
-        overflow-wrap: anywhere;
-        word-break: break-word;
-    }
-
-    /* PERIODE */
-    .periode-box {
-        width: 100%;
-        max-width: 100%;
-
-        margin-left: 0;
-        margin-right: 0;
-
-        box-sizing: border-box;
-    }
-
-    /* ARSIP */
-    .arsip-item {
-        width: 100%;
-        max-width: 100%;
-        min-width: 0;
-
-        box-sizing: border-box;
-        overflow: hidden;
+        word-break: break-word !important;
     }
 }
