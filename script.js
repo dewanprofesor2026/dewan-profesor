@@ -278,30 +278,6 @@ if (searchInput) {
                 tampilkanData(hasil);
                 
                 setTimeout(() => {
-    const kartuPertama = document.querySelector("#listProfesor .card");
-    if (kartuPertama) {
-        // 1. Hitung posisi kartu dari atas halaman
-        const posisiKartu = kartuPertama.getBoundingClientRect().top + window.pageYOffset;
-        
-        // 2. Tentukan tinggi offset (sesuaikan angka 100 dengan tinggi header/navigasi Anda)
-        // Jika header Anda tinggi, naikkan angka ini (misal: 150 atau 200)
-        const offset = 120; 
-        
-        // 3. Scroll paksa ke posisi tersebut
-        window.scrollTo({
-            top: posisiKartu - offset,
-            behavior: "smooth"
-        });
-        
-        // Efek kilat/glow
-        kartuPertama.style.transition = "all 0.3s ease";
-        kartuPertama.style.boxShadow = "0 0 0 4px #008000, 0 12px 30px rgba(0,0,0,0.25)";
-        
-        setTimeout(() => {
-            kartuPertama.style.boxShadow = "";
-        }, 2000);
-    }
-}, 200); // Waktu diperpanjang sedikit agar render data selesai
             } else {
                 tampilkanData(hasil);
             }
