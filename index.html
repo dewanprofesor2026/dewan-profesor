@@ -3,28 +3,66 @@
 
 <head>
 
+    <!-- =====================================================
+         META
+    ====================================================== -->
+
     <meta charset="UTF-8">
 
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
-    <title>Dewan Profesor Universitas Andalas</title>
+    <meta
+        name="theme-color"
+        content="#006b3c"
+    >
 
-    <!-- CSS UTAMA -->
-    <link rel="stylesheet" href="style.css">
+    <title>
+        Dewan Profesor Universitas Andalas
+    </title>
 
-    <!-- GOOGLE FONT -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- =====================================================
+         CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="style.css"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"
+    >
 
-    <!-- FONT AWESOME -->
+
+    <!-- =====================================================
+         FONT AWESOME
+    ====================================================== -->
+
     <link
         rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+    >
 
 </head>
 
@@ -33,324 +71,332 @@
 
 
     <!-- =====================================================
-         HEADER
-    ====================================================== -->
-
-    <header class="header">
-
-        <img
-            src="img/logo.png"
-            class="logo"
-            alt="Logo Dewan Profesor Universitas Andalas"
-        >
-
-        <h1>
-            UNIVERSITAS ANDALAS
-        </h1>
-
-        <h2>
-            DEWAN PROFESOR
-        </h2>
-
-        <p>
-            Portal Digital Pengukuhan Guru Besar
-        </p>
-
-    </header>
-
-
-
-    <!-- =====================================================
-         SLIDESHOW PROFESOR
+         BACKGROUND OVERLAY
          
-         FOTO AKAN DIISI OTOMATIS OLEH SCRIPT.JS
+         Background foto UNAND nanti diatur melalui CSS.
+         JANGAN tambahkan <img> background di sini.
     ====================================================== -->
 
-    <section
-        class="professor-slideshow"
-        id="professorSlideshow"
-    >
-
-        <!-- Tombol kiri -->
-
-        <button
-            class="slideshow-arrow slideshow-prev"
-            id="slideshowPrev"
-            type="button"
-            aria-label="Profesor sebelumnya"
-        >
-
-            <i class="fa-solid fa-chevron-left"></i>
-
-        </button>
-
-
-
-        <!-- Area foto -->
-
-        <div
-            class="slideshow-track"
-            id="slideshowTrack"
-        >
-
-            <!--
-                Foto profesor akan dibuat
-                otomatis oleh JavaScript.
-            -->
-
-        </div>
-
-
-
-        <!-- Tombol kanan -->
-
-        <button
-            class="slideshow-arrow slideshow-next"
-            id="slideshowNext"
-            type="button"
-            aria-label="Profesor berikutnya"
-        >
-
-            <i class="fa-solid fa-chevron-right"></i>
-
-        </button>
-
-
-
-        <!-- Indikator -->
-
-        <div
-            class="slideshow-dots"
-            id="slideshowDots"
-        >
-
-            <!-- Dot dibuat otomatis oleh JavaScript -->
-
-        </div>
-
-    </section>
-
+    <div class="background-overlay"></div>
 
 
     <!-- =====================================================
-         MENU UTAMA
+         CONTAINER UTAMA
     ====================================================== -->
 
-    <nav class="menu">
+    <div class="portal">
 
 
-        <!-- BERANDA -->
+        <!-- =================================================
+             HEADER
+        ================================================== -->
 
-        <button
-            class="menu-btn active"
-            id="btnBeranda"
-            type="button"
-        >
+        <header class="header">
 
-            <i class="fa-solid fa-house"></i>
 
-            <span>
-                Beranda
-            </span>
-
-        </button>
-
-
-
-        <!-- ARSIP -->
-
-        <button
-            class="menu-btn"
-            id="btnArsip"
-            type="button"
-        >
-
-            <i class="fa-solid fa-folder-open"></i>
-
-            <span>
-                Arsip Pengukuhan
-            </span>
-
-        </button>
-
-
-
-        <!-- SEARCH -->
-
-        <div class="search-menu">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                id="searchInput"
-                placeholder="Cari Guru Besar..."
-                autocomplete="off"
-                aria-label="Cari Guru Besar"
-            >
-
-        </div>
-
-    </nav>
-
-
-
-    <!-- =====================================================
-         INFORMASI PERIODE TERBARU
-    ====================================================== -->
-
-    <section class="periode-box">
-
-
-        <h3>
-            <i class="fa-regular fa-calendar"></i>
-
-            Pengukuhan Guru Besar
-        </h3>
-
-
-        <h2 id="periodeAktif">
-            25 Oktober 2026
-        </h2>
-
-
-        <p id="jumlahPeriode">
-            7 Guru Besar Dikukuhkan
-        </p>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         DAFTAR PROFESOR
-         
-         Data akan dimasukkan oleh SCRIPT.JS
-    ====================================================== -->
-
-    <main id="listProfesor">
-
-        <!--
-            Kartu profesor akan dibuat
-            otomatis oleh JavaScript.
-        -->
-
-    </main>
-
-
-
-    <!-- =====================================================
-         STATISTIK
-    ====================================================== -->
-
-    <section class="statistik">
-
-
-        <!-- TOTAL PROFESOR -->
-
-        <div class="stat">
-
-            <i class="fa-solid fa-user-graduate"></i>
-
-            <span id="totalProfesor">
-                0
-            </span>
-
-            <span>
-                Guru Besar
-            </span>
-
-        </div>
-
-
-
-        <!-- TOTAL BUKU -->
-
-        <div class="stat">
-
-            <i class="fa-solid fa-book-open"></i>
-
-            <span id="totalBuku">
-                0
-            </span>
-
-            <span>
-                Buku Digital
-            </span>
-
-        </div>
-
-
-
-        <!-- TOTAL VIDEO -->
-
-        <div class="stat">
-
-            <i class="fa-brands fa-youtube"></i>
-
-            <span id="totalVideo">
-                0
-            </span>
-
-            <span>
-                Video
-            </span>
-
-        </div>
-
-
-    </section>
-
-
-
-    <!-- =====================================================
-         FOOTER
-    ====================================================== -->
-
-    <footer class="footer">
-
-
-        <div class="footer-logo">
+            <!-- LOGO HANYA SATU -->
 
             <img
                 src="img/logo.png"
-                alt="Logo Dewan Profesor"
+                class="logo"
+                alt="Logo Universitas Andalas"
             >
 
-        </div>
+
+            <!-- JUDUL -->
+
+            <h1>
+                UNIVERSITAS ANDALAS
+            </h1>
 
 
-        <div class="footer-text">
+            <h2>
+                DEWAN PROFESOR
+            </h2>
+
+
+            <p class="subtitle">
+                Portal Digital Pengukuhan Guru Besar
+            </p>
+
+
+            <!-- =================================================
+                 SLIDESHOW FOTO PROFESOR
+                 
+                 JS akan mengisi bagian ini otomatis.
+                 
+                 Hanya foto + tidak ada nama.
+            ================================================== -->
+
+            <div
+                id="professorSlideshow"
+                class="professor-slideshow"
+                aria-label="Slideshow Guru Besar"
+            >
+
+                <!--
+                    Isi slideshow dibuat otomatis oleh script.js
+                -->
+
+            </div>
+
+
+        </header>
+
+
+
+        <!-- =================================================
+             MENU UTAMA
+        ================================================== -->
+
+        <nav
+            class="menu"
+            aria-label="Menu utama"
+        >
+
+
+            <!-- BERANDA -->
+
+            <button
+                type="button"
+                class="menu-btn active"
+                id="btnBeranda"
+            >
+
+                <i class="fa-solid fa-house"></i>
+
+                <span>
+                    Beranda
+                </span>
+
+            </button>
+
+
+
+            <!-- ARSIP -->
+
+            <button
+                type="button"
+                class="menu-btn"
+                id="btnArsip"
+            >
+
+                <i class="fa-solid fa-folder-open"></i>
+
+                <span>
+                    Arsip Pengukuhan
+                </span>
+
+            </button>
+
+
+
+            <!-- SEARCH -->
+
+            <div class="search-menu">
+
+                <i
+                    class="fa-solid fa-magnifying-glass"
+                ></i>
+
+
+                <input
+                    type="search"
+                    id="searchInput"
+                    placeholder="Cari Guru Besar..."
+                    autocomplete="off"
+                    enterkeyhint="search"
+                    aria-label="Cari Guru Besar"
+                >
+
+            </div>
+
+
+        </nav>
+
+
+
+        <!-- =================================================
+             INFORMASI PERIODE TERBARU
+        ================================================== -->
+
+        <section
+            class="periode-box"
+            aria-label="Informasi periode pengukuhan"
+        >
+
 
             <h3>
-                DEWAN PROFESOR
+                <span aria-hidden="true">📅</span>
+                Pengukuhan Guru Besar
             </h3>
+
+
+            <h2 id="periodeAktif">
+                Memuat data...
+            </h2>
+
+
+            <p id="jumlahPeriode">
+                Memuat data Guru Besar...
+            </p>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             DAFTAR PROFESOR
+             
+             Script.js akan mengisi bagian ini.
+        ================================================== -->
+
+        <main
+            id="listProfesor"
+            class="list-profesor"
+        >
+
+            <div class="data-kosong">
+
+                <i class="fa-solid fa-spinner fa-spin"></i>
+
+                <h3>
+                    Memuat data...
+                </h3>
+
+                <p>
+                    Mohon tunggu sebentar.
+                </p>
+
+            </div>
+
+        </main>
+
+
+
+        <!-- =================================================
+             STATISTIK
+        ================================================== -->
+
+        <section
+            class="statistics"
+            aria-label="Statistik portal"
+        >
+
+
+            <!-- TOTAL GURU BESAR -->
+
+            <div class="stat">
+
+                <i
+                    class="fa-solid fa-user-graduate"
+                    aria-hidden="true"
+                ></i>
+
+
+                <span id="totalProfesor">
+                    0
+                </span>
+
+
+                <small>
+                    Guru Besar
+                </small>
+
+            </div>
+
+
+
+            <!-- TOTAL BUKU -->
+
+            <div class="stat">
+
+                <i
+                    class="fa-solid fa-book-open"
+                    aria-hidden="true"
+                ></i>
+
+
+                <span id="totalBuku">
+                    0
+                </span>
+
+
+                <small>
+                    Buku Digital
+                </small>
+
+            </div>
+
+
+
+            <!-- TOTAL VIDEO -->
+
+            <div class="stat">
+
+                <i
+                    class="fa-brands fa-youtube"
+                    aria-hidden="true"
+                ></i>
+
+
+                <span id="totalVideo">
+                    0
+                </span>
+
+
+                <small>
+                    Video
+                </small>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- =================================================
+             FOOTER
+        ================================================== -->
+
+        <footer class="footer">
+
 
             <p>
                 Direktorat Sumber Daya Manusia
             </p>
 
+
             <p>
                 Universitas Andalas
             </p>
 
-            <p>
+
+            <p class="copyright">
                 &copy; 2026
             </p>
 
-        </div>
+
+        </footer>
 
 
-    </footer>
+    </div>
 
 
 
     <!-- =====================================================
          JAVASCRIPT
+         
+         defer memastikan HTML selesai dibaca sebelum JS
+         dijalankan.
     ====================================================== -->
 
-    <script src="script.js"></script>
+    <script
+        src="script.js"
+        defer
+    ></script>
 
 
 </body>
