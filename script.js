@@ -269,19 +269,22 @@ if (searchInput) {
             item.nama.toLowerCase().includes(keyword) || 
             item.fakultas.toLowerCase().includes(keyword)
         );
-        tampilkanData(hasil);
 
-        // Jika tombol ENTER ditekan, langsung scroll & beri efek fokus ke kartu pertama
+        // Jika tombol ENTER ditekan, pastikan kembali ke Beranda/Tampilan Utama lalu scroll ke kartu
         if (e.key === "Enter") {
             e.preventDefault();
             
             if (hasil.length > 0) {
+                // Aktifkan kembali tab Beranda secara otomatis agar hasil pencajaran tampil penuh di layar utama
                 if (btnBeranda) btnBeranda.click();
+                
+                // Render hasil pencarian
+                tampilkanData(hasil);
                 
                 setTimeout(() => {
                     const kartuPertama = document.querySelector("#listProfesor .card");
                     if (kartuPertama) {
-                        // Scroll halus menuju posisi kartu
+                        // Scroll halus menuju posisi tengah kartu agar tidak terpotong
                         kartuPertama.scrollIntoView({ behavior: "smooth", block: "center" });
                         
                         // Efek kilat/glow (bingkai hijau menyala) sementara pada kartu
@@ -293,11 +296,15 @@ if (searchInput) {
                         }, 2000);
                     }
                 }, 100);
+            } else {
+                tampilkanData(hasil);
             }
+        } else {
+            // Pencarian real-time biasa
+            tampilkanData(hasil);
         }
     });
 }
-
 // Navigation Tabs
 const btnBeranda = document.getElementById("btnBeranda");
 const btnArsip = document.getElementById("btnArsip");
