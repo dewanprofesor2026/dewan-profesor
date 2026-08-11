@@ -1323,3 +1323,183 @@ body {
         box-sizing: border-box;
     }
 }
+
+/* =========================================================
+   FIX FINAL SEARCH & CARD DI HP
+   AGAR TIDAK TERPOTONG / TIDAK PERLU ZOOM OUT
+========================================================= */
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+@media (max-width: 600px) {
+
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 8px;
+        padding-right: 8px;
+        overflow-x: hidden;
+    }
+
+    /* MENU */
+    .menu {
+        width: 100%;
+        max-width: 100%;
+        grid-template-columns: 1fr 1fr 1.2fr;
+        gap: 3px;
+        padding: 4px;
+    }
+
+    .menu-btn {
+        width: 100%;
+        min-width: 0;
+        padding-left: 2px;
+        padding-right: 2px;
+        font-size: 9px;
+    }
+
+    .search-menu {
+        width: 100%;
+        min-width: 0;
+        padding: 0 7px;
+    }
+
+    .search-menu input {
+        width: 100%;
+        min-width: 0;
+        font-size: 9px;
+    }
+
+    /* HASIL SEARCH / DAFTAR PROFESOR */
+    #listProfesor {
+        width: 100%;
+        max-width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    /* CARD */
+    #listProfesor .card {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+
+        gap: 9px;
+        padding: 10px;
+
+        overflow: hidden;
+    }
+
+    /* FOTO */
+    #listProfesor .card img {
+        width: 72px;
+        height: 95px;
+
+        min-width: 72px;
+        max-width: 72px;
+
+        flex: 0 0 72px;
+
+        object-fit: cover;
+    }
+
+    /* INFORMASI */
+    #listProfesor .info {
+        width: 0;
+        min-width: 0;
+        max-width: 100%;
+
+        flex: 1;
+
+        overflow: hidden;
+    }
+
+    #listProfesor .info h3 {
+        width: 100%;
+        max-width: 100%;
+
+        margin: 0 0 4px 0;
+
+        font-size: 12px;
+        line-height: 1.3;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    #listProfesor .fakultas,
+    #listProfesor .periode-profesor {
+        width: 100%;
+        max-width: 100%;
+
+        font-size: 9px;
+        line-height: 1.3;
+
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* TOMBOL */
+    #listProfesor .buttons {
+        width: 100%;
+        max-width: 100%;
+
+        display: flex;
+        flex-wrap: wrap;
+
+        gap: 4px;
+
+        overflow: hidden;
+    }
+
+    #listProfesor .btn {
+        max-width: 100%;
+        min-width: 0;
+
+        padding: 5px 6px;
+
+        font-size: 8px;
+
+        white-space: normal;
+        overflow-wrap: anywhere;
+        word-break: break-word;
+    }
+
+    /* PERIODE */
+    .periode-box {
+        width: 100%;
+        max-width: 100%;
+
+        margin-left: 0;
+        margin-right: 0;
+
+        box-sizing: border-box;
+    }
+
+    /* ARSIP */
+    .arsip-item {
+        width: 100%;
+        max-width: 100%;
+        min-width: 0;
+
+        box-sizing: border-box;
+        overflow: hidden;
+    }
+}
