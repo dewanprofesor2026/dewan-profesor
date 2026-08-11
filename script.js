@@ -278,6 +278,29 @@ if (searchInput) {
                 tampilkanData(hasil);
                 
                 setTimeout(() => {
+                    const kartuPertama = document.querySelector("#listProfesor .card");
+                    if (kartuPertama) {
+                        // 1. Hitung posisi absolut kartu dari puncak dokumen
+                        const elementPosition = kartuPertama.getBoundingClientRect().top + window.pageYOffset;
+                        
+                        // 2. Berikan offset jarak aman (misal 20px) agar ada ruang kosong di atas kartu
+                        const offsetPosition = elementPosition - 20; 
+
+                        // 3. Eksekusi scroll halus secara presisi
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: "smooth"
+                        });
+                        
+                        // Efek kilat/glow (bingkai hijau menyala) sementara pada kartu
+                        kartuPertama.style.transition = "all 0.3s ease";
+                        kartuPertama.style.boxShadow = "0 0 0 4px #008000, 0 12px 30px rgba(0,0,0,0.25)";
+                        
+                        setTimeout(() => {
+                            kartuPertama.style.boxShadow = "";
+                        }, 2000);
+                    }
+                }, 150);
             } else {
                 tampilkanData(hasil);
             }
