@@ -5,15 +5,26 @@
 
     <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0">
 
-    <title>Dewan Profesor Universitas Andalas</title>
+    <title>
+        Dewan Profesor Universitas Andalas
+    </title>
 
-    <link rel="stylesheet" href="style.css">
+    <link
+        rel="stylesheet"
+        href="style.css">
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com">
 
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin>
 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
@@ -29,212 +40,259 @@
 <body>
 
 
-<div class="container">
+<!-- =====================================================
+     HEADER
+====================================================== -->
+
+<header>
+
+    <img
+        src="img/logo.png"
+        class="logo"
+        alt="Logo Universitas Andalas">
 
 
-    <!-- ========================================
-         HEADER
-    ========================================= -->
+    <h1>
+        UNIVERSITAS ANDALAS
+    </h1>
 
-    <header>
 
-        <img
-            src="img/logo.png"
-            class="logo"
-            alt="Logo Universitas Andalas">
+    <h2>
+        DEWAN PROFESOR
+    </h2>
 
-        <h1>UNIVERSITAS ANDALAS</h1>
 
-        <h2>DEWAN PROFESOR</h2>
+    <p>
+        Portal Digital Pengukuhan Guru Besar
+    </p>
 
-        <p>
-            Portal Digital Pengukuhan Guru Besar
-        </p>
 
-    </header>
+    <!-- =================================================
+         SLIDESHOW FOTO PROFESOR
+         
+         FOTO SAJA
+         TANPA NAMA
+         
+         JavaScript akan mengisi bagian ini
+         secara otomatis dari Google Sheets.
+    ================================================== -->
 
-    <!-- =====================================================
-     SLIDESHOW 3D FOTO PROFESOR
-===================================================== -->
+    <div
+        id="professorSlideshow"
+        class="professor-slideshow">
 
-<section class="profesor-slider">
+        <div class="slideshow-track">
 
-    <button class="slider-arrow slider-prev" id="sliderPrev">
-        <i class="fa-solid fa-chevron-left"></i>
-    </button>
+            <!-- Foto akan dimasukkan otomatis oleh JS -->
 
-    <div class="slider-stage" id="sliderStage">
-        <!-- Diisi otomatis oleh JavaScript -->
+        </div>
+
     </div>
 
-    <button class="slider-arrow slider-next" id="sliderNext">
-        <i class="fa-solid fa-chevron-right"></i>
+
+</header>
+
+
+
+<!-- =====================================================
+     MENU UTAMA
+====================================================== -->
+
+<nav class="menu">
+
+
+    <!-- BERANDA -->
+
+    <button
+        class="menu-btn active"
+        id="btnBeranda">
+
+        <i
+            class="fa-solid fa-house">
+        </i>
+
+        <span>
+            Beranda
+        </span>
+
     </button>
+
+
+
+    <!-- ARSIP -->
+
+    <button
+        class="menu-btn"
+        id="btnArsip">
+
+        <i
+            class="fa-solid fa-folder-open">
+        </i>
+
+        <span>
+            Arsip Pengukuhan
+        </span>
+
+    </button>
+
+
+
+    <!-- PENCARIAN -->
+
+    <div class="search-menu">
+
+        <i
+            class="fa-solid fa-magnifying-glass">
+        </i>
+
+
+        <input
+            type="text"
+            placeholder="Cari Guru Besar..."
+            id="searchInput">
+
+    </div>
+
+
+</nav>
+
+
+
+<!-- =====================================================
+     INFORMASI PERIODE TERBARU
+====================================================== -->
+
+<section class="periode-box">
+
+
+    <h3>
+        📅 Pengukuhan Guru Besar
+    </h3>
+
+
+    <h2 id="periodeAktif">
+        25 Oktober 2026
+    </h2>
+
+
+    <p id="jumlahPeriode">
+        7 Guru Besar Dikukuhkan
+    </p>
+
 
 </section>
 
 
-    <!-- ========================================
-         MENU UTAMA
-         BERANDA - ARSIP - PENCARIAN
-    ========================================= -->
 
-    <nav class="menu">
+<!-- =====================================================
+     DAFTAR PROFESOR
+     
+     Data akan diisi oleh script.js
+====================================================== -->
 
-
-        <!-- BERANDA -->
-
-        <button
-            class="menu-btn active"
-            id="btnBeranda">
-
-            <i class="fa-solid fa-house"></i>
-
-            <span>Beranda</span>
-
-        </button>
-
-
-        <!-- ARSIP -->
-
-        <button
-            class="menu-btn"
-            id="btnArsip">
-
-            <i class="fa-solid fa-folder-open"></i>
-
-            <span>Arsip Pengukuhan</span>
-
-        </button>
-
-
-        <!-- PENCARIAN -->
-
-        <div class="search-menu">
-
-            <i class="fa-solid fa-magnifying-glass"></i>
-
-            <input
-                type="text"
-                placeholder="Cari Guru Besar..."
-                id="searchInput">
-
-        </div>
-
-
-    </nav>
-
-
-    <!-- ========================================
-         INFORMASI PERIODE TERBARU
-    ========================================= -->
-
-    <section class="periode-box">
-
-        <h3>
-            📅 Pengukuhan Guru Besar
-        </h3>
-
-        <h2 id="periodeAktif">
-            25 Oktober 2026
-        </h2>
-
-        <p id="jumlahPeriode">
-            7 Guru Besar Dikukuhkan
-        </p>
-
-    </section>
-
-
-    <!-- ========================================
-         DAFTAR PROFESOR
-    ========================================= -->
-
-    <div id="listProfesor">
-
-    </div>
-
+<div id="listProfesor">
 
 </div>
 
 
-<!-- ========================================
-     STATISTIK PORTAL
-========================================= -->
 
-<div class="statistik-bar">
+<!-- =====================================================
+     STATISTIK
+====================================================== -->
+
+<section class="statistics">
 
 
     <div class="stat">
 
-        <i class="fa-solid fa-user-graduate"></i>
+        <i
+            class="fa-solid fa-user-graduate">
+        </i>
+
 
         <span id="totalProfesor">
             0
         </span>
+
 
         Guru Besar
 
     </div>
 
 
+
     <div class="stat">
 
-        <i class="fa-solid fa-book-open"></i>
+        <i
+            class="fa-solid fa-book-open">
+        </i>
+
 
         <span id="totalBuku">
             0
         </span>
+
 
         Buku Digital
 
     </div>
 
 
+
     <div class="stat">
 
-        <i class="fa-brands fa-youtube"></i>
+        <i
+            class="fa-brands fa-youtube">
+        </i>
+
 
         <span id="totalVideo">
             0
         </span>
+
 
         Video
 
     </div>
 
 
-</div>
+</section>
 
 
-<!-- ========================================
+
+<!-- =====================================================
      FOOTER
-========================================= -->
+====================================================== -->
 
 <footer>
+
 
     <p>
         Direktorat Sumber Daya Manusia
     </p>
 
+
     <p>
         Universitas Andalas
     </p>
+
 
     <p>
         &copy;2026
     </p>
 
+
 </footer>
 
 
-<!-- ========================================
-     JAVASCRIPT
-========================================= -->
 
-<script src="data.js"></script>
+<!-- =====================================================
+     SCRIPT
+====================================================== -->
 
-<script src="script.js"></script>
+<script
+    src="script.js">
+</script>
 
 
 </body>
