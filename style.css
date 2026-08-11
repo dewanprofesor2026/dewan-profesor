@@ -1,12 +1,11 @@
-/* ========================================================
+/* =========================================================
    DEWAN PROFESOR UNIVERSITAS ANDALAS
-   STYLE.CSS - LENGKAP
-   ======================================================== */
+   STYLE.CSS LENGKAP
+   ========================================================= */
 
-
-/* ========================================================
+/* =========================================================
    RESET
-   ======================================================== */
+   ========================================================= */
 
 * {
     margin: 0;
@@ -21,379 +20,259 @@ html {
 body {
     font-family: "Poppins", sans-serif;
     min-height: 100vh;
-
+    color: #123;
     background:
         linear-gradient(
-            rgba(255, 255, 255, 0.12),
-            rgba(255, 255, 255, 0.12)
+            rgba(255, 255, 255, 0.88),
+            rgba(255, 255, 255, 0.88)
         ),
         url("img/background.jpg") center center / cover fixed no-repeat;
 
-    color: #111;
     overflow-x: hidden;
 }
 
 
-/* ========================================================
+/* =========================================================
    HEADER
-   ======================================================== */
+   ========================================================= */
 
 header {
     width: 100%;
-    min-height: 245px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     text-align: center;
-
-    padding: 25px 20px 30px;
-
-    background:
-        linear-gradient(
-            180deg,
-            rgba(255, 255, 255, 0.94),
-            rgba(255, 255, 255, 0.78)
-        );
-
-    backdrop-filter: blur(4px);
+    padding: 30px 20px 25px;
+    position: relative;
+    z-index: 2;
 }
-
-
-/* LOGO */
 
 .logo {
     width: 125px;
     height: 125px;
-
     object-fit: contain;
-
     display: block;
-
-    margin-bottom: 10px;
-
-    filter:
-        drop-shadow(
-            0 5px 10px rgba(0, 0, 0, 0.20)
-        );
+    margin: 0 auto 12px;
 }
-
-
-/* JUDUL */
 
 header h1 {
-    font-size: clamp(24px, 4vw, 42px);
-
-    font-weight: 700;
-
-    color: #003b1b;
-
-    line-height: 1.15;
-
-    margin-bottom: 3px;
+    font-size: 30px;
+    font-weight: 800;
+    color: #006b21;
+    line-height: 1.2;
+    text-shadow:
+        1px 1px 0 #fff,
+        -1px -1px 0 #fff;
 }
-
 
 header h2 {
-    font-size: clamp(18px, 3vw, 30px);
-
-    font-weight: 600;
-
-    color: #008000;
-
+    margin-top: 3px;
+    font-size: 25px;
+    font-weight: 700;
+    color: #006b21;
     line-height: 1.2;
-
-    margin-bottom: 7px;
+    text-shadow:
+        1px 1px 0 #fff,
+        -1px -1px 0 #fff;
 }
-
 
 header p {
-    font-size: clamp(12px, 2vw, 17px);
-
-    color: #333;
-
-    font-weight: 400;
+    margin-top: 8px;
+    font-size: 15px;
+    color: #444;
+    font-weight: 500;
 }
 
 
-/* ========================================================
+/* =========================================================
    SLIDESHOW PROFESOR
-   ======================================================== */
+   ========================================================= */
 
 .profesor-slideshow {
     width: 100%;
-
+    max-width: 1000px;
+    height: 260px;
+    margin: 5px auto 20px;
     position: relative;
 
-    margin: 0 auto;
-
-    padding: 28px 0 35px;
-
-    overflow: hidden;
-
-    min-height: 270px;
-
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
-
-    background:
-        linear-gradient(
-            rgba(255, 255, 255, 0.08),
-            rgba(255, 255, 255, 0.08)
-        );
+    overflow: hidden;
+    z-index: 2;
 }
 
 
-/* AREA FOTO */
+/* Container foto */
 
 .slideshow-track {
     width: 100%;
-    height: 250px;
-
-    position: relative;
+    height: 100%;
 
     display: flex;
-
+    align-items: center;
     justify-content: center;
 
-    align-items: center;
+    position: relative;
 }
 
 
-/* SEMUA ITEM FOTO */
+/* Semua item */
 
-.slide-item {
+.slide-profesor {
     position: absolute;
 
-    top: 50%;
-
-    left: 50%;
-
     width: 145px;
-    height: 205px;
+    height: 190px;
 
-    transform:
-        translate(-50%, -50%)
-        scale(0.72);
+    border-radius: 16px;
 
-    opacity: 0.55;
+    overflow: hidden;
 
-    z-index: 1;
+    background: #fff;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.25);
 
     transition:
-        transform 0.55s ease,
-        opacity 0.55s ease,
-        filter 0.55s ease,
-        z-index 0s linear 0.2s;
+        transform 0.5s ease,
+        opacity 0.5s ease,
+        filter 0.5s ease,
+        box-shadow 0.5s ease;
 
-    filter:
-        drop-shadow(
-            0 8px 15px rgba(0, 0, 0, 0.25)
-        );
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 
-/* FOTO */
+/* Foto */
 
-.slide-item img {
+.slide-profesor img {
     width: 100%;
     height: 100%;
 
-    display: block;
-
     object-fit: cover;
 
-    border-radius: 18px;
-
-    border: 3px solid rgba(255, 255, 255, 0.95);
-
-    background: #008000;
-
-    box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.25);
-
-    user-select: none;
-
-    -webkit-user-drag: none;
+    display: block;
 }
 
 
-/* ========================================================
+/* =========================================================
    POSISI SLIDESHOW
-   ======================================================== */
+   ========================================================= */
 
 
-/* FOTO TENGAH */
+/* Foto tengah */
 
-.slide-item.active {
-    transform:
-        translate(-50%, -50%)
-        scale(1);
+.slide-profesor.center {
+    z-index: 5;
 
     opacity: 1;
 
-    z-index: 10;
+    transform:
+        translateX(0)
+        scale(1);
 
-    filter:
-        drop-shadow(
-            0 12px 22px rgba(0, 0, 0, 0.35)
-        );
+    box-shadow:
+        0 14px 35px rgba(0, 0, 0, 0.35);
 }
 
 
-/* FOTO KIRI */
+/* Foto kiri */
 
-.slide-item.prev {
+.slide-profesor.left {
+    z-index: 3;
+
+    opacity: 0.9;
+
     transform:
-        translate(
-            calc(-50% - 100px),
-            -50%
-        )
+        translateX(-105px)
         scale(0.82);
 
-    opacity: 0.88;
-
-    z-index: 5;
+    filter: brightness(0.85);
 }
 
 
-/* FOTO KANAN */
+/* Foto kanan */
 
-.slide-item.next {
+.slide-profesor.right {
+    z-index: 3;
+
+    opacity: 0.9;
+
     transform:
-        translate(
-            calc(-50% + 100px),
-            -50%
-        )
+        translateX(105px)
         scale(0.82);
 
-    opacity: 0.88;
-
-    z-index: 5;
+    filter: brightness(0.85);
 }
 
 
-/* FOTO JAUH KIRI */
+/* Foto jauh kiri */
 
-.slide-item.prev-2 {
-    transform:
-        translate(
-            calc(-50% - 190px),
-            -50%
-        )
-        scale(0.68);
-
-    opacity: 0.45;
-
-    z-index: 2;
-}
-
-
-/* FOTO JAUH KANAN */
-
-.slide-item.next-2 {
-    transform:
-        translate(
-            calc(-50% + 190px),
-            -50%
-        )
-        scale(0.68);
-
-    opacity: 0.45;
-
-    z-index: 2;
-}
-
-
-/* FOTO LAIN */
-
-.slide-item.hidden {
-    transform:
-        translate(-50%, -50%)
-        scale(0.55);
+.slide-profesor.far-left {
+    z-index: 1;
 
     opacity: 0;
 
-    z-index: 0;
+    transform:
+        translateX(-220px)
+        scale(0.65);
 }
 
 
-/* ========================================================
-   EFEK BAYANGAN FOTO
-   ======================================================== */
+/* Foto jauh kanan */
 
-.slide-item::after {
-    content: "";
+.slide-profesor.far-right {
+    z-index: 1;
 
-    position: absolute;
+    opacity: 0;
 
-    left: 15%;
-    right: 15%;
-
-    bottom: -12px;
-
-    height: 18px;
-
-    background: rgba(0, 0, 0, 0.30);
-
-    border-radius: 50%;
-
-    filter: blur(8px);
-
-    z-index: -1;
+    transform:
+        translateX(220px)
+        scale(0.65);
 }
 
 
-/* ========================================================
+/* =========================================================
    TOMBOL SLIDESHOW
-   ======================================================== */
+   ========================================================= */
 
-.slide-button {
+.slideshow-btn {
     position: absolute;
 
     top: 50%;
-
     transform: translateY(-50%);
 
-    width: 42px;
-    height: 42px;
+    width: 38px;
+    height: 38px;
 
     border: none;
-
     border-radius: 50%;
 
-    background: rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.95);
 
-    color: #008000;
+    color: #008329;
 
     font-size: 18px;
 
     display: flex;
-
     align-items: center;
     justify-content: center;
 
     cursor: pointer;
 
-    z-index: 20;
-
     box-shadow:
         0 5px 15px rgba(0, 0, 0, 0.18);
+
+    z-index: 10;
 
     transition:
         transform 0.2s ease,
         background 0.2s ease;
 }
 
-
-.slide-button:hover {
-    background: #008000;
-
+.slideshow-btn:hover {
+    background: #008329;
     color: white;
 
     transform:
@@ -401,458 +280,350 @@ header p {
         scale(1.08);
 }
 
+.slideshow-prev {
+    left: 15px;
+}
 
-.slide-button.prev-button {
-    left: 8%;
+.slideshow-next {
+    right: 15px;
 }
 
 
-.slide-button.next-button {
-    right: 8%;
-}
-
-
-/* ========================================================
-   TITIK SLIDESHOW
-   ======================================================== */
-
-.slideshow-dots {
-    position: absolute;
-
-    bottom: 8px;
-
-    left: 50%;
-
-    transform: translateX(-50%);
-
-    display: flex;
-
-    gap: 7px;
-
-    z-index: 30;
-}
-
-
-.slideshow-dot {
-    width: 8px;
-    height: 8px;
-
-    border-radius: 50%;
-
-    background: rgba(255, 255, 255, 0.65);
-
-    cursor: pointer;
-
-    transition:
-        width 0.25s ease,
-        background 0.25s ease;
-}
-
-
-.slideshow-dot.active {
-    width: 24px;
-
-    border-radius: 10px;
-
-    background: #008000;
-}
-
-
-/* ========================================================
-   MENU UTAMA
-   ======================================================== */
+/* =========================================================
+   MENU
+   ========================================================= */
 
 .menu {
-    width: 92%;
-    max-width: 1200px;
+    width: calc(100% - 30px);
+    max-width: 1000px;
 
-    margin: 20px auto;
+    min-height: 64px;
+
+    margin: 10px auto 18px;
+
+    padding: 10px 12px;
+
+    background: rgba(255, 255, 255, 0.93);
+
+    border-radius: 18px;
 
     display: flex;
-
     align-items: center;
-
-    gap: 12px;
-
-    padding: 12px;
-
-    background:
-        rgba(255, 255, 255, 0.93);
-
-    border-radius: 22px;
+    gap: 8px;
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.12);
+        0 8px 25px rgba(0, 0, 0, 0.12);
 
-    backdrop-filter: blur(10px);
+    position: relative;
+    z-index: 20;
 }
 
 
-/* ========================================================
+/* =========================================================
    MENU BUTTON
-   ======================================================== */
+   ========================================================= */
 
 .menu-btn {
     border: none;
 
     background: transparent;
 
-    padding: 13px 18px;
-
-    border-radius: 14px;
-
-    color: #222;
+    color: #333;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: 14px;
+    font-size: 13px;
 
-    font-weight: 500;
+    font-weight: 600;
+
+    padding: 11px 14px;
+
+    border-radius: 10px;
 
     cursor: pointer;
 
     display: flex;
-
     align-items: center;
 
-    justify-content: center;
-
-    gap: 8px;
+    gap: 7px;
 
     transition:
-        0.25s ease;
+        background 0.25s ease,
+        color 0.25s ease,
+        transform 0.2s ease;
 }
-
-
-.menu-btn i {
-    font-size: 16px;
-}
-
 
 .menu-btn:hover {
-    background: rgba(0, 128, 0, 0.08);
-
-    color: #008000;
+    background: #e9f7ec;
+    color: #007c26;
 }
 
-
 .menu-btn.active {
-    background: #008000;
-
+    background: #008329;
     color: white;
 
     box-shadow:
-        0 5px 15px rgba(0, 128, 0, 0.25);
+        0 5px 12px rgba(0, 128, 41, 0.25);
+}
+
+.menu-btn i {
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    SEARCH
-   ======================================================== */
+   ========================================================= */
 
 .search-menu {
     margin-left: auto;
 
-    width: 330px;
+    width: 300px;
 
-    height: 52px;
+    height: 44px;
 
     display: flex;
-
     align-items: center;
 
-    gap: 12px;
+    gap: 9px;
 
-    padding: 0 18px;
+    padding: 0 14px;
 
-    background: white;
+    background: #fff;
 
-    border: 2px solid #008000;
+    border: 2px solid #6dbb80;
 
-    border-radius: 30px;
+    border-radius: 25px;
 
     box-shadow:
-        0 0 0 5px rgba(0, 128, 0, 0.08);
+        0 0 0 4px rgba(0, 128, 41, 0.05);
 
     transition:
-        0.25s ease;
+        border-color 0.25s ease,
+        box-shadow 0.25s ease;
 }
-
 
 .search-menu:focus-within {
-    box-shadow:
-        0 0 0 6px rgba(0, 128, 0, 0.14);
-}
+    border-color: #008329;
 
+    box-shadow:
+        0 0 0 4px rgba(0, 128, 41, 0.12);
+}
 
 .search-menu i {
-    color: #008000;
-
-    font-size: 20px;
+    color: #008329;
+    font-size: 17px;
 }
-
 
 .search-menu input {
     width: 100%;
 
     border: none;
-
     outline: none;
 
     background: transparent;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: 16px;
+    font-size: 14px;
 
-    color: #222;
+    color: #333;
 }
-
-
-/*
-   PENTING UNTUK HP
-
-   Font input minimal 16px membantu mencegah
-   Safari/iPhone melakukan zoom otomatis.
-
-   Jika Anda ingin Android tetap boleh melakukan
-   auto zoom, JS yang menangani proses tersebut.
-*/
 
 .search-menu input::placeholder {
     color: #999;
 }
 
 
-/* ========================================================
+/* =========================================================
    PERIODE TERBARU
-   ======================================================== */
+   ========================================================= */
 
 .periode-box {
-    width: 92%;
-    max-width: 1200px;
+    width: calc(100% - 30px);
+    max-width: 1000px;
 
-    margin: 20px auto;
+    margin: 0 auto 18px;
 
-    padding: 28px 32px;
+    padding: 22px 25px;
 
-    background:
-        rgba(255, 255, 255, 0.94);
+    background: rgba(255, 255, 255, 0.92);
 
-    border-radius: 24px;
+    border-radius: 18px;
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.12);
+        0 8px 25px rgba(0, 0, 0, 0.10);
 
-    text-align: center;
+    text-align: left;
+
+    position: relative;
+    z-index: 2;
 }
-
 
 .periode-box h3 {
-    font-size: 17px;
-
-    color: #333;
-
-    margin-bottom: 7px;
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 4px;
 }
-
 
 .periode-box h2 {
-    font-size: clamp(24px, 4vw, 36px);
-
-    color: #008000;
-
-    font-weight: 700;
-
-    margin-bottom: 5px;
+    font-size: 27px;
+    color: #008329;
+    font-weight: 800;
 }
-
 
 .periode-box p {
-    color: #555;
-
-    font-size: 14px;
+    margin-top: 4px;
+    color: #666;
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    LIST PROFESOR
-   ======================================================== */
+   ========================================================= */
 
 #listProfesor {
-    width: 92%;
-    max-width: 1200px;
+    width: calc(100% - 30px);
+    max-width: 1000px;
 
-    margin: 25px auto 40px;
+    margin: 0 auto;
 
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 20px;
+    position: relative;
+    z-index: 2;
 }
 
 
-/* ========================================================
+/* =========================================================
    CARD PROFESOR
-   ======================================================== */
+   ========================================================= */
 
 .card {
     width: 100%;
 
-    display: flex;
+    min-height: 190px;
 
+    margin-bottom: 18px;
+
+    padding: 12px;
+
+    display: flex;
     align-items: center;
 
-    gap: 25px;
+    gap: 14px;
 
-    padding: 22px;
+    background: rgba(255, 255, 255, 0.94);
 
-    background:
-        rgba(255, 255, 255, 0.95);
-
-    border-radius: 25px;
+    border-radius: 18px;
 
     box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.12);
+        0 8px 25px rgba(0, 0, 0, 0.12);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 }
 
-
 .card:hover {
     transform: translateY(-3px);
 
     box-shadow:
-        0 14px 35px rgba(0, 0, 0, 0.17);
+        0 14px 30px rgba(0, 0, 0, 0.17);
 }
 
 
-/* ========================================================
+/* =========================================================
    FOTO CARD
-   ======================================================== */
+   ========================================================= */
 
-.card .photo {
-    width: 175px;
-    height: 210px;
+.photo {
+    width: 130px;
+    height: 160px;
 
-    flex-shrink: 0;
+    flex: 0 0 130px;
 
     object-fit: cover;
 
-    object-position: center top;
+    border-radius: 12px;
 
-    border-radius: 18px;
-
-    border: 3px solid white;
-
-    background: #008000;
+    background: #008329;
 
     box-shadow:
-        0 8px 20px rgba(0, 0, 0, 0.20);
+        0 7px 18px rgba(0, 0, 0, 0.22);
 }
-
 
 .photo-placeholder {
-    width: 175px;
-    height: 210px;
+    width: 130px;
+    height: 160px;
 
-    flex-shrink: 0;
+    flex: 0 0 130px;
 
-    border-radius: 18px;
+    border-radius: 12px;
 
-    background: #008000;
+    background: #e8f4ea;
 
-    color: white;
+    color: #008329;
 
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    font-size: 50px;
+    font-size: 40px;
 }
 
 
-/* ========================================================
-   INFORMASI CARD
-   ======================================================== */
+/* =========================================================
+   INFO PROFESOR
+   ========================================================= */
 
 .info {
     flex: 1;
-
     min-width: 0;
 }
 
-
 .info h3 {
-    font-size: 24px;
+    color: #008329;
 
-    color: #008000;
+    font-size: 18px;
 
-    margin-bottom: 8px;
+    font-weight: 800;
 
-    line-height: 1.3;
+    margin-bottom: 3px;
 }
-
 
 .info .fakultas {
-    font-size: 16px;
+    color: #555;
 
-    font-weight: 500;
+    font-size: 13px;
 
-    color: #333;
-
-    margin-bottom: 8px;
+    margin-bottom: 6px;
 }
-
 
 .periode-profesor {
     color: #666;
 
-    font-size: 14px;
+    font-size: 12px;
 
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
-
 
 .periode-profesor i {
-    color: #008000;
-
-    margin-right: 5px;
+    color: #008329;
+    margin-right: 3px;
 }
 
 
-/* ========================================================
-   HIGHLIGHT SEARCH
-   ======================================================== */
-
-mark {
-    background: #b7f5c0;
-
-    color: #006b16;
-
-    border-radius: 4px;
-
-    padding: 1px 3px;
-}
-
-
-/* ========================================================
-   BUTTON
-   ======================================================== */
+/* =========================================================
+   BUTTONS
+   ========================================================= */
 
 .buttons {
     display: flex;
 
     flex-wrap: wrap;
 
-    gap: 10px;
+    gap: 7px;
 }
-
 
 .btn {
     display: inline-flex;
@@ -861,168 +632,192 @@ mark {
 
     justify-content: center;
 
-    gap: 7px;
+    gap: 6px;
 
-    padding: 10px 16px;
+    padding: 8px 11px;
 
-    border-radius: 10px;
+    border-radius: 8px;
 
-    background: #008000;
+    background: #008329;
 
     color: white;
 
     text-decoration: none;
 
-    font-size: 13px;
+    font-size: 11px;
 
-    font-weight: 500;
+    font-weight: 600;
 
     transition:
-        0.25s ease;
+        background 0.2s ease,
+        transform 0.2s ease;
 }
-
 
 .btn:hover {
-    background: #006b00;
+    background: #006b21;
 
-    transform: translateY(-2px);
+    transform: translateY(-1px);
 }
-
 
 .btn-book {
-    background: #006d31;
+    background: #007c29;
 }
 
 
-/* ========================================================
-   DATA KOSONG
-   ======================================================== */
+/* =========================================================
+   HIGHLIGHT SEARCH
+   ========================================================= */
+
+mark {
+    background: #fff19a;
+
+    color: #006b21;
+
+    border-radius: 3px;
+
+    padding: 0 2px;
+}
+
+
+/* =========================================================
+   DATA KOSONG / ERROR
+   ========================================================= */
 
 .data-kosong {
     width: 100%;
 
-    padding: 55px 20px;
+    min-height: 180px;
 
-    text-align: center;
+    padding: 40px 20px;
 
-    background:
-        rgba(255, 255, 255, 0.94);
+    margin-bottom: 20px;
 
-    border-radius: 24px;
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.94);
 
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.10);
-}
 
+    text-align: center;
+
+    color: #555;
+}
 
 .data-kosong i {
-    font-size: 45px;
+    font-size: 35px;
 
-    color: #008000;
+    color: #008329;
 
-    margin-bottom: 15px;
+    margin-bottom: 12px;
 }
-
 
 .data-kosong h3 {
     color: #333;
 
-    margin-bottom: 7px;
-}
+    font-size: 18px;
 
+    margin-bottom: 5px;
+}
 
 .data-kosong p {
-    color: #777;
-
-    font-size: 14px;
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    ARSIP
-   ======================================================== */
+   ========================================================= */
 
 .arsip-header {
     width: 100%;
 
-    padding: 30px;
+    padding: 25px;
+
+    margin-bottom: 18px;
 
     text-align: center;
 
-    background:
-        rgba(255, 255, 255, 0.95);
+    border-radius: 18px;
 
-    border-radius: 25px;
-
-    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.94);
 
     box-shadow:
         0 8px 25px rgba(0, 0, 0, 0.10);
 }
 
-
 .arsip-header-icon {
-    width: 65px;
-    height: 65px;
+    width: 50px;
+    height: 50px;
 
-    margin: 0 auto 12px;
+    margin: 0 auto 10px;
 
     border-radius: 50%;
 
+    background: #e8f6eb;
+
+    color: #008329;
+
     display: flex;
-
     align-items: center;
-
     justify-content: center;
 
-    background: #008000;
-
-    color: white;
-
-    font-size: 25px;
+    font-size: 22px;
 }
-
 
 .arsip-header h2 {
-    color: #008000;
+    color: #008329;
 
-    margin-bottom: 5px;
+    font-size: 23px;
+
+    margin-bottom: 4px;
 }
-
 
 .arsip-header p {
     color: #666;
 
-    font-size: 14px;
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    TAHUN ARSIP
-   ======================================================== */
+   ========================================================= */
 
 .tahun-arsip {
-    margin: 25px 0 10px;
+    margin: 22px 0 10px;
 
-    padding: 10px 18px;
-
-    border-left: 6px solid #008000;
+    padding-left: 5px;
 }
-
 
 .tahun-arsip h2 {
-    color: #008000;
+    color: #008329;
 
-    font-size: 25px;
+    font-size: 22px;
+
+    font-weight: 800;
 }
 
 
-/* ========================================================
+/* =========================================================
    ITEM ARSIP
-   ======================================================== */
+   ========================================================= */
 
 .arsip-item {
     width: 100%;
+
+    min-height: 75px;
+
+    padding: 14px 18px;
+
+    margin-bottom: 10px;
+
+    border-radius: 15px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+        0 6px 18px rgba(0, 0, 0, 0.09);
 
     display: flex;
 
@@ -1030,137 +825,119 @@ mark {
 
     justify-content: space-between;
 
-    gap: 20px;
-
-    padding: 20px 24px;
-
-    margin-bottom: 12px;
-
-    background:
-        rgba(255, 255, 255, 0.95);
-
-    border-radius: 18px;
-
     cursor: pointer;
 
-    box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.08);
-
     transition:
-        0.25s ease;
+        transform 0.2s ease,
+        box-shadow 0.2s ease;
 }
-
 
 .arsip-item:hover {
-    transform: translateX(5px);
+    transform: translateX(4px);
 
     box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.13);
+        0 10px 22px rgba(0, 0, 0, 0.13);
 }
-
 
 .arsip-item h3 {
-    color: #333;
+    color: #008329;
 
-    font-size: 16px;
+    font-size: 15px;
 
-    margin-bottom: 5px;
+    margin-bottom: 3px;
 }
-
 
 .arsip-item h3 i {
-    color: #008000;
-
-    margin-right: 6px;
+    margin-right: 5px;
 }
-
 
 .arsip-item p {
     color: #777;
 
-    font-size: 13px;
+    font-size: 12px;
 }
-
 
 .arsip-arrow {
-    color: #008000;
+    color: #008329;
 
-    font-weight: 600;
+    font-size: 13px;
 
-    white-space: nowrap;
+    font-weight: 700;
 }
 
 
-/* ========================================================
+/* =========================================================
    DETAIL PERIODE
-   ======================================================== */
+   ========================================================= */
 
 .periode-detail {
     width: 100%;
 }
 
-
 .btn-kembali {
     border: none;
 
-    background: white;
+    background: #008329;
 
-    color: #008000;
+    color: white;
 
-    padding: 11px 17px;
+    padding: 9px 14px;
 
-    border-radius: 10px;
+    border-radius: 9px;
 
     font-family: "Poppins", sans-serif;
 
-    font-size: 13px;
+    font-size: 12px;
 
-    font-weight: 500;
+    font-weight: 600;
 
     cursor: pointer;
 
-    margin-bottom: 18px;
+    margin-bottom: 14px;
 
-    box-shadow:
-        0 5px 15px rgba(0, 0, 0, 0.10);
-
-    transition: 0.2s ease;
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
 }
-
 
 .btn-kembali:hover {
-    background: #008000;
+    background: #006b21;
 
-    color: white;
+    transform: translateX(-2px);
 }
 
-
 .periode-detail-box {
+    width: 100%;
+
+    padding: 22px;
+
+    border-radius: 18px;
+
+    background: rgba(255, 255, 255, 0.94);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.10);
+
     display: flex;
 
     align-items: center;
 
-    gap: 20px;
+    gap: 15px;
 
-    padding: 25px;
-
-    background:
-        rgba(255, 255, 255, 0.95);
-
-    border-radius: 22px;
-
-    margin-bottom: 20px;
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.10);
+    margin-bottom: 18px;
 }
 
-
 .periode-icon {
-    width: 65px;
-    height: 65px;
+    width: 55px;
+    height: 55px;
 
-    flex-shrink: 0;
+    flex: 0 0 55px;
+
+    border-radius: 50%;
+
+    background: #e8f6eb;
+
+    color: #008329;
 
     display: flex;
 
@@ -1168,642 +945,635 @@ mark {
 
     justify-content: center;
 
-    border-radius: 16px;
-
-    background: #008000;
-
-    color: white;
-
-    font-size: 25px;
+    font-size: 22px;
 }
-
 
 .periode-info-text h2 {
-    font-size: 20px;
+    font-size: 18px;
 
     color: #333;
-
-    margin-bottom: 4px;
 }
-
 
 .periode-info-text h3 {
-    font-size: 25px;
+    color: #008329;
 
-    color: #008000;
-
-    margin-bottom: 3px;
+    font-size: 23px;
 }
-
 
 .periode-info-text p {
-    font-size: 13px;
+    color: #777;
 
-    color: #666;
+    font-size: 12px;
 }
 
 
-/* ========================================================
+/* =========================================================
    STATISTIK
-   ======================================================== */
+   ========================================================= */
 
-.stats {
-    width: 92%;
-    max-width: 1200px;
+.statistik {
+    width: calc(100% - 30px);
+    max-width: 1000px;
 
-    margin: 20px auto;
+    margin: 25px auto;
 
     display: grid;
 
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 15px;
+    gap: 12px;
 }
-
 
 .stat {
-    background:
-        rgba(255, 255, 255, 0.95);
+    min-height: 65px;
 
-    border-radius: 18px;
+    padding: 12px;
 
-    padding: 18px;
+    background: rgba(255, 255, 255, 0.94);
 
-    text-align: center;
-
-    color: #444;
+    border-radius: 14px;
 
     box-shadow:
-        0 6px 20px rgba(0, 0, 0, 0.09);
-}
+        0 5px 18px rgba(0, 0, 0, 0.08);
 
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 7px;
+
+    color: #555;
+
+    font-size: 12px;
+}
 
 .stat i {
-    color: #008000;
+    color: #008329;
 
-    margin-right: 5px;
+    font-size: 17px;
 }
-
 
 .stat span {
-    color: #008000;
+    color: #008329;
 
-    font-weight: 700;
+    font-weight: 800;
 }
 
 
-/* ========================================================
+/* =========================================================
    FOOTER
-   ======================================================== */
+   ========================================================= */
 
 footer {
     width: 100%;
 
-    margin-top: 40px;
+    margin-top: 30px;
 
-    padding: 30px 20px;
+    padding: 25px 15px;
 
     text-align: center;
 
-    background:
-        rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.90);
+
+    border-top:
+        1px solid rgba(0, 128, 41, 0.10);
 
     color: #555;
 
-    font-size: 13px;
-}
+    font-size: 12px;
 
+    line-height: 1.7;
+}
 
 footer p {
-    margin: 3px 0;
+    margin: 2px 0;
+}
+
+footer p:last-child {
+    color: #008329;
+
+    font-weight: 700;
+
+    margin-top: 4px;
 }
 
 
-/* ========================================================
+/* =========================================================
    RESPONSIVE TABLET
-   ======================================================== */
+   ========================================================= */
 
-@media (max-width: 900px) {
+@media (max-width: 768px) {
+
+    header {
+        padding-top: 20px;
+    }
+
+    .logo {
+        width: 100px;
+        height: 100px;
+    }
+
+    header h1 {
+        font-size: 24px;
+    }
+
+    header h2 {
+        font-size: 20px;
+    }
+
+    header p {
+        font-size: 13px;
+    }
+
+
+    /* Slideshow */
+
+    .profesor-slideshow {
+        height: 220px;
+    }
+
+    .slide-profesor {
+        width: 120px;
+        height: 165px;
+    }
+
+    .slide-profesor.left {
+        transform:
+            translateX(-85px)
+            scale(0.80);
+    }
+
+    .slide-profesor.right {
+        transform:
+            translateX(85px)
+            scale(0.80);
+    }
+
+    .slideshow-prev {
+        left: 5px;
+    }
+
+    .slideshow-next {
+        right: 5px;
+    }
+
+
+    /* Menu */
 
     .menu {
         flex-wrap: wrap;
     }
 
-
     .search-menu {
         width: 100%;
 
-        order: 3;
-
         margin-left: 0;
+
+        order: 3;
     }
 
 
-    .slide-item {
-        width: 135px;
-        height: 190px;
+    /* Card */
+
+    .card {
+        padding: 10px;
+    }
+
+    .photo,
+    .photo-placeholder {
+        width: 110px;
+        height: 140px;
+
+        flex-basis: 110px;
+    }
+
+    .info h3 {
+        font-size: 16px;
     }
 
 
-    .slide-item.prev {
-        transform:
-            translate(
-                calc(-50% - 85px),
-                -50%
-            )
-            scale(0.78);
-    }
-
-
-    .slide-item.next {
-        transform:
-            translate(
-                calc(-50% + 85px),
-                -50%
-            )
-            scale(0.78);
-    }
-
-
-    .slide-item.prev-2 {
-        transform:
-            translate(
-                calc(-50% - 160px),
-                -50%
-            )
-            scale(0.65);
-    }
-
-
-    .slide-item.next-2 {
-        transform:
-            translate(
-                calc(-50% + 160px),
-                -50%
-            )
-            scale(0.65);
-    }
-
-
-    .slide-button.prev-button {
-        left: 3%;
-    }
-
-
-    .slide-button.next-button {
-        right: 3%;
+    .statistik {
+        grid-template-columns:
+            1fr;
     }
 
 }
 
 
-/* ========================================================
+/* =========================================================
    RESPONSIVE HP
-   ======================================================== */
+   ========================================================= */
 
-@media (max-width: 600px) {
+@media (max-width: 520px) {
 
     body {
         background-attachment: scroll;
     }
 
 
-    /* HEADER */
-
     header {
-        min-height: 190px;
-
         padding:
-            18px 12px 20px;
+            18px
+            12px
+            10px;
     }
-
 
     .logo {
-        width: 90px;
-        height: 90px;
+        width: 85px;
+        height: 85px;
 
-        margin-bottom: 7px;
+        margin-bottom: 8px;
     }
-
 
     header h1 {
-        font-size: 23px;
+        font-size: 21px;
     }
-
 
     header h2 {
         font-size: 18px;
     }
 
-
     header p {
-        font-size: 12px;
+        font-size: 11px;
+
+        margin-top: 5px;
     }
 
 
-    /* ====================================================
+    /* =====================================================
        SLIDESHOW HP
-       ==================================================== */
+       ===================================================== */
 
     .profesor-slideshow {
-        min-height: 230px;
+        height: 190px;
 
-        padding: 15px 0 30px;
+        margin-top: 0;
+
+        margin-bottom: 12px;
     }
 
+    .slide-profesor {
+        width: 105px;
+        height: 145px;
 
-    .slideshow-track {
-        height: 210px;
+        border-radius: 12px;
     }
 
-
-    .slide-item {
-        width: 115px;
-        height: 165px;
-    }
-
-
-    /*
-       FOTO TENGAH
-    */
-
-    .slide-item.active {
+    .slide-profesor.center {
         transform:
-            translate(-50%, -50%)
-            scale(0.95);
+            translateX(0)
+            scale(1);
     }
 
-
-    /*
-       FOTO KIRI
-       Berhimpit sebagian dengan foto tengah
-    */
-
-    .slide-item.prev {
+    .slide-profesor.left {
         transform:
-            translate(
-                calc(-50% - 72px),
-                -50%
-            )
-            scale(0.74);
-
-        opacity: 0.9;
+            translateX(-72px)
+            scale(0.78);
     }
 
-
-    /*
-       FOTO KANAN
-       Berhimpit sebagian dengan foto tengah
-    */
-
-    .slide-item.next {
+    .slide-profesor.right {
         transform:
-            translate(
-                calc(-50% + 72px),
-                -50%
-            )
-            scale(0.74);
-
-        opacity: 0.9;
+            translateX(72px)
+            scale(0.78);
     }
 
-
-    /*
-       FOTO JAUH
-    */
-
-    .slide-item.prev-2 {
-        transform:
-            translate(
-                calc(-50% - 130px),
-                -50%
-            )
-            scale(0.60);
-
-        opacity: 0.35;
-    }
-
-
-    .slide-item.next-2 {
-        transform:
-            translate(
-                calc(-50% + 130px),
-                -50%
-            )
-            scale(0.60);
-
-        opacity: 0.35;
-    }
-
-
-    /* TOMBOL */
-
-    .slide-button {
-        width: 34px;
-        height: 34px;
+    .slideshow-btn {
+        width: 32px;
+        height: 32px;
 
         font-size: 14px;
     }
 
 
-    .slide-button.prev-button {
-        left: 8px;
-    }
-
-
-    .slide-button.next-button {
-        right: 8px;
-    }
-
-
-    /* MENU */
+    /* =====================================================
+       MENU HP
+       ===================================================== */
 
     .menu {
-        width: 94%;
+        width: calc(100% - 20px);
+
+        margin:
+            8px auto
+            12px;
 
         padding: 8px;
 
-        gap: 6px;
-
-        border-radius: 18px;
-    }
-
-
-    .menu-btn {
-        flex: 1;
-
-        padding:
-            10px 7px;
-
-        font-size: 11px;
+        border-radius: 15px;
 
         gap: 5px;
     }
 
+    .menu-btn {
+        padding:
+            8px 9px;
+
+        font-size: 10px;
+    }
 
     .menu-btn i {
-        font-size: 13px;
+        font-size: 10px;
     }
 
+
+    /* =====================================================
+       SEARCH HP
+       ===================================================== */
 
     .search-menu {
-        height: 48px;
+        height: 43px;
 
-        border-radius: 25px;
+        border-radius: 23px;
 
         padding:
-            0 14px;
+            0 12px;
     }
-
 
     .search-menu input {
         /*
-           16px penting agar browser mobile
-           tidak melakukan zoom berlebihan.
-        */
+         * Jangan ubah menjadi font kecil.
+         *
+         * 16px membantu browser HP tidak melakukan
+         * zoom berlebihan pada input.
+         *
+         * Tetapi bila Anda memang menyukai auto zoom
+         * saat search diklik, JS tetap menangani
+         * perilakunya.
+         */
         font-size: 16px;
     }
 
 
-    /* PERIODE */
+    /* =====================================================
+       PERIODE
+       ===================================================== */
 
     .periode-box {
-        width: 94%;
+        width: calc(100% - 20px);
 
-        padding:
-            20px 15px;
-
-        border-radius: 18px;
-    }
-
-
-    .periode-box h3 {
-        font-size: 14px;
-    }
-
-
-    .periode-box h2 {
-        font-size: 24px;
-    }
-
-
-    .periode-box p {
-        font-size: 12px;
-    }
-
-
-    /* LIST */
-
-    #listProfesor {
-        width: 94%;
-    }
-
-
-    /* CARD */
-
-    .card {
-        flex-direction: column;
-
-        text-align: center;
-
-        padding: 18px;
-
-        gap: 15px;
-    }
-
-
-    .card .photo,
-    .photo-placeholder {
-        width: 150px;
-        height: 180px;
-    }
-
-
-    .info {
-        width: 100%;
-    }
-
-
-    .info h3 {
-        font-size: 19px;
-    }
-
-
-    .info .fakultas {
-        font-size: 14px;
-    }
-
-
-    .periode-profesor {
-        font-size: 12px;
-    }
-
-
-    .buttons {
-        justify-content: center;
-    }
-
-
-    .btn {
-        font-size: 12px;
-
-        padding:
-            9px 12px;
-    }
-
-
-    /* STAT */
-
-    .stats {
-        width: 94%;
-
-        grid-template-columns:
-            1fr;
-
-        gap: 10px;
-    }
-
-
-    /* ARSIP */
-
-    .arsip-header {
-        padding: 22px 15px;
-    }
-
-
-    .arsip-header h2 {
-        font-size: 20px;
-    }
-
-
-    .arsip-header p {
-        font-size: 12px;
-    }
-
-
-    .arsip-item {
-        padding:
-            16px;
+        padding: 17px;
 
         border-radius: 15px;
     }
 
-
-    .arsip-item h3 {
-        font-size: 13px;
-    }
-
-
-    .arsip-item p {
-        font-size: 11px;
-    }
-
-
-    .arsip-arrow {
+    .periode-box h3 {
         font-size: 12px;
     }
 
+    .periode-box h2 {
+        font-size: 21px;
+    }
 
-    /* DETAIL PERIODE */
+    .periode-box p {
+        font-size: 11px;
+    }
+
+
+    /* =====================================================
+       CARD HP
+       ===================================================== */
+
+    #listProfesor {
+        width: calc(100% - 20px);
+    }
+
+    .card {
+        min-height: 150px;
+
+        padding: 9px;
+
+        gap: 10px;
+
+        border-radius: 15px;
+    }
+
+    .photo,
+    .photo-placeholder {
+        width: 85px;
+        height: 115px;
+
+        flex: 0 0 85px;
+
+        border-radius: 9px;
+    }
+
+    .photo-placeholder {
+        font-size: 28px;
+    }
+
+    .info h3 {
+        font-size: 13px;
+
+        line-height: 1.3;
+    }
+
+    .info .fakultas {
+        font-size: 10px;
+    }
+
+    .periode-profesor {
+        font-size: 9px;
+
+        margin-bottom: 7px;
+    }
+
+    .buttons {
+        gap: 4px;
+    }
+
+    .btn {
+        padding:
+            6px 7px;
+
+        font-size: 8px;
+
+        border-radius: 6px;
+    }
+
+
+    /* =====================================================
+       ARSIP HP
+       ===================================================== */
+
+    .arsip-header {
+        padding: 20px 15px;
+    }
+
+    .arsip-header h2 {
+        font-size: 19px;
+    }
+
+    .arsip-header p {
+        font-size: 10px;
+    }
+
+    .tahun-arsip h2 {
+        font-size: 18px;
+    }
+
+    .arsip-item {
+        padding:
+            12px;
+
+        min-height: 65px;
+
+        border-radius: 12px;
+    }
+
+    .arsip-item h3 {
+        font-size: 12px;
+    }
+
+    .arsip-item p {
+        font-size: 9px;
+    }
+
+    .arsip-arrow {
+        font-size: 10px;
+    }
+
+
+    /* =====================================================
+       DETAIL PERIODE HP
+       ===================================================== */
 
     .periode-detail-box {
-        padding: 18px;
+        padding: 15px;
 
-        gap: 12px;
+        gap: 10px;
     }
-
 
     .periode-icon {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
 
-        font-size: 18px;
+        flex-basis: 42px;
+
+        font-size: 17px;
     }
-
 
     .periode-info-text h2 {
-        font-size: 15px;
+        font-size: 13px;
     }
-
 
     .periode-info-text h3 {
-        font-size: 18px;
+        font-size: 17px;
     }
-
 
     .periode-info-text p {
-        font-size: 11px;
+        font-size: 9px;
     }
 
 
-    /* FOOTER */
+    /* =====================================================
+       STATISTIK HP
+       ===================================================== */
+
+    .statistik {
+        width: calc(100% - 20px);
+
+        margin:
+            15px auto;
+    }
+
+    .stat {
+        min-height: 50px;
+
+        font-size: 10px;
+    }
+
+    .stat i {
+        font-size: 14px;
+    }
+
+
+    /* =====================================================
+       FOOTER HP
+       ===================================================== */
 
     footer {
-        padding:
-            25px 15px;
+        margin-top: 20px;
 
-        font-size: 11px;
+        padding:
+            18px 10px;
+
+        font-size: 10px;
     }
 
 }
 
 
-/* ========================================================
-   HP SANGAT KECIL
-   ======================================================== */
+/* =========================================================
+   EXTRA SMALL HP
+   ========================================================= */
 
-@media (max-width: 380px) {
+@media (max-width: 360px) {
 
-    .slide-item {
-        width: 100px;
-        height: 145px;
+    header h1 {
+        font-size: 18px;
+    }
+
+    header h2 {
+        font-size: 16px;
+    }
+
+    header p {
+        font-size: 10px;
     }
 
 
-    .slide-item.prev {
+    .profesor-slideshow {
+        height: 170px;
+    }
+
+    .slide-profesor {
+        width: 90px;
+        height: 125px;
+    }
+
+    .slide-profesor.left {
         transform:
-            translate(
-                calc(-50% - 60px),
-                -50%
-            )
-            scale(0.70);
+            translateX(-62px)
+            scale(0.75);
     }
 
-
-    .slide-item.next {
+    .slide-profesor.right {
         transform:
-            translate(
-                calc(-50% + 60px),
-                -50%
-            )
-            scale(0.70);
+            translateX(62px)
+            scale(0.75);
     }
 
 
-    .slide-item.prev-2 {
-        transform:
-            translate(
-                calc(-50% - 110px),
-                -50%
-            )
-            scale(0.55);
+    .menu-btn span {
+        display: none;
+    }
+
+    .menu-btn {
+        width: 38px;
+        height: 38px;
+
+        justify-content: center;
+
+        padding: 0;
     }
 
 
-    .slide-item.next-2 {
-        transform:
-            translate(
-                calc(-50% + 110px),
-                -50%
-            )
-            scale(0.55);
+    .photo,
+    .photo-placeholder {
+        width: 75px;
+        height: 100px;
+
+        flex-basis: 75px;
     }
 
+    .info h3 {
+        font-size: 11px;
+    }
 
-    .slide-button {
-        width: 30px;
-        height: 30px;
+    .btn {
+        font-size: 7px;
     }
 
 }
