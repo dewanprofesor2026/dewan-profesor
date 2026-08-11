@@ -1,6 +1,6 @@
 // ========================================================
 // DEWAN PROFESOR UNIVERSITAS ANDALAS
-// SCRIPT.JS (LENGKAP & OPTIMIZED FOTO DRIVE + HIGHLIGHT)
+// SCRIPT.JS (LENGKAP: DRIVE FOTO, HIGHLIGHT, & ENTER SCROLL)
 // ========================================================
 
 const API_URL = "https://script.google.com/macros/s/AKfycbyAFoztVoX6ZJ7ANsDTFLDJ5WcBOT8SneZZ9IgnAqLyu0Kz0ufoJERtdhe5iq0OCYH7qA/exec";
@@ -192,11 +192,10 @@ function mulaiPortal() {
     tampilkanData(profesorTerbaru);
 }
 
-// Render Kartu Profesor ke Halaman Web (Dilengkapi Fitur Highlight Pencarian)
+// Render Kartu Profesor ke Halaman Web (Dilengkapi Fitur Highlight Teks)
 function tampilkanData(data) {
     if (!list) return;
 
-    // Ambil kata kunci dari kolom pencarian
     const keyword = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
     if (!data || data.length === 0) {
@@ -224,7 +223,6 @@ function tampilkanData(data) {
         const fakultas = highlightText(item.fakultas);
         const periode = escapeHTML(item.periode);
 
-        // Tag Foto dengan atribut referrerpolicy="no-referrer" agar foto dari Drive tidak terblokir
         const fotoProfesor = (item.foto && item.foto.trim() !== "")
             ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${escapeHTML(item.nama)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                <div class="photo-placeholder" style="display:none;"><i class="fa-solid fa-user"></i></div>`
@@ -257,19 +255,46 @@ function tampilkanData(data) {
     list.innerHTML = htmlBuffer;
 }
 
-// Event Search
+// Event Search (Mendukung Real-Time Filter & Tekan Enter untuk Fokus/Scroll ke Foto)
 if (searchInput) {
-    searchInput.addEventListener("keyup", function() {
+    searchInput.addEventListener("keyup", function(e) {
         const keyword = searchInput.value.toLowerCase().trim();
+        
         if (keyword === "") {
             tampilkanData(profesorTerbaru);
             return;
         }
+        
         const hasil = dataProfesor.filter(item => 
             item.nama.toLowerCase().includes(keyword) || 
             item.fakultas.toLowerCase().includes(keyword)
         );
         tampilkanData(hasil);
+
+        // Jika tombol ENTER ditekan, langsung scroll & beri efek fokus ke kartu pertama
+        if (e.key === "Enter") {
+            e.preventDefault();
+            
+            if (hasil.length > 0) {
+                if (btnBeranda) btnBeranda.click();
+                
+                setTimeout(() => {
+                    const kartuPertama = document.querySelector("#listProfesor .card");
+                    if (kartuPertama) {
+                        // Scroll halus menuju posisi kartu
+                        kartuPertama.scrollIntoView({ behavior: "smooth", block: "center" });
+                        
+                        // Efek kilat/glow (bingkai hijau menyala) sementara pada kartu
+                        kartuPertama.style.transition = "all 0.3s ease";
+                        kartuPertama.style.boxShadow = "0 0 0 4px #008000, 0 12px 30px rgba(0,0,0,0.25)";
+                        
+                        setTimeout(() => {
+                            kartuPertama.style.boxShadow = "";
+                        }, 2000);
+                    }
+                }, 100);
+            }
+        }
     });
 }
 
