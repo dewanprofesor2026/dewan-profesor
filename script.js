@@ -270,22 +270,21 @@ if (searchInput) {
             item.fakultas.toLowerCase().includes(keyword)
         );
 
-        // Jika tombol ENTER ditekan, pastikan kembali ke Beranda/Tampilan Utama lalu scroll ke kartu
         if (e.key === "Enter") {
             e.preventDefault();
             
             if (hasil.length > 0) {
-                // Aktifkan kembali tab Beranda secara otomatis agar hasil pencajaran tampil penuh di layar utama
                 if (btnBeranda) btnBeranda.click();
-                
-                // Render hasil pencarian
                 tampilkanData(hasil);
                 
                 setTimeout(() => {
                     const kartuPertama = document.querySelector("#listProfesor .card");
                     if (kartuPertama) {
-                        // Scroll halus menuju posisi tengah kartu agar tidak terpotong
-                        kartuPertama.scrollIntoView({ behavior: "smooth", block: "center" });
+                        // Menggunakan 'start' agar posisi kartu berada di batas atas pandangan layar
+                        kartuPertama.scrollIntoView({ behavior: "smooth", block: "start" });
+                        
+                        // Menambahkan penyesuaian manual scroll ke bawah sedikit agar tidak tertutup header HP
+                        window.scrollBy({ top: -120, behavior: "smooth" });
                         
                         // Efek kilat/glow (bingkai hijau menyala) sementara pada kartu
                         kartuPertama.style.transition = "all 0.3s ease";
@@ -295,12 +294,11 @@ if (searchInput) {
                             kartuPertama.style.boxShadow = "";
                         }, 2000);
                     }
-                }, 100);
+                }, 150);
             } else {
                 tampilkanData(hasil);
             }
         } else {
-            // Pencarian real-time biasa
             tampilkanData(hasil);
         }
     });
