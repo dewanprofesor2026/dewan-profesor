@@ -1,6 +1,6 @@
 // ========================================================
 // DEWAN PROFESOR UNIVERSITAS ANDALAS
-// SCRIPT.JS (LENGKAP & OPTIMIZED FOTO DRIVE)
+// SCRIPT.JS (LENGKAP & OPTIMIZED FOTO DRIVE + HIGHLIGHT)
 // ========================================================
 
 const API_URL = "https://script.google.com/macros/s/AKfycbyAFoztVoX6ZJ7ANsDTFLDJ5WcBOT8SneZZ9IgnAqLyu0Kz0ufoJERtdhe5iq0OCYH7qA/exec";
@@ -192,9 +192,12 @@ function mulaiPortal() {
     tampilkanData(profesorTerbaru);
 }
 
-// Render Kartu Profesor ke Halaman Web
+// Render Kartu Profesor ke Halaman Web (Dilengkapi Fitur Highlight Pencarian)
 function tampilkanData(data) {
     if (!list) return;
+
+    // Ambil kata kunci dari kolom pencarian
+    const keyword = searchInput ? searchInput.value.toLowerCase().trim() : "";
 
     if (!data || data.length === 0) {
         list.innerHTML = `
@@ -210,13 +213,20 @@ function tampilkanData(data) {
     let htmlBuffer = "";
 
     data.forEach(item => {
-        const nama = escapeHTML(item.nama);
-        const fakultas = escapeHTML(item.fakultas);
+        // Fungsi helper untuk membungkus teks pencarian dengan tanda highlight <mark>
+        const highlightText = (text) => {
+            if (!keyword) return escapeHTML(text);
+            const regex = new RegExp(`(${keyword.replace(/[-\/\\^$*+?.()|[\]{}]/g, '\\$&')})`, 'gi');
+            return String(text).replace(regex, '<mark>$1</mark>');
+        };
+
+        const nama = highlightText(item.nama);
+        const fakultas = highlightText(item.fakultas);
         const periode = escapeHTML(item.periode);
 
         // Tag Foto dengan atribut referrerpolicy="no-referrer" agar foto dari Drive tidak terblokir
         const fotoProfesor = (item.foto && item.foto.trim() !== "")
-            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${nama}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            ? `<img src="${escapeHTML(item.foto)}" class="photo" alt="${escapeHTML(item.nama)}" loading="lazy" referrerpolicy="no-referrer" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
                <div class="photo-placeholder" style="display:none;"><i class="fa-solid fa-user"></i></div>`
             : `<div class="photo-placeholder"><i class="fa-solid fa-user"></i></div>`;
 
@@ -303,7 +313,6 @@ function bukaPeriode(periodeTarget) {
     if (periodeBox) periodeBox.style.display = "none";
     if (searchInput) searchInput.value = "";
 
-    // PERBAIKAN: Struktur HTML tombol kembali & header detail periode
     let htmlHeader = `
         <div class="periode-detail">
             <button class="btn-kembali" onclick="tampilkanArsip()">
@@ -358,8 +367,8 @@ function bukaPeriode(periodeTarget) {
     });
 
     list.innerHTML = htmlHeader + `<div>${htmlCards}</div>`;
-    if (countInfo) countInfo.textContent = "";
 }
+
 function tampilkanArsip() {
     let htmlBuffer = `
         <div class="arsip-header">
