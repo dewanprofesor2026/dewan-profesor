@@ -1663,3 +1663,423 @@ button.btn-kembali:hover i {
         max-width: 100%;
     }
 }
+
+/* =========================================================
+   3D PROFESOR SLIDESHOW
+========================================================= */
+
+.profesor-slider {
+    width: 100%;
+    max-width: 900px;
+
+    height: 230px;
+
+    margin: 5px auto 15px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   AREA SLIDESHOW
+========================================================= */
+
+.slider-stage {
+    width: 100%;
+    height: 220px;
+
+    position: relative;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    perspective: 1000px;
+}
+
+
+/* =========================================================
+   CARD FOTO
+========================================================= */
+
+.slider-card {
+    width: 135px;
+    height: 175px;
+
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform-origin: center center;
+
+    border-radius: 14px;
+
+    overflow: hidden;
+
+    background: rgba(255,255,255,0.95);
+
+    box-shadow:
+        0 10px 25px rgba(0,0,0,0.25);
+
+    transition:
+        transform 0.6s ease,
+        opacity 0.6s ease,
+        filter 0.6s ease,
+        z-index 0.6s ease;
+
+    cursor: pointer;
+}
+
+
+/* FOTO */
+
+.slider-card img {
+    width: 100%;
+    height: 145px;
+
+    display: block;
+
+    object-fit: cover;
+
+    object-position: center top;
+}
+
+
+/* NAMA PROFESOR */
+
+.slider-card-name {
+    width: 100%;
+    height: 30px;
+
+    padding: 5px 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    background: rgba(255,255,255,0.96);
+
+    color: #111;
+
+    font-family: "Poppins", sans-serif;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    line-height: 1.1;
+
+    overflow: hidden;
+}
+
+
+/* =========================================================
+   POSISI TENGAH
+========================================================= */
+
+.slider-card.center {
+    transform:
+        translate(-50%, -50%)
+        translateX(0)
+        scale(1.12);
+
+    opacity: 1;
+
+    filter: none;
+
+    z-index: 10;
+
+    box-shadow:
+        0 14px 30px rgba(0,0,0,0.30);
+}
+
+
+/* =========================================================
+   POSISI KIRI
+========================================================= */
+
+.slider-card.left {
+    transform:
+        translate(-50%, -50%)
+        translateX(-155px)
+        scale(0.82);
+
+    opacity: 0.65;
+
+    filter: grayscale(25%);
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   POSISI KANAN
+========================================================= */
+
+.slider-card.right {
+    transform:
+        translate(-50%, -50%)
+        translateX(155px)
+        scale(0.82);
+
+    opacity: 0.65;
+
+    filter: grayscale(25%);
+
+    z-index: 5;
+}
+
+
+/* =========================================================
+   POSISI JAUH KIRI
+========================================================= */
+
+.slider-card.far-left {
+    transform:
+        translate(-50%, -50%)
+        translateX(-270px)
+        scale(0.65);
+
+    opacity: 0.20;
+
+    filter: grayscale(60%);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   POSISI JAUH KANAN
+========================================================= */
+
+.slider-card.far-right {
+    transform:
+        translate(-50%, -50%)
+        translateX(270px)
+        scale(0.65);
+
+    opacity: 0.20;
+
+    filter: grayscale(60%);
+
+    z-index: 2;
+}
+
+
+/* =========================================================
+   TOMBOL PANAH
+========================================================= */
+
+.slider-arrow {
+    position: absolute;
+
+    top: 50%;
+
+    width: 30px;
+    height: 30px;
+
+    transform: translateY(-50%);
+
+    border: none;
+
+    border-radius: 50%;
+
+    background: rgba(255,255,255,0.90);
+
+    color: #008000;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    z-index: 20;
+
+    box-shadow:
+        0 4px 12px rgba(0,0,0,0.18);
+
+    transition: all 0.25s ease;
+}
+
+
+.slider-arrow:hover {
+    background: #008000;
+
+    color: #fff;
+
+    transform:
+        translateY(-50%)
+        scale(1.08);
+}
+
+
+.slider-prev {
+    left: 8px;
+}
+
+
+.slider-next {
+    right: 8px;
+}
+
+
+.slider-arrow i {
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   RESPONSIVE HP
+========================================================= */
+
+@media (max-width: 600px) {
+
+    .profesor-slider {
+        height: 190px;
+
+        margin-top: 0;
+
+        margin-bottom: 8px;
+    }
+
+    .slider-stage {
+        height: 185px;
+    }
+
+    .slider-card {
+        width: 105px;
+        height: 145px;
+    }
+
+    .slider-card img {
+        height: 118px;
+    }
+
+    .slider-card-name {
+        height: 27px;
+
+        font-size: 8px;
+
+        padding: 3px;
+    }
+
+    .slider-card.center {
+        transform:
+            translate(-50%, -50%)
+            translateX(0)
+            scale(1.08);
+    }
+
+    .slider-card.left {
+        transform:
+            translate(-50%, -50%)
+            translateX(-105px)
+            scale(0.78);
+    }
+
+    .slider-card.right {
+        transform:
+            translate(-50%, -50%)
+            translateX(105px)
+            scale(0.78);
+    }
+
+    .slider-card.far-left {
+        transform:
+            translate(-50%, -50%)
+            translateX(-180px)
+            scale(0.62);
+    }
+
+    .slider-card.far-right {
+        transform:
+            translate(-50%, -50%)
+            translateX(180px)
+            scale(0.62);
+    }
+
+    .slider-arrow {
+        width: 25px;
+        height: 25px;
+    }
+
+    .slider-arrow i {
+        font-size: 10px;
+    }
+
+    .slider-prev {
+        left: 3px;
+    }
+
+    .slider-next {
+        right: 3px;
+    }
+}
+
+
+/* =========================================================
+   HP SANGAT KECIL
+========================================================= */
+
+@media (max-width: 400px) {
+
+    .profesor-slider {
+        height: 175px;
+    }
+
+    .slider-stage {
+        height: 170px;
+    }
+
+    .slider-card {
+        width: 90px;
+        height: 130px;
+    }
+
+    .slider-card img {
+        height: 105px;
+    }
+
+    .slider-card-name {
+        height: 25px;
+
+        font-size: 7px;
+    }
+
+    .slider-card.left {
+        transform:
+            translate(-50%, -50%)
+            translateX(-90px)
+            scale(0.72);
+    }
+
+    .slider-card.right {
+        transform:
+            translate(-50%, -50%)
+            translateX(90px)
+            scale(0.72);
+    }
+
+    .slider-card.far-left {
+        transform:
+            translate(-50%, -50%)
+            translateX(-150px)
+            scale(0.58);
+    }
+
+    .slider-card.far-right {
+        transform:
+            translate(-50%, -50%)
+            translateX(150px)
+            scale(0.58);
+    }
+}
