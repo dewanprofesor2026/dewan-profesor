@@ -1,12 +1,11 @@
-/* ========================================================
+/* =========================================================
    DEWAN PROFESOR UNIVERSITAS ANDALAS
-   STYLE.CSS - VERSI PEMULIHAN LENGKAP
-   ======================================================== */
+   STYLE.CSS LENGKAP
+   ========================================================= */
 
-
-/* ========================================================
+/* =========================================================
    RESET
-   ======================================================== */
+   ========================================================= */
 
 * {
     margin: 0;
@@ -18,52 +17,33 @@ html {
     scroll-behavior: smooth;
 }
 
+html,
+body {
+    width: 100%;
+    min-height: 100%;
+}
+
 body {
     font-family: "Poppins", sans-serif;
     background: #f4f7f5;
-    color: #1d2b24;
-    min-height: 100vh;
+    color: #222;
     overflow-x: hidden;
 }
 
 
-/* ========================================================
-   BODY BACKGROUND
-   ======================================================== */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: -2;
-
-    background:
-        radial-gradient(
-            circle at 20% 10%,
-            rgba(0, 128, 70, 0.08),
-            transparent 35%
-        ),
-        radial-gradient(
-            circle at 80% 80%,
-            rgba(212, 175, 55, 0.08),
-            transparent 35%
-        );
-
-    pointer-events: none;
-}
-
-
-/* ========================================================
-   HEADER
-   ======================================================== */
+/* =========================================================
+   HEADER / HERO
+   FOTO GEDUNG UNAND SEBAGAI BACKGROUND ASLI
+   ========================================================= */
 
 header {
     position: relative;
 
     width: 100%;
-    min-height: 390px;
+    min-height: 430px;
 
-    padding: 50px 20px 35px;
+    margin: 0;
+    padding: 25px 20px 180px;
 
     display: flex;
     flex-direction: column;
@@ -72,386 +52,374 @@ header {
 
     text-align: center;
 
-    color: white;
+    background-image: url("img/background-unand.jpg");
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
 
     overflow: hidden;
 
-    background:
-        linear-gradient(
-            rgba(0, 73, 45, 0.82),
-            rgba(0, 105, 65, 0.88)
-        ),
-        url("img/background-unand.jpg");
-
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-
-    box-shadow:
-        0 8px 30px rgba(0, 0, 0, 0.16);
+    isolation: isolate;
 }
 
 
-/* Lapisan dekorasi header */
+/* =========================================================
+   TIDAK ADA OVERLAY HIJAU
+   ========================================================= */
 
-header::before {
-    content: "";
+header::before,
+header::after {
+    content: none !important;
+    display: none !important;
+}
 
-    position: absolute;
-    inset: 0;
 
-    background:
-        radial-gradient(
-            circle at 50% 0%,
-            rgba(255, 255, 255, 0.15),
-            transparent 45%
+/* =========================================================
+   LOGO DEWAN PROFESOR
+   ========================================================= */
+
+header .logo {
+    position: relative;
+
+    z-index: 20;
+
+    width: 90px;
+    height: 90px;
+
+    object-fit: contain;
+
+    display: block;
+
+    margin: 0 auto 8px;
+
+    filter:
+        drop-shadow(
+            0 3px 8px rgba(0, 0, 0, 0.55)
         );
+}
+
+
+/* =========================================================
+   JUDUL HEADER
+   ========================================================= */
+
+header h1,
+header h2,
+header p {
+    position: relative;
+    z-index: 20;
+
+    color: #ffffff;
+
+    text-shadow:
+        0 2px 4px rgba(0, 0, 0, 0.75),
+        0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+header h1 {
+    font-size: 25px;
+    line-height: 1.2;
+
+    font-weight: 700;
+
+    margin: 2px 0;
+}
+
+header h2 {
+    font-size: 20px;
+    line-height: 1.3;
+
+    font-weight: 600;
+
+    margin: 2px 0;
+}
+
+header p {
+    font-size: 13px;
+
+    font-weight: 400;
+
+    margin-top: 3px;
+}
+
+
+/* =========================================================
+   SLIDESHOW PROFESOR
+   ========================================================= */
+
+.professor-slider {
+    position: absolute;
+
+    z-index: 30;
+
+    left: 50%;
+    bottom: 20px;
+
+    transform: translateX(-50%);
+
+    width: 100%;
+    height: 185px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: center;
 
     pointer-events: none;
 }
 
 
-/* Pastikan isi header berada di atas background */
+/* =========================================================
+   ITEM FOTO PROFESOR
+   ========================================================= */
 
-header > * {
-    position: relative;
-    z-index: 2;
-}
+.professor-slide {
+    position: absolute;
 
+    width: 120px;
+    height: 155px;
 
-/* ========================================================
-   LOGO UNAND
-   HANYA SATU LOGO DI HEADER
-   ======================================================== */
-
-.logo {
-    width: 92px;
-    height: 92px;
-
-    object-fit: contain;
-
-    margin-bottom: 14px;
-
-    filter:
-        drop-shadow(
-            0 5px 10px rgba(0, 0, 0, 0.25)
-        );
-}
-
-
-/* ========================================================
-   JUDUL HEADER
-   ======================================================== */
-
-header h1 {
-    font-size: 30px;
-
-    font-weight: 700;
-
-    letter-spacing: 2px;
-
-    line-height: 1.25;
-
-    text-shadow:
-        0 3px 8px rgba(0, 0, 0, 0.22);
-}
-
-
-header h2 {
-    margin-top: 4px;
-
-    font-size: 22px;
-
-    font-weight: 500;
-
-    letter-spacing: 3px;
-
-    color: #f7df87;
-}
-
-
-header p {
-    margin-top: 8px;
-
-    font-size: 14px;
-
-    font-weight: 300;
-
-    opacity: 0.95;
-}
-
-
-/* ========================================================
-   SLIDESHOW PROFESOR
-   ======================================================== */
-
-.slideshow {
-    position: relative;
-
-    width: 100%;
-    max-width: 1050px;
-
-    height: 190px;
-
-    margin: 30px auto 0;
-
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
+    border-radius: 15px;
 
     overflow: hidden;
 
-    z-index: 3;
+    background: #ffffff;
+
+    border: 3px solid #ffffff;
+
+    box-shadow:
+        0 8px 22px rgba(0, 0, 0, 0.45);
+
+    transition:
+        transform 0.45s ease,
+        opacity 0.45s ease,
+        width 0.45s ease,
+        height 0.45s ease,
+        box-shadow 0.45s ease;
+
+    pointer-events: auto;
 }
 
 
-/* Wrapper */
+/* =========================================================
+   FOTO DI DALAM SLIDE
+   ========================================================= */
 
-.slideshow-track {
+.professor-slide img {
     width: 100%;
     height: 100%;
 
-    display: flex;
-
-    justify-content: center;
-    align-items: center;
-
-    position: relative;
-}
-
-
-/* ========================================================
-   FOTO PROFESOR SLIDESHOW
-   ======================================================== */
-
-.slideshow .profesor-slide {
-    position: absolute;
-
-    top: 50%;
-
-    left: 50%;
-
-    width: 145px;
-    height: 165px;
-
-    transform:
-        translate(-50%, -50%);
+    display: block;
 
     object-fit: cover;
 
-    border-radius: 16px;
-
-    border: 3px solid rgba(255, 255, 255, 0.85);
-
-    box-shadow:
-        0 10px 25px rgba(0, 0, 0, 0.38);
-
-    background: #ffffff;
-
-    transition:
-        transform 0.6s ease,
-        opacity 0.6s ease,
-        filter 0.6s ease,
-        z-index 0.6s ease;
-
-    opacity: 0;
+    object-position: center center;
 }
 
 
-/* ========================================================
-   POSISI TENGAH
-   ======================================================== */
+/* =========================================================
+   FOTO TENGAH
+   ========================================================= */
 
-.slideshow .profesor-slide.center {
+.professor-slide.active {
+    width: 145px;
+    height: 175px;
+
+    z-index: 10;
+
     opacity: 1;
 
-    z-index: 5;
-
     transform:
-        translate(-50%, -50%)
-        scale(1.08);
-
-    filter: brightness(1);
+        translateX(0)
+        scale(1);
 
     box-shadow:
-        0 15px 35px rgba(0, 0, 0, 0.45);
+        0 12px 30px rgba(0, 0, 0, 0.55);
 }
 
 
-/* ========================================================
+/* =========================================================
    FOTO KIRI
-   ======================================================== */
+   BERHIMPIT SEBAGIAN DENGAN FOTO TENGAH
+   ========================================================= */
 
-.slideshow .profesor-slide.left {
-    opacity: 0.82;
+.professor-slide.prev {
+    width: 120px;
+    height: 155px;
 
-    z-index: 3;
+    z-index: 6;
+
+    opacity: 0.90;
 
     transform:
-        translate(
-            calc(-50% - 115px),
-            -50%
-        )
+        translateX(-105px)
         scale(0.88);
 
-    filter: brightness(0.78);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.40);
 }
 
 
-/* ========================================================
+/* =========================================================
    FOTO KANAN
-   ======================================================== */
+   BERHIMPIT SEBAGIAN DENGAN FOTO TENGAH
+   ========================================================= */
 
-.slideshow .profesor-slide.right {
-    opacity: 0.82;
+.professor-slide.next {
+    width: 120px;
+    height: 155px;
 
-    z-index: 3;
+    z-index: 6;
+
+    opacity: 0.90;
 
     transform:
-        translate(
-            calc(-50% + 115px),
-            -50%
-        )
+        translateX(105px)
         scale(0.88);
 
-    filter: brightness(0.78);
+    box-shadow:
+        0 8px 20px rgba(0, 0, 0, 0.40);
 }
 
 
-/* ========================================================
-   FOTO SAMPING BERHIMPIT DENGAN FOTO TENGAH
-   ======================================================== */
+/* =========================================================
+   FOTO LAINNYA
+   ========================================================= */
 
-.slideshow .profesor-slide.left,
-.slideshow .profesor-slide.right {
-    margin: 0;
+.professor-slide.hidden {
+    z-index: 1;
+
+    opacity: 0;
+
+    pointer-events: none;
+
+    transform:
+        translateX(0)
+        scale(0.5);
 }
 
 
-/* ========================================================
-   NAVIGASI SLIDESHOW
-   ======================================================== */
+/* =========================================================
+   TOMBOL SLIDESHOW
+   ========================================================= */
 
-.slideshow-prev,
-.slideshow-next {
+.slider-prev,
+.slider-next {
     position: absolute;
 
     top: 50%;
 
-    transform: translateY(-50%);
-
     width: 38px;
     height: 38px;
+
+    transform: translateY(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     border: none;
 
     border-radius: 50%;
 
-    display: flex;
+    background: rgba(255, 255, 255, 0.95);
 
-    align-items: center;
-    justify-content: center;
+    color: #008000;
 
-    background:
-        rgba(255, 255, 255, 0.2);
+    font-size: 17px;
 
-    color: white;
+    line-height: 1;
 
     cursor: pointer;
 
-    z-index: 10;
+    z-index: 40;
 
-    backdrop-filter: blur(5px);
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.25);
 
     transition:
+        transform 0.25s ease,
         background 0.25s ease,
-        transform 0.25s ease;
+        box-shadow 0.25s ease;
 }
 
-
-.slideshow-prev {
-    left: 15px;
-}
-
-
-.slideshow-next {
-    right: 15px;
-}
-
-
-.slideshow-prev:hover,
-.slideshow-next:hover {
-    background:
-        rgba(255, 255, 255, 0.35);
+.slider-prev:hover,
+.slider-next:hover {
+    background: #ffffff;
 
     transform:
         translateY(-50%)
         scale(1.08);
+
+    box-shadow:
+        0 6px 15px rgba(0, 0, 0, 0.30);
+}
+
+.slider-prev:active,
+.slider-next:active {
+    transform:
+        translateY(-50%)
+        scale(0.94);
 }
 
 
-/* ========================================================
-   MENU
-   ======================================================== */
+/* =========================================================
+   POSISI TOMBOL KIRI / KANAN
+   ========================================================= */
+
+.slider-prev {
+    left: calc(50% - 190px);
+}
+
+.slider-next {
+    right: calc(50% - 190px);
+}
+
+
+/* =========================================================
+   MENU UTAMA
+   ========================================================= */
 
 .menu {
     position: relative;
 
-    width: min(
-        1100px,
-        calc(100% - 30px)
-    );
+    z-index: 100;
+
+    width: min(900px, 94%);
+
+    min-height: 58px;
 
     margin:
-        -25px auto
-        30px;
+        -30px auto
+        22px;
 
-    padding: 12px;
+    padding: 9px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 8px;
 
     background:
         rgba(255, 255, 255, 0.97);
 
-    border-radius: 18px;
+    border-radius: 14px;
 
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.12);
-
-    z-index: 20;
+        0 6px 20px rgba(0, 0, 0, 0.15);
 }
 
 
-/* ========================================================
-   BUTTON MENU
-   ======================================================== */
+/* =========================================================
+   TOMBOL MENU
+   ========================================================= */
 
 .menu-btn {
-    min-height: 46px;
+    min-height: 40px;
 
     padding:
-        0 18px;
-
-    border: none;
-
-    border-radius: 12px;
-
-    background: transparent;
-
-    color: #315446;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 14px;
-
-    font-weight: 500;
+        8px 13px;
 
     display: flex;
 
@@ -459,7 +427,21 @@ header p {
 
     justify-content: center;
 
-    gap: 8px;
+    gap: 7px;
+
+    border: none;
+
+    border-radius: 8px;
+
+    background: transparent;
+
+    color: #333;
+
+    font-family: inherit;
+
+    font-size: 12px;
+
+    font-weight: 500;
 
     cursor: pointer;
 
@@ -471,93 +453,79 @@ header p {
         transform 0.25s ease;
 }
 
-
 .menu-btn i {
-    font-size: 15px;
+    font-size: 13px;
 }
-
 
 .menu-btn:hover {
-    background:
-        rgba(0, 128, 70, 0.08);
+    background: #eaf5ed;
 
-    color: #006b42;
+    color: #008000;
 }
-
 
 .menu-btn.active {
-    background:
-        linear-gradient(
-            135deg,
-            #007a4d,
-            #005c3a
-        );
+    background: #008000;
 
-    color: white;
+    color: #ffffff;
 
     box-shadow:
-        0 5px 15px rgba(0, 100, 60, 0.2);
+        0 4px 10px rgba(0, 128, 0, 0.25);
 }
 
 
-/* ========================================================
-   SEARCH
-   ======================================================== */
+/* =========================================================
+   SEARCH MENU
+   ========================================================= */
 
 .search-menu {
     flex: 1;
 
     min-width: 180px;
 
-    height: 46px;
+    height: 42px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 10px;
+    gap: 9px;
 
     padding:
-        0 15px;
+        0 13px;
 
     border:
-        1px solid #dce7e1;
+        2px solid #8abf99;
 
-    border-radius: 12px;
+    border-radius: 25px;
 
-    background:
-        #f8faf9;
+    background: #ffffff;
 
     transition:
         border-color 0.25s ease,
-        box-shadow 0.25s ease,
-        background 0.25s ease;
+        box-shadow 0.25s ease;
 }
-
 
 .search-menu:focus-within {
-    background: white;
-
-    border-color:
-        #008052;
+    border-color: #008000;
 
     box-shadow:
-        0 0 0 4px
-        rgba(0, 128, 82, 0.08);
+        0 0 0 4px rgba(0, 128, 0, 0.10);
 }
 
-
-.search-menu i {
-    color: #008052;
+.search-menu > i {
+    color: #008000;
 
     font-size: 16px;
-}
 
+    flex-shrink: 0;
+}
 
 .search-menu input {
     width: 100%;
 
     min-width: 0;
+
+    height: 38px;
 
     border: none;
 
@@ -565,241 +533,166 @@ header p {
 
     background: transparent;
 
-    color: #25372f;
+    color: #222;
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: inherit;
 
-    font-size: 16px;
-
-    -webkit-appearance: none;
+    font-size: 14px;
 }
-
 
 .search-menu input::placeholder {
-    color: #8a9992;
+    color: #999;
 }
 
 
-/* ========================================================
-   PERIODE BOX
-   ======================================================== */
+/* =========================================================
+   INFORMASI PERIODE TERBARU
+   ========================================================= */
 
 .periode-box {
-    width: min(
-        900px,
-        calc(100% - 30px)
-    );
+    width: min(900px, 94%);
 
     margin:
-        0 auto 30px;
+        0 auto
+        20px;
 
     padding:
-        24px 25px;
+        22px 25px;
+
+    background:
+        rgba(255, 255, 255, 0.96);
+
+    border-radius: 14px;
 
     text-align: center;
 
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #f3f8f5
-        );
-
-    border:
-        1px solid #e2ece7;
-
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.07);
+        0 5px 18px rgba(0, 0, 0, 0.10);
 }
 
-
 .periode-box h3 {
-    color: #46705d;
+    color: #555;
 
     font-size: 14px;
 
     font-weight: 500;
+
+    margin-bottom: 5px;
 }
 
-
 .periode-box h2 {
-    margin-top: 4px;
-
-    color: #006b43;
+    color: #008000;
 
     font-size: 24px;
 
     font-weight: 700;
-}
 
+    margin-bottom: 5px;
+}
 
 .periode-box p {
-    margin-top: 3px;
+    color: #666;
 
-    color: #71817a;
-
-    font-size: 13px;
+    font-size: 12px;
 }
 
 
-/* ========================================================
+/* =========================================================
    LIST PROFESOR
-   ======================================================== */
+   ========================================================= */
 
 #listProfesor {
-    width: min(
-        1100px,
-        calc(100% - 30px)
-    );
+    width: min(900px, 94%);
 
     margin:
-        0 auto 45px;
+        0 auto
+        30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 16px;
 }
 
 
-/* ========================================================
-   GRID KARTU
-   ======================================================== */
-
-#listProfesor > .card,
-#listProfesor > div:not(.arsip-header):not(.periode-detail) {
-    width: 100%;
-}
-
-
-/* Jika terdapat kumpulan card */
-
-#listProfesor > div > .card {
-    margin-bottom: 20px;
-}
-
-
-/* ========================================================
+/* =========================================================
    CARD PROFESOR
-   ======================================================== */
+   ========================================================= */
 
 .card {
-    position: relative;
-
     width: 100%;
 
-    min-height: 190px;
+    min-height: 150px;
+
+    padding: 14px;
 
     display: flex;
 
     align-items: center;
 
-    gap: 25px;
-
-    padding: 20px;
-
-    margin-bottom: 20px;
-
-    background: white;
-
-    border:
-        1px solid #e5eee9;
-
-    border-radius: 20px;
-
-    box-shadow:
-        0 8px 24px rgba(0, 0, 0, 0.07);
-
-    overflow: hidden;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease;
-}
-
-
-.card:hover {
-    transform:
-        translateY(-3px);
-
-    box-shadow:
-        0 15px 35px
-        rgba(0, 0, 0, 0.11);
-}
-
-
-/* Garis dekorasi kiri */
-
-.card::before {
-    content: "";
-
-    position: absolute;
-
-    left: 0;
-    top: 20px;
-    bottom: 20px;
-
-    width: 4px;
-
-    border-radius:
-        0 5px 5px 0;
+    gap: 15px;
 
     background:
-        linear-gradient(
-            #008052,
-            #d2ad39
-        );
-}
-
-
-/* ========================================================
-   FOTO CARD
-   ======================================================== */
-
-.card .photo,
-.card .photo-placeholder {
-    flex:
-        0 0 130px;
-
-    width: 130px;
-    height: 150px;
+        rgba(255, 255, 255, 0.97);
 
     border-radius: 15px;
 
-    object-fit: cover;
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.10);
+
+    transition:
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
 }
 
-
-.card .photo {
-    background: #e8efeb;
+.card:hover {
+    transform:
+        translateY(-2px);
 
     box-shadow:
-        0 8px 20px
-        rgba(0, 0, 0, 0.15);
+        0 9px 25px rgba(0, 0, 0, 0.15);
 }
 
 
-.photo-placeholder {
+/* =========================================================
+   FOTO CARD
+   ========================================================= */
+
+.card .photo,
+.card .photo-placeholder {
+    width: 115px;
+
+    height: 135px;
+
+    flex-shrink: 0;
+
+    border-radius: 10px;
+
+    object-fit: cover;
+
+    background: #e8eee9;
+
+    box-shadow:
+        0 4px 12px rgba(0, 0, 0, 0.18);
+}
+
+.card .photo-placeholder {
     display: flex;
 
     align-items: center;
+
     justify-content: center;
 
-    background:
-        linear-gradient(
-            135deg,
-            #dce9e2,
-            #eef4f0
-        );
+    color: #7c8a80;
 
-    color: #6f8c7e;
-
-    font-size: 40px;
+    font-size: 32px;
 }
 
 
-/* ========================================================
+/* =========================================================
    INFO CARD
-   ======================================================== */
+   ========================================================= */
 
 .card .info {
     flex: 1;
@@ -807,284 +700,235 @@ header p {
     min-width: 0;
 }
 
-
 .card .info h3 {
-    color: #194c39;
+    color: #008000;
 
-    font-size: 20px;
+    font-size: 18px;
 
-    font-weight: 600;
+    font-weight: 700;
 
-    line-height: 1.4;
+    margin-bottom: 4px;
 }
-
 
 .card .fakultas {
-    margin-top: 5px;
+    color: #555;
 
-    color: #667970;
+    font-size: 13px;
 
-    font-size: 14px;
+    margin-bottom: 6px;
 }
-
 
 .card .periode-profesor {
-    margin-top: 8px;
+    color: #666;
 
-    color: #829088;
+    font-size: 11px;
 
-    font-size: 12px;
+    margin-bottom: 10px;
 }
 
-
 .card .periode-profesor i {
-    color: #008052;
+    color: #008000;
 
     margin-right: 4px;
 }
 
 
-/* ========================================================
+/* =========================================================
    HIGHLIGHT SEARCH
-   ======================================================== */
+   ========================================================= */
 
 mark {
     padding:
-        1px 4px;
+        1px 3px;
 
-    border-radius: 4px;
+    border-radius: 3px;
 
-    background:
-        #f3d76c;
+    background: #fff176;
 
-    color:
-        #30432c;
+    color: #111;
 }
 
 
-/* ========================================================
-   BUTTONS CARD
-   ======================================================== */
+/* =========================================================
+   TOMBOL CARD
+   ========================================================= */
 
 .buttons {
-    margin-top: 15px;
-
     display: flex;
 
     flex-wrap: wrap;
 
-    gap: 8px;
+    gap: 7px;
 }
-
 
 .btn {
     display: inline-flex;
 
     align-items: center;
+
     justify-content: center;
 
-    gap: 7px;
+    gap: 5px;
 
-    min-height: 38px;
+    min-height: 32px;
 
     padding:
-        8px 14px;
+        6px 11px;
 
     border: none;
 
-    border-radius: 9px;
+    border-radius: 7px;
 
-    background:
-        #007b50;
+    background: #008000;
 
-    color: white;
+    color: #ffffff;
 
     text-decoration: none;
 
-    font-family:
-        "Poppins",
-        sans-serif;
+    font-family: inherit;
 
-    font-size: 12px;
+    font-size: 11px;
 
     font-weight: 500;
 
     transition:
-        transform 0.2s ease,
-        background 0.2s ease,
-        box-shadow 0.2s ease;
+        background 0.25s ease,
+        transform 0.25s ease;
 }
-
 
 .btn:hover {
-    background:
-        #005f3d;
+    background: #006b00;
 
     transform:
-        translateY(-2px);
-
-    box-shadow:
-        0 5px 12px
-        rgba(0, 100, 60, 0.18);
+        translateY(-1px);
 }
-
 
 .btn-book {
-    background:
-        #b08a20;
+    background: #007a3d;
 }
 
 
-.btn-book:hover {
-    background:
-        #8f6e16;
-}
-
-
-/* ========================================================
-   DATA KOSONG / ERROR
-   ======================================================== */
+/* =========================================================
+   DATA KOSONG
+   ========================================================= */
 
 .data-kosong {
     width: 100%;
 
     padding:
-        55px 20px;
+        45px 20px;
 
     text-align: center;
 
-    background: white;
+    background:
+        rgba(255, 255, 255, 0.96);
 
-    border-radius: 20px;
-
-    border:
-        1px solid #e3ece7;
+    border-radius: 15px;
 
     box-shadow:
-        0 8px 25px
-        rgba(0, 0, 0, 0.06);
+        0 5px 18px rgba(0, 0, 0, 0.08);
 }
 
-
 .data-kosong i {
-    color: #16815a;
+    color: #008000;
 
-    font-size: 38px;
+    font-size: 35px;
 
     margin-bottom: 12px;
 }
 
-
 .data-kosong h3 {
-    color: #315446;
+    color: #444;
 
+    font-size: 18px;
+
+    margin-bottom: 5px;
+}
+
+.data-kosong p {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   ARSIP
+   ========================================================= */
+
+.arsip-header {
+    padding:
+        25px 20px;
+
+    text-align: center;
+
+    background:
+        rgba(255, 255, 255, 0.97);
+
+    border-radius: 15px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.arsip-header-icon {
+    color: #008000;
+
+    font-size: 35px;
+
+    margin-bottom: 8px;
+}
+
+.arsip-header h2 {
+    color: #008000;
+
+    font-size: 22px;
+
+    margin-bottom: 5px;
+}
+
+.arsip-header p {
+    color: #777;
+
+    font-size: 12px;
+}
+
+
+/* =========================================================
+   TAHUN ARSIP
+   ========================================================= */
+
+.tahun-arsip {
+    margin-top: 18px;
+
+    padding:
+        8px 15px;
+
+    border-radius: 8px;
+
+    background: #008000;
+
+    color: #ffffff;
+
+    text-align: center;
+}
+
+.tahun-arsip h2 {
     font-size: 18px;
 }
 
 
-.data-kosong p {
-    margin-top: 5px;
-
-    color: #829088;
-
-    font-size: 13px;
-}
-
-
-/* ========================================================
-   ARSIP
-   ======================================================== */
-
-.arsip-header {
-    text-align: center;
-
-    padding:
-        25px 20px 30px;
-
-    margin-bottom: 15px;
-}
-
-
-.arsip-header-icon {
-    width: 65px;
-    height: 65px;
-
-    margin:
-        0 auto 12px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #007b50,
-            #005c3b
-        );
-
-    color: white;
-
-    font-size: 26px;
-
-    box-shadow:
-        0 8px 20px
-        rgba(0, 100, 60, 0.18);
-}
-
-
-.arsip-header h2 {
-    color: #174c38;
-
-    font-size: 25px;
-}
-
-
-.arsip-header p {
-    margin-top: 5px;
-
-    color: #78877f;
-
-    font-size: 13px;
-}
-
-
-/* ========================================================
-   TAHUN ARSIP
-   ======================================================== */
-
-.tahun-arsip {
-    margin:
-        25px 0 10px;
-
-    padding-bottom: 7px;
-
-    border-bottom:
-        2px solid #dfeae4;
-}
-
-
-.tahun-arsip h2 {
-    color: #00764b;
-
-    font-size: 20px;
-}
-
-
-/* ========================================================
+/* =========================================================
    ITEM ARSIP
-   ======================================================== */
+   ========================================================= */
 
 .arsip-item {
     width: 100%;
 
-    margin-bottom: 10px;
+    margin-top: 10px;
 
     padding:
-        17px 20px;
+        15px 18px;
 
     display: flex;
 
@@ -1094,68 +938,52 @@ mark {
 
     gap: 15px;
 
-    background: white;
+    background: #ffffff;
 
-    border:
-        1px solid #e2ebe6;
-
-    border-radius: 14px;
+    border-radius: 12px;
 
     cursor: pointer;
 
     box-shadow:
-        0 5px 15px
-        rgba(0, 0, 0, 0.05);
+        0 4px 12px rgba(0, 0, 0, 0.08);
 
     transition:
         transform 0.25s ease,
-        box-shadow 0.25s ease,
-        border-color 0.25s ease;
+        box-shadow 0.25s ease;
 }
-
 
 .arsip-item:hover {
     transform:
-        translateX(4px);
-
-    border-color:
-        #80b59d;
+        translateX(3px);
 
     box-shadow:
-        0 8px 22px
-        rgba(0, 0, 0, 0.08);
+        0 6px 18px rgba(0, 0, 0, 0.12);
 }
-
 
 .arsip-item h3 {
-    color: #315446;
+    color: #333;
 
-    font-size: 15px;
-
-    font-weight: 600;
+    font-size: 14px;
 }
 
-
 .arsip-item h3 i {
-    color: #007b50;
+    color: #008000;
 
     margin-right: 5px;
 }
 
-
 .arsip-item p {
+    color: #777;
+
+    font-size: 11px;
+
     margin-top: 3px;
-
-    color: #89968f;
-
-    font-size: 12px;
 }
 
-
 .arsip-arrow {
-    color: #007b50;
+    color: #008000;
 
-    font-size: 13px;
+    font-size: 12px;
 
     font-weight: 600;
 
@@ -1163,145 +991,43 @@ mark {
 }
 
 
-/* ========================================================
+/* =========================================================
    DETAIL PERIODE
-   ======================================================== */
+   ========================================================= */
 
 .periode-detail {
-    margin-bottom: 25px;
+    width: 100%;
 }
 
-
 .btn-kembali {
-    border: none;
+    display: inline-flex;
 
-    background:
-        transparent;
+    align-items: center;
 
-    color: #00764b;
-
-    font-family:
-        "Poppins",
-        sans-serif;
-
-    font-size: 13px;
-
-    font-weight: 500;
-
-    cursor: pointer;
+    gap: 6px;
 
     margin-bottom: 15px;
 
-    transition:
-        color 0.2s ease;
+    padding:
+        8px 13px;
+
+    border: none;
+
+    border-radius: 7px;
+
+    background: #008000;
+
+    color: #ffffff;
+
+    font-family: inherit;
+
+    font-size: 11px;
+
+    cursor: pointer;
 }
-
-
-.btn-kembali:hover {
-    color: #004e34;
-}
-
 
 .periode-detail-box {
-    display: flex;
-
-    align-items: center;
-
-    gap: 18px;
-
-    padding:
-        22px;
-
-    border-radius: 18px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #ffffff,
-            #f2f8f4
-        );
-
-    border:
-        1px solid #e0ebe5;
-
-    box-shadow:
-        0 8px 25px
-        rgba(0, 0, 0, 0.06);
-}
-
-
-.periode-icon {
-    width: 60px;
-    height: 60px;
-
-    flex:
-        0 0 60px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    border-radius: 15px;
-
-    background:
-        #007b50;
-
-    color: white;
-
-    font-size: 25px;
-}
-
-
-.periode-info-text h2 {
-    color: #355a49;
-
-    font-size: 18px;
-}
-
-
-.periode-info-text h3 {
-    margin-top: 2px;
-
-    color: #00764b;
-
-    font-size: 20px;
-}
-
-
-.periode-info-text p {
-    margin-top: 2px;
-
-    color: #829088;
-
-    font-size: 12px;
-}
-
-
-/* ========================================================
-   STATISTIK
-   ======================================================== */
-
-.stats {
-    width: min(
-        1100px,
-        calc(100% - 30px)
-    );
-
-    margin:
-        0 auto 40px;
-
-    display: grid;
-
-    grid-template-columns:
-        repeat(3, 1fr);
-
-    gap: 15px;
-}
-
-
-.stat {
-    min-height: 100px;
+    width: 100%;
 
     padding:
         20px;
@@ -1309,172 +1035,208 @@ mark {
     display: flex;
 
     align-items: center;
+
+    gap: 15px;
+
+    background: #ffffff;
+
+    border-radius: 14px;
+
+    box-shadow:
+        0 5px 18px rgba(0, 0, 0, 0.08);
+}
+
+.periode-icon {
+    width: 55px;
+    height: 55px;
+
+    display: flex;
+
+    align-items: center;
     justify-content: center;
 
-    gap: 8px;
+    flex-shrink: 0;
+
+    border-radius: 12px;
+
+    background: #eaf5ed;
+
+    color: #008000;
+
+    font-size: 25px;
+}
+
+.periode-info-text h2 {
+    color: #555;
+
+    font-size: 16px;
+}
+
+.periode-info-text h3 {
+    color: #008000;
+
+    font-size: 21px;
+}
+
+.periode-info-text p {
+    color: #777;
+
+    font-size: 11px;
+}
+
+
+/* =========================================================
+   STATISTIK
+   ========================================================= */
+
+.stats {
+    width: 100%;
+
+    padding:
+        12px 15px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    gap: 12px;
 
     flex-wrap: wrap;
 
+    background: #ffffff;
+
+    border-top:
+        1px solid #e0e8e2;
+
+    border-bottom:
+        1px solid #e0e8e2;
+}
+
+.stat {
+    min-width: 150px;
+
+    padding:
+        10px 15px;
+
     text-align: center;
 
-    background: white;
+    color: #555;
 
-    border:
-        1px solid #e2ebe6;
-
-    border-radius: 16px;
-
-    color: #60746a;
-
-    font-size: 13px;
-
-    box-shadow:
-        0 7px 20px
-        rgba(0, 0, 0, 0.05);
+    font-size: 12px;
 }
-
 
 .stat i {
-    width: 100%;
+    color: #008000;
 
-    color: #007b50;
-
-    font-size: 23px;
+    margin-right: 5px;
 }
 
-
 .stat span {
-    color: #174c38;
-
-    font-size: 23px;
+    color: #008000;
 
     font-weight: 700;
 }
 
 
-/* ========================================================
+/* =========================================================
    FOOTER
-   ======================================================== */
+   ========================================================= */
 
 footer {
     width: 100%;
 
-    margin-top: 50px;
+    margin-top: 35px;
 
     padding:
-        30px 20px;
+        25px 20px;
+
+    background: #006b45;
+
+    color: #ffffff;
 
     text-align: center;
-
-    background:
-        linear-gradient(
-            135deg,
-            #004c32,
-            #006b43
-        );
-
-    color: rgba(255, 255, 255, 0.9);
 }
-
 
 footer p {
-    margin: 3px 0;
+    margin:
+        3px 0;
 
-    font-size: 12px;
+    font-size: 11px;
 }
 
 
-footer p:last-child {
-    margin-top: 10px;
-
-    color:
-        rgba(255, 255, 255, 0.65);
-}
-
-
-/* ========================================================
+/* =========================================================
    RESPONSIVE TABLET
-   ======================================================== */
+   ========================================================= */
 
-@media (max-width: 800px) {
+@media (max-width: 900px) {
 
     header {
-        min-height: 360px;
+        min-height: 410px;
 
-        padding-top: 40px;
+        padding-bottom: 165px;
     }
 
-
-    header h1 {
-        font-size: 25px;
-    }
-
-
-    header h2 {
-        font-size: 18px;
-
-        letter-spacing: 2px;
-    }
-
-
-    .logo {
+    header .logo {
         width: 78px;
         height: 78px;
     }
 
-
-    .slideshow {
-        height: 170px;
+    header h1 {
+        font-size: 22px;
     }
 
+    header h2 {
+        font-size: 18px;
+    }
 
-    .slideshow .profesor-slide {
-        width: 125px;
+    header p {
+        font-size: 12px;
+    }
+
+    .professor-slider {
+        height: 175px;
+    }
+
+    .professor-slide.active {
+        width: 130px;
+        height: 165px;
+    }
+
+    .professor-slide.prev,
+    .professor-slide.next {
+        width: 110px;
         height: 145px;
     }
 
-
-    .slideshow .profesor-slide.left {
+    .professor-slide.prev {
         transform:
-            translate(
-                calc(-50% - 95px),
-                -50%
-            )
-            scale(0.84);
+            translateX(-92px)
+            scale(0.88);
     }
 
-
-    .slideshow .profesor-slide.right {
+    .professor-slide.next {
         transform:
-            translate(
-                calc(-50% + 95px),
-                -50%
-            )
-            scale(0.84);
+            translateX(92px)
+            scale(0.88);
     }
 
-
-    .menu {
-        flex-wrap: wrap;
+    .slider-prev {
+        left: 15px;
     }
 
-
-    .search-menu {
-        flex:
-            1 1 100%;
-    }
-
-
-    .stats {
-        gap: 10px;
+    .slider-next {
+        right: 15px;
     }
 
 }
 
 
-/* ========================================================
+/* =========================================================
    RESPONSIVE HP
-   ======================================================== */
+   ========================================================= */
 
 @media (max-width: 600px) {
 
@@ -1483,183 +1245,178 @@ footer p:last-child {
     }
 
 
-    /* ============================
-       HEADER
-       ============================ */
+    /* HEADER */
 
     header {
-        min-height: 335px;
+        min-height: 360px;
 
         padding:
-            30px 12px 20px;
+            15px 10px 145px;
+
+        background-size: cover;
+
+        background-position:
+            center center;
     }
 
 
-    .logo {
+    header .logo {
         width: 65px;
         height: 65px;
 
-        margin-bottom: 9px;
+        margin-bottom: 5px;
     }
 
 
     header h1 {
-        font-size: 20px;
-
-        letter-spacing: 1px;
+        font-size: 17px;
     }
-
 
     header h2 {
-        font-size: 15px;
-
-        letter-spacing: 1.5px;
+        font-size: 14px;
     }
-
 
     header p {
-        margin-top: 5px;
-
-        font-size: 11px;
+        font-size: 9px;
     }
 
 
-    /* ============================
-       SLIDESHOW
-       ============================ */
+    /* SLIDESHOW */
 
-    .slideshow {
-        height: 155px;
+    .professor-slider {
+        height: 145px;
 
-        margin-top: 20px;
+        bottom: 10px;
     }
 
 
-    .slideshow .profesor-slide {
-        width: 105px;
-        height: 130px;
+    .professor-slide {
+        width: 78px;
+        height: 105px;
 
         border-width: 2px;
 
-        border-radius: 13px;
+        border-radius: 11px;
     }
 
 
-    .slideshow .profesor-slide.center {
+    .professor-slide.active {
+        width: 100px;
+        height: 130px;
+    }
+
+
+    .professor-slide.prev {
+        width: 78px;
+        height: 105px;
+
         transform:
-            translate(-50%, -50%)
-            scale(1.03);
+            translateX(-65px)
+            scale(0.88);
     }
 
 
-    .slideshow .profesor-slide.left {
+    .professor-slide.next {
+        width: 78px;
+        height: 105px;
+
         transform:
-            translate(
-                calc(-50% - 78px),
-                -50%
-            )
-            scale(0.82);
+            translateX(65px)
+            scale(0.88);
     }
 
 
-    .slideshow .profesor-slide.right {
-        transform:
-            translate(
-                calc(-50% + 78px),
-                -50%
-            )
-            scale(0.82);
-    }
+    /* TOMBOL SLIDER */
 
-
-    .slideshow-prev,
-    .slideshow-next {
+    .slider-prev,
+    .slider-next {
         width: 30px;
         height: 30px;
 
-        font-size: 11px;
+        font-size: 13px;
     }
 
 
-    .slideshow-prev {
-        left: 4px;
+    .slider-prev {
+        left: 8px;
+    }
+
+    .slider-next {
+        right: 8px;
     }
 
 
-    .slideshow-next {
-        right: 4px;
-    }
-
-
-    /* ============================
-       MENU
-       ============================ */
+    /* MENU */
 
     .menu {
-        width:
-            calc(100% - 20px);
+        width: 94%;
 
-        margin-top:
-            -18px;
+        margin:
+            -20px auto
+            15px;
 
-        padding: 8px;
+        padding: 7px;
 
-        border-radius: 14px;
+        gap: 5px;
 
-        gap: 6px;
+        border-radius: 11px;
     }
 
 
     .menu-btn {
-        flex:
-            1 1 auto;
+        min-height: 35px;
 
-        min-height: 42px;
+        padding:
+            6px 8px;
+
+        font-size: 9px;
+
+        gap: 4px;
+    }
+
+
+    .menu-btn i {
+        font-size: 10px;
+    }
+
+
+    .search-menu {
+        height: 35px;
+
+        min-width: 0;
 
         padding:
             0 9px;
-
-        font-size: 11px;
 
         gap: 5px;
     }
 
 
-    .menu-btn i {
-        font-size: 12px;
-    }
-
-
-    .search-menu {
-        flex:
-            1 1 100%;
-
-        height: 44px;
-    }
-
-
     .search-menu input {
+        height: 32px;
+
         /*
-         * 16px sengaja dipertahankan.
-         * Ini mencegah iPhone melakukan zoom
-         * terlalu agresif ketika search disentuh.
+         * 16px penting agar iPhone tidak melakukan
+         * auto zoom berlebihan.
          */
         font-size: 16px;
     }
 
 
-    /* ============================
-       PERIODE
-       ============================ */
+    .search-menu > i {
+        font-size: 13px;
+    }
+
+
+    /* PERIODE */
 
     .periode-box {
-        width:
-            calc(100% - 20px);
+        width: 94%;
 
         padding:
-            18px 12px;
+            16px 12px;
 
-        border-radius: 14px;
+        margin-bottom: 15px;
     }
 
 
@@ -1667,148 +1424,117 @@ footer p:last-child {
         font-size: 11px;
     }
 
-
     .periode-box h2 {
         font-size: 18px;
     }
 
-
     .periode-box p {
-        font-size: 11px;
-    }
-
-
-    /* ============================
-       LIST
-       ============================ */
-
-    #listProfesor {
-        width:
-            calc(100% - 20px);
-
-        margin-bottom: 30px;
-    }
-
-
-    /* ============================
-       CARD
-       ============================ */
-
-    .card {
-        min-height: auto;
-
-        padding:
-            15px;
-
-        gap: 13px;
-
-        border-radius: 15px;
-
-        align-items: flex-start;
-    }
-
-
-    .card::before {
-        top: 15px;
-        bottom: 15px;
-    }
-
-
-    .card .photo,
-    .card .photo-placeholder {
-        flex:
-            0 0 90px;
-
-        width: 90px;
-        height: 110px;
-
-        border-radius: 11px;
-    }
-
-
-    .card .info h3 {
-        font-size: 15px;
-
-        line-height: 1.35;
-    }
-
-
-    .card .fakultas {
-        font-size: 11px;
-    }
-
-
-    .card .periode-profesor {
-        font-size: 9px;
-
-        line-height: 1.4;
-    }
-
-
-    .buttons {
-        margin-top: 10px;
-
-        gap: 5px;
-    }
-
-
-    .btn {
-        min-height: 33px;
-
-        padding:
-            6px 9px;
-
-        font-size: 9px;
-
-        border-radius: 7px;
-    }
-
-
-    /* ============================
-       ARSIP
-       ============================ */
-
-    .arsip-header {
-        padding:
-            15px 10px 20px;
-    }
-
-
-    .arsip-header-icon {
-        width: 52px;
-        height: 52px;
-
-        border-radius: 14px;
-
-        font-size: 20px;
-    }
-
-
-    .arsip-header h2 {
-        font-size: 20px;
-    }
-
-
-    .arsip-header p {
         font-size: 10px;
     }
 
 
-    .tahun-arsip h2 {
-        font-size: 17px;
+    /* LIST */
+
+    #listProfesor {
+        width: 94%;
+
+        gap: 12px;
     }
 
 
-    .arsip-item {
-        padding:
-            13px;
+    /* CARD */
+
+    .card {
+        padding: 10px;
+
+        gap: 10px;
+
+        min-height: 125px;
 
         border-radius: 12px;
     }
 
 
+    .card .photo,
+    .card .photo-placeholder {
+        width: 82px;
+        height: 105px;
+
+        border-radius: 8px;
+    }
+
+
+    .card .info h3 {
+        font-size: 13px;
+
+        line-height: 1.25;
+    }
+
+
+    .card .fakultas {
+        font-size: 9px;
+    }
+
+
+    .card .periode-profesor {
+        font-size: 8px;
+
+        margin-bottom: 7px;
+    }
+
+
+    .buttons {
+        gap: 4px;
+    }
+
+
+    .btn {
+        min-height: 26px;
+
+        padding:
+            4px 7px;
+
+        font-size: 8px;
+
+        border-radius: 5px;
+    }
+
+
+    /* ARSIP */
+
+    .arsip-header {
+        padding:
+            18px 12px;
+    }
+
+    .arsip-header-icon {
+        font-size: 28px;
+    }
+
+    .arsip-header h2 {
+        font-size: 18px;
+    }
+
+    .arsip-header p {
+        font-size: 9px;
+    }
+
+
+    .tahun-arsip h2 {
+        font-size: 15px;
+    }
+
+
+    .arsip-item {
+        padding:
+            12px;
+
+        border-radius: 9px;
+    }
+
+
     .arsip-item h3 {
-        font-size: 12px;
+        font-size: 11px;
     }
 
 
@@ -1818,97 +1544,73 @@ footer p:last-child {
 
 
     .arsip-arrow {
-        font-size: 10px;
+        font-size: 9px;
     }
 
 
-    /* ============================
-       DETAIL
-       ============================ */
+    /* DETAIL */
 
     .periode-detail-box {
-        padding:
-            15px;
+        padding: 14px;
 
-        gap: 12px;
+        gap: 10px;
     }
 
 
     .periode-icon {
-        width: 48px;
-        height: 48px;
+        width: 42px;
+        height: 42px;
 
-        flex:
-            0 0 48px;
-
-        border-radius: 12px;
-
-        font-size: 20px;
+        font-size: 19px;
     }
 
 
     .periode-info-text h2 {
-        font-size: 14px;
+        font-size: 12px;
     }
-
 
     .periode-info-text h3 {
         font-size: 16px;
     }
-
 
     .periode-info-text p {
         font-size: 9px;
     }
 
 
-    /* ============================
-       STATISTIK
-       ============================ */
+    /* STAT */
 
     .stats {
-        width:
-            calc(100% - 20px);
+        flex-direction: column;
 
-        grid-template-columns:
-            repeat(3, 1fr);
+        gap: 0;
 
-        gap: 6px;
-
-        margin-bottom: 25px;
+        padding: 0;
     }
 
 
     .stat {
-        min-height: 80px;
+        width: 100%;
 
-        padding: 10px 4px;
+        min-width: 0;
 
-        border-radius: 11px;
+        padding:
+            9px;
 
-        font-size: 8px;
+        border-bottom:
+            1px solid #e5e5e5;
 
-        gap: 3px;
+        font-size: 10px;
     }
 
 
-    .stat i {
-        font-size: 17px;
-    }
-
-
-    .stat span {
-        font-size: 17px;
-    }
-
-
-    /* ============================
-       FOOTER
-       ============================ */
+    /* FOOTER */
 
     footer {
+        margin-top: 20px;
+
         padding:
-            25px 15px;
+            18px 10px;
     }
 
 
@@ -1919,94 +1621,107 @@ footer p:last-child {
 }
 
 
-/* ========================================================
+/* =========================================================
    HP SANGAT KECIL
-   ======================================================== */
+   ========================================================= */
 
 @media (max-width: 380px) {
 
-    header h1 {
-        font-size: 18px;
+    header {
+        min-height: 340px;
+
+        padding-bottom: 135px;
     }
 
 
-    header h2 {
-        font-size: 14px;
+    .professor-slide.active {
+        width: 92px;
+        height: 120px;
     }
 
 
-    .slideshow {
-        height: 145px;
+    .professor-slide.prev,
+    .professor-slide.next {
+        width: 72px;
+        height: 96px;
     }
 
 
-    .slideshow .profesor-slide {
-        width: 95px;
-        height: 118px;
-    }
-
-
-    .slideshow .profesor-slide.left {
+    .professor-slide.prev {
         transform:
-            translate(
-                calc(-50% - 70px),
-                -50%
-            )
-            scale(0.8);
+            translateX(-58px)
+            scale(0.86);
     }
 
 
-    .slideshow .profesor-slide.right {
+    .professor-slide.next {
         transform:
-            translate(
-                calc(-50% + 70px),
-                -50%
-            )
-            scale(0.8);
+            translateX(58px)
+            scale(0.86);
+    }
+
+
+    .menu-btn span {
+        display: none;
+    }
+
+
+    .menu-btn {
+        width: 35px;
+        padding: 6px;
+    }
+
+
+    .search-menu {
+        flex: 1;
     }
 
 
     .card .photo,
     .card .photo-placeholder {
-        flex:
-            0 0 78px;
-
-        width: 78px;
-        height: 98px;
+        width: 72px;
+        height: 95px;
     }
 
 
     .card .info h3 {
-        font-size: 13px;
+        font-size: 12px;
     }
 
 
     .btn {
-        font-size: 8px;
-
-        padding:
-            5px 7px;
+        font-size: 7px;
     }
 
 }
 
 
-/* ========================================================
-   PENCEGAHAN HORIZONTAL OVERFLOW
-   ======================================================== */
+/* =========================================================
+   MENCEGAH GAMBAR MELUAS KELUAR
+   ========================================================= */
 
-img,
-video,
-iframe {
+img {
     max-width: 100%;
 }
 
 
-/* ========================================================
-   SELECTION
-   ======================================================== */
+/* =========================================================
+   LOADING
+   ========================================================= */
 
-::selection {
-    background: #007b50;
-    color: white;
+.fa-spin {
+    animation:
+        fa-spin 1s infinite linear;
+}
+
+@keyframes fa-spin {
+
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+
 }
