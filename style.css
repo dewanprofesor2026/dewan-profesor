@@ -1926,3 +1926,11 @@ footer p {
             13px;
     }
 }
+
+/* =========================================================
+   SEMBUNYIKAN HEADER BESAR "ARSIP PENGUKUHAN"
+   ========================================================= */
+
+.arsip-header {
+    display: none !important;
+}
