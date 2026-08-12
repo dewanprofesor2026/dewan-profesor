@@ -159,7 +159,7 @@ function ubahLinkGoogleDrive(url) {
 
     const matchParamId =
         url.match(
-            /[?&]id=([a-zA-Z0-9_-]+)/i
+            /[?&]id=([a-zA-Z0-9\_-]+)/i
         );
 
 
@@ -168,14 +168,14 @@ function ubahLinkGoogleDrive(url) {
 
     const matchPathId =
         url.match(
-            /\/d\/([a-zA-Z0-9_-]+)/i
+            /\/d\/([a-zA-Z0-9\_-]+)/i
         );
 
 
     // Jika langsung ID Drive
 
     const matchRawId =
-        /^[a-zA-Z0-9_-]{20,}$/.test(
+        /^[a-zA-Z0-9\_-]{20,}$/.test(
             url
         );
 
@@ -218,6 +218,7 @@ function ubahLinkGoogleDrive(url) {
 
 // ========================================================
 // FORMAT TANGGAL
+// PERBAIKAN: MENCEGAH TANGGAL MUNDUR 1 HARI
 // ========================================================
 
 function formatTanggal(tanggal) {
@@ -227,6 +228,125 @@ function formatTanggal(tanggal) {
         return "";
 
     }
+
+
+    // ====================================================
+    // JIKA SUDAH BERUPA TEKS
+    // ====================================================
+
+    if (typeof tanggal === "string") {
+
+        const teks =
+            tanggal.trim();
+
+
+        // Jika sudah dalam format:
+        // 27 Juni 2026
+
+        const cocokIndonesia =
+            teks.match(
+                /^(\d{1,2})\s+(Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+(\d{4})$/i
+            );
+
+
+        if (cocokIndonesia) {
+
+            return teks;
+
+        }
+
+
+        // =================================================
+        // Jika format:
+        // YYYY-MM-DD
+        // =================================================
+
+        const cocokISO =
+            teks.match(
+                /^(\d{4})-(\d{2})-(\d{2})/
+            );
+
+
+        if (cocokISO) {
+
+            const tahun =
+                parseInt(
+                    cocokISO[1]
+                );
+
+            const bulan =
+                parseInt(
+                    cocokISO[2]
+                ) - 1;
+
+            const hari =
+                parseInt(
+                    cocokISO[3]
+                );
+
+
+            if (
+                bulan >= 0 &&
+                bulan <= 11
+            ) {
+
+                return `${hari} ${
+                    namaBulan[bulan]
+                } ${tahun}`;
+
+            }
+
+        }
+
+    }
+
+
+    // ====================================================
+    // JIKA BERUPA OBJECT DATE
+    // ====================================================
+
+    if (
+        Object.prototype.toString.call(tanggal) ===
+        "[object Date]"
+    ) {
+
+        if (
+            isNaN(
+                tanggal.getTime()
+            )
+        ) {
+
+            return "";
+
+        }
+
+
+        // PENTING:
+        // Gunakan tanggal lokal.
+        // Jangan gunakan getUTCDate().
+        // Ini mencegah tanggal 27 Juni
+        // berubah menjadi 26 Juni.
+
+        const hari =
+            tanggal.getDate();
+
+        const bulan =
+            tanggal.getMonth();
+
+        const tahun =
+            tanggal.getFullYear();
+
+
+        return `${hari} ${
+            namaBulan[bulan]
+        } ${tahun}`;
+
+    }
+
+
+    // ====================================================
+    // CADANGAN
+    // ====================================================
 
     const date =
         new Date(tanggal);
@@ -238,14 +358,14 @@ function formatTanggal(tanggal) {
         )
     ) {
 
-        return tanggal;
+        return String(tanggal);
 
     }
 
 
-    return `${date.getUTCDate()} ${
-        namaBulan[date.getUTCMonth()]
-    } ${date.getUTCFullYear()}`;
+    return `${date.getDate()} ${
+        namaBulan[date.getMonth()]
+    } ${date.getFullYear()}`;
 
 }
 
