@@ -218,7 +218,11 @@ function ubahLinkGoogleDrive(url) {
 
 // ========================================================
 // FORMAT TANGGAL
-// PERBAIKAN: MENCEGAH TANGGAL MUNDUR 1 HARI
+//
+// PERBAIKAN TANGGAL:
+// Tidak menggunakan new Date() untuk membaca bagian
+// tanggal ISO secara langsung karena dapat menyebabkan
+// tanggal mundur satu hari akibat timezone.
 // ========================================================
 
 function formatTanggal(tanggal) {
@@ -230,122 +234,90 @@ function formatTanggal(tanggal) {
     }
 
 
-    // ====================================================
-    // JIKA SUDAH BERUPA TEKS
-    // ====================================================
-
-    if (typeof tanggal === "string") {
-
-        const teks =
-            tanggal.trim();
-
-
-        // Jika sudah dalam format:
-        // 27 Juni 2026
-
-        const cocokIndonesia =
-            teks.match(
-                /^(\d{1,2})\s+(Januari|Februari|Maret|April|Mei|Juni|Juli|Agustus|September|Oktober|November|Desember)\s+(\d{4})$/i
-            );
-
-
-        if (cocokIndonesia) {
-
-            return teks;
-
-        }
-
-
-        // =================================================
-        // Jika format:
-        // YYYY-MM-DD
-        // =================================================
-
-        const cocokISO =
-            teks.match(
-                /^(\d{4})-(\d{2})-(\d{2})/
-            );
-
-
-        if (cocokISO) {
-
-            const tahun =
-                parseInt(
-                    cocokISO[1]
-                );
-
-            const bulan =
-                parseInt(
-                    cocokISO[2]
-                ) - 1;
-
-            const hari =
-                parseInt(
-                    cocokISO[3]
-                );
-
-
-            if (
-                bulan >= 0 &&
-                bulan <= 11
-            ) {
-
-                return `${hari} ${
-                    namaBulan[bulan]
-                } ${tahun}`;
-
-            }
-
-        }
-
-    }
+    const teks =
+        String(tanggal).trim();
 
 
     // ====================================================
-    // JIKA BERUPA OBJECT DATE
+    // FORMAT ISO DARI GOOGLE SHEETS
+    //
+    // Contoh:
+    // 2026-06-27
+    // 2026-06-27T00:00:00.000Z
     // ====================================================
 
-    if (
-        Object.prototype.toString.call(tanggal) ===
-        "[object Date]"
-    ) {
-
-        if (
-            isNaN(
-                tanggal.getTime()
-            )
-        ) {
-
-            return "";
-
-        }
+    const matchISO =
+        teks.match(
+            /^(\d{4})-(\d{2})-(\d{2})/
+        );
 
 
-        // PENTING:
-        // Gunakan tanggal lokal.
-        // Jangan gunakan getUTCDate().
-        // Ini mencegah tanggal 27 Juni
-        // berubah menjadi 26 Juni.
-
-        const hari =
-            tanggal.getDate();
-
-        const bulan =
-            tanggal.getMonth();
+    if (matchISO) {
 
         const tahun =
-            tanggal.getFullYear();
+            parseInt(
+                matchISO[1],
+                10
+            );
+
+        const bulan =
+            parseInt(
+                matchISO[2],
+                10
+            );
+
+        const hari =
+            parseInt(
+                matchISO[3],
+                10
+            );
 
 
-        return `${hari} ${
-            namaBulan[bulan]
-        } ${tahun}`;
+        if (
+
+            !isNaN(hari) &&
+
+            !isNaN(bulan) &&
+
+            !isNaN(tahun) &&
+
+            bulan >= 1 &&
+
+            bulan <= 12
+
+        ) {
+
+            return `${hari} ${
+                namaBulan[bulan - 1]
+            } ${tahun}`;
+
+        }
 
     }
 
 
     // ====================================================
-    // CADANGAN
+    // FORMAT INDONESIA
+    //
+    // Contoh:
+    // 27 Juni 2026
+    // ====================================================
+
+    const matchIndonesia =
+        teks.match(
+            /^(\d{1,2})\s+([A-Za-z]+)\s+(\d{4})$/
+        );
+
+
+    if (matchIndonesia) {
+
+        return teks;
+
+    }
+
+
+    // ====================================================
+    // FALLBACK
     // ====================================================
 
     const date =
@@ -358,20 +330,24 @@ function formatTanggal(tanggal) {
         )
     ) {
 
-        return String(tanggal);
+        return teks;
 
     }
 
 
-    return `${date.getDate()} ${
-        namaBulan[date.getMonth()]
-    } ${date.getFullYear()}`;
+    return `${date.getUTCDate()} ${
+        namaBulan[date.getUTCMonth()]
+    } ${date.getUTCFullYear()}`;
 
 }
 
 
 // ========================================================
 // UBAH TANGGAL INDONESIA MENJADI OBJECT DATE
+//
+// PERBAIKAN:
+// Untuk ISO YYYY-MM-DD, tanggal dibuat menggunakan
+// tahun/bulan/tanggal lokal agar tidak bergeser timezone.
 // ========================================================
 
 function ubahTanggal(teks) {
@@ -383,40 +359,77 @@ function ubahTanggal(teks) {
     }
 
 
-    // Format ISO
+    const nilai =
+        String(teks).trim();
 
-    if (
 
-        teks.includes("T") ||
+    // ====================================================
+    // FORMAT ISO
+    //
+    // Contoh:
+    // 2026-06-27
+    // 2026-06-27T00:00:00.000Z
+    // ====================================================
 
-        /^\d{4}-\d{2}-\d{2}/.test(
-            teks
-        )
+    const matchISO =
+        nilai.match(
+            /^(\d{4})-(\d{2})-(\d{2})/
+        );
 
-    ) {
 
-        const date =
-            new Date(teks);
+    if (matchISO) {
+
+        const tahun =
+            parseInt(
+                matchISO[1],
+                10
+            );
+
+        const bulan =
+            parseInt(
+                matchISO[2],
+                10
+            );
+
+        const tanggal =
+            parseInt(
+                matchISO[3],
+                10
+            );
 
 
         if (
-            !isNaN(
-                date.getTime()
-            )
+
+            !isNaN(tahun) &&
+
+            !isNaN(bulan) &&
+
+            !isNaN(tanggal) &&
+
+            bulan >= 1 &&
+
+            bulan <= 12
+
         ) {
 
-            return date;
+            return new Date(
+                tahun,
+                bulan - 1,
+                tanggal
+            );
 
         }
 
     }
 
 
-    // Format:
-    // 25 Oktober 2026
+    // ====================================================
+    // FORMAT:
+    // 27 Juni 2026
+    // ====================================================
 
     const bagian =
-        teks.trim().split(" ");
+        nilai.split(/\s+/);
 
 
     if (
@@ -430,7 +443,8 @@ function ubahTanggal(teks) {
 
     const tanggal =
         parseInt(
-            bagian[0]
+            bagian[0],
+            10
         );
 
 
@@ -442,7 +456,8 @@ function ubahTanggal(teks) {
 
     const tahun =
         parseInt(
-            bagian[2]
+            bagian[2],
+            10
         );
 
 
