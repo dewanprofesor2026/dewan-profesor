@@ -736,160 +736,112 @@ mark {
 }
 
 /* =========================================================
-   STATISTIK
-   SATU CONTAINER - 3 BAGIAN MENYATU
+   STATISTIK - SATU CONTAINER, UKURAN LEBIH KECIL
 ========================================================= */
 
 .stats {
-
-    width: min(1000px, calc(100% - 40px));
-
-    margin: 25px auto;
+    width: min(850px, calc(100% - 40px));
+    margin: 18px auto;
 
     display: grid;
-
-    grid-template-columns:
-        repeat(3, minmax(0, 1fr));
-
-    gap: 0 !important;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
 
     position: relative;
-
     z-index: 5;
 
-    /* SATU BACKGROUND UNTUK SEMUA */
-    background:
-        rgba(255, 255, 255, 0.92);
+    background: rgba(255, 255, 255, 0.92);
 
-    border:
-        1px solid
-        rgba(255, 255, 255, 0.90);
+    border: 1px solid rgba(255, 255, 255, 0.90);
 
-    border-radius:
-        16px;
+    border-radius: 13px;
 
     box-shadow:
-        0 8px 25px
-        rgba(0, 0, 0, 0.16);
+        0 6px 18px rgba(0, 0, 0, 0.14);
 
-    overflow:
-        hidden;
+    overflow: hidden;
 }
+
 
 /* =========================================================
    STAT CARD
-   TIDAK ADA CARD TERPISAH
 ========================================================= */
 
-.stats .stat {
+.stat {
+    min-height: 85px;
 
-    width: 100%;
-
-    min-width: 0;
-
-    min-height: 115px;
-
-    padding: 18px 10px;
+    padding: 10px 8px;
 
     display: flex;
-
     flex-direction: column;
-
     align-items: center;
-
     justify-content: center;
 
     text-align: center;
 
-    /* WAJIB TRANSPARAN */
-    background:
-        transparent !important;
+    background: transparent;
 
-    color:
-        #006b3f;
+    color: #006b3f;
 
-    /* TIDAK ADA BORDER LUAR */
-    border:
-        none !important;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
 
-    border-radius:
-        0 !important;
-
-    /* TIDAK ADA SHADOW PER CARD */
-    box-shadow:
-        none !important;
-
-    /* PEMISAH ANTAR BAGIAN */
     border-right:
-        1px solid
-        rgba(0, 107, 63, 0.14) !important;
+        1px solid rgba(0, 107, 63, 0.12);
 
     transition:
         background 0.25s ease;
 }
 
-/* STAT TERAKHIR TIDAK MEMILIKI GARIS */
 
-.stats .stat:last-child {
+/* STAT TERAKHIR TANPA GARIS */
 
-    border-right:
-        none !important;
+.stat:last-child {
+    border-right: none;
 }
+
 
 /* HOVER */
 
-.stats .stat:hover {
-
+.stat:hover {
     background:
-        rgba(0, 143, 47, 0.06) !important;
+        rgba(0, 143, 47, 0.06);
 }
 
-/* =========================================================
-   ICON STAT
-========================================================= */
 
-.stats .stat i {
+/* ICON */
 
-    font-size: 22px;
-
-    margin-bottom: 7px;
-
-    color:
-        #008f2f;
+.stat i {
+    font-size: 18px;
+    margin-bottom: 4px;
+    color: #008f2f;
 }
 
-/* =========================================================
-   ANGKA STAT
-========================================================= */
 
-.stats .stat span {
+/* ANGKA */
 
+.stat span {
     display: block;
 
-    font-size: 24px;
-
+    font-size: 20px;
     font-weight: 700;
 
     line-height: 1.1;
 
-    color:
-        #008f2f;
+    color: #008f2f;
 }
 
-/* =========================================================
-   LABEL STAT
-========================================================= */
 
-.stats .stat small {
+/* LABEL */
 
-    margin-top: 5px;
+.stat small {
+    margin-top: 3px;
 
-    font-size: 11px;
-
+    font-size: 10px;
     font-weight: 500;
 
-    color:
-        #555555;
+    color: #555555;
 }
 
 /* =========================================================
