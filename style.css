@@ -1,7 +1,7 @@
 /* ========================================================
    DEWAN PROFESOR UNIVERSITAS ANDALAS
    STYLE.CSS
-   VERSI SEBELUM SLIDESHOW
+   VERSI PEMULIHAN SEBELUM SLIDESHOW
 ======================================================== */
 
 
@@ -36,7 +36,7 @@ body {
 
     color: #ffffff;
 
-    /* FOTO UNAND TAMPIL ASLI TANPA OVERLAY HIJAU */
+    /* FOTO UNAND ASLI - TANPA OVERLAY HIJAU */
     background-image: url("img/background-unand.jpg");
 
     background-size: cover;
@@ -67,7 +67,9 @@ body {
 }
 
 
-/* LOGO */
+/* ========================================================
+   LOGO
+======================================================== */
 
 .logo {
 
@@ -84,12 +86,14 @@ body {
     filter:
         drop-shadow(
             0 5px 12px
-            rgba(0,0,0,0.30)
+            rgba(0, 0, 0, 0.30)
         );
 }
 
 
-/* JUDUL */
+/* ========================================================
+   JUDUL
+======================================================== */
 
 .site-header h1 {
 
@@ -103,11 +107,13 @@ body {
 
     text-shadow:
         0 3px 8px
-        rgba(0,0,0,0.35);
+        rgba(0, 0, 0, 0.35);
 }
 
 
-/* DEWAN PROFESOR */
+/* ========================================================
+   DEWAN PROFESOR
+======================================================== */
 
 .site-header h2 {
 
@@ -121,11 +127,13 @@ body {
 
     text-shadow:
         0 3px 8px
-        rgba(0,0,0,0.35);
+        rgba(0, 0, 0, 0.35);
 }
 
 
-/* TAGLINE */
+/* ========================================================
+   TAGLINE
+======================================================== */
 
 .site-header p {
 
@@ -137,80 +145,119 @@ body {
 
     text-shadow:
         0 2px 6px
-        rgba(0,0,0,0.35);
+        rgba(0, 0, 0, 0.35);
 }
 
 
 /* ========================================================
-   MENU
-======================================================== */
-
-/* ========================================================
    MENU UTAMA
    BERANDA | ARSIP | PENCARIAN
-   ======================================================== */
+======================================================== */
 
 .menu {
-    width: min(900px, calc(100% - 30px));
+
+    width: min(
+        900px,
+        calc(100% - 30px)
+    );
+
     margin: 20px auto;
-    
+
     display: flex;
+
     align-items: center;
+
     justify-content: center;
+
     gap: 12px;
 
     padding: 10px;
 
     box-sizing: border-box;
 
-    /* Efek kaca */
-    background: rgba(255, 255, 255, 0.75);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.75
+        );
 
-    border: 1px solid rgba(255, 255, 255, 0.8);
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    border:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.8
+        );
+
     border-radius: 18px;
 
     box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.15);
+        0 8px 25px
+        rgba(
+            0,
+            0,
+            0,
+            0.15
+        );
 }
 
 
 /* ========================================================
-   SEMUA ITEM MENU MEMILIKI UKURAN SAMA
-   ======================================================== */
+   SEMUA ITEM MENU UKURAN SAMA
+======================================================== */
 
 .menu-btn,
 .search-menu {
+
     width: 250px;
+
     height: 52px;
 
     flex: 1 1 0;
+
+    min-width: 0;
 
     box-sizing: border-box;
 
     border-radius: 12px;
 
     display: flex;
+
     align-items: center;
+
     justify-content: center;
 
-    font-family: 'Poppins', sans-serif;
+    font-family:
+        'Poppins',
+        sans-serif;
 }
 
 
 /* ========================================================
    TOMBOL BERANDA & ARSIP
-   ======================================================== */
+======================================================== */
 
 .menu-btn {
+
     border: none;
 
-    background: transparent;
+    background:
+        transparent;
 
-    color: #006b3c;
+    color:
+        #006b3c;
 
     font-size: 14px;
+
     font-weight: 600;
 
     cursor: pointer;
@@ -225,187 +272,146 @@ body {
 }
 
 
-/* Icon */
+/* ICON MENU */
 
 .menu-btn i {
+
     font-size: 15px;
 }
 
 
-/* Hover */
+/* HOVER */
 
 .menu-btn:hover {
-    background: rgba(0, 128, 0, 0.10);
 
-    transform: translateY(-1px);
+    background:
+        rgba(
+            0,
+            128,
+            0,
+            0.10
+        );
+
+    transform:
+        translateY(-1px);
 }
 
 
-/* Menu aktif */
+/* MENU AKTIF */
 
 .menu-btn.active {
-    background: #008000;
 
-    color: #ffffff;
+    background:
+        #008000;
+
+    color:
+        #ffffff;
 
     box-shadow:
-        0 5px 14px rgba(0, 128, 0, 0.25);
+        0 5px 14px
+        rgba(
+            0,
+            128,
+            0,
+            0.25
+        );
 }
 
 
 /* ========================================================
    SEARCH
-   UKURAN SAMA DENGAN MENU
-   ======================================================== */
+======================================================== */
 
 .search-menu {
-    background: #ffffff;
 
-    border: 1px solid rgba(0, 128, 0, 0.35);
+    background:
+        #ffffff;
 
-    padding: 0 15px;
+    border:
+        1px solid
+        rgba(
+            0,
+            128,
+            0,
+            0.35
+        );
 
-    gap: 10px;
+    padding:
+        0 15px;
+
+    gap:
+        10px;
 
     box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,0.5);
+        inset
+        0 0 0 1px
+        rgba(
+            255,
+            255,
+            255,
+            0.5
+        );
 }
 
 
-/* Icon search */
+/* ICON SEARCH */
 
 .search-menu i {
-    flex: 0 0 auto;
 
-    color: #008000;
+    flex:
+        0 0 auto;
 
-    font-size: 16px;
+    color:
+        #008000;
+
+    font-size:
+        16px;
 }
 
 
-/* Input */
+/* INPUT */
 
 .search-menu input {
-    width: 100%;
 
-    height: 100%;
+    width:
+        100%;
 
-    border: none;
+    height:
+        100%;
 
-    outline: none;
+    min-width:
+        0;
 
-    background: transparent;
+    border:
+        none;
 
-    color: #333333;
+    outline:
+        none;
 
-    font-family: 'Poppins', sans-serif;
+    background:
+        transparent;
 
-    font-size: 13px;
+    color:
+        #333333;
+
+    font-family:
+        'Poppins',
+        sans-serif;
+
+    font-size:
+        13px;
 }
 
 
-/* Placeholder */
+/* PLACEHOLDER */
 
 .search-menu input::placeholder {
-    color: #888888;
 
-    opacity: 1;
-}
+    color:
+        #888888;
 
-
-/* ========================================================
-   RESPONSIVE HP
-   ======================================================== */
-
-@media (max-width: 700px) {
-
-    .menu {
-        width: calc(100% - 20px);
-
-        gap: 7px;
-
-        padding: 7px;
-
-        border-radius: 15px;
-    }
-
-    .menu-btn,
-    .search-menu {
-        height: 46px;
-
-        width: auto;
-
-        min-width: 0;
-    }
-
-    .menu-btn {
-        font-size: 11px;
-
-        gap: 5px;
-    }
-
-    .menu-btn i {
-        font-size: 13px;
-    }
-
-    .search-menu {
-        padding: 0 10px;
-
-        gap: 6px;
-    }
-
-    .search-menu i {
-        font-size: 13px;
-    }
-
-    .search-menu input {
-        font-size: 11px;
-    }
-
-}
-
-
-/* ========================================================
-   HP KECIL
-   ======================================================== */
-
-@media (max-width: 430px) {
-
-    .menu {
-        gap: 5px;
-
-        padding: 6px;
-    }
-
-    .menu-btn,
-    .search-menu {
-        height: 42px;
-
-        border-radius: 10px;
-    }
-
-    .menu-btn {
-        font-size: 9px;
-
-        gap: 3px;
-    }
-
-    .menu-btn i {
-        font-size: 11px;
-    }
-
-    .search-menu {
-        padding: 0 7px;
-    }
-
-    .search-menu i {
-        font-size: 11px;
-    }
-
-    .search-menu input {
-        font-size: 9px;
-    }
-
+    opacity:
+        1;
 }
 
 
@@ -415,11 +421,17 @@ body {
 
 main {
 
-    width: min(1100px, 94%);
+    width:
+        min(
+            1100px,
+            94%
+        );
 
-    margin: 0 auto;
+    margin:
+        0 auto;
 
-    padding-bottom: 30px;
+    padding-bottom:
+        30px;
 }
 
 
@@ -429,58 +441,88 @@ main {
 
 .periode-box {
 
-    width: 100%;
+    width:
+        100%;
 
-    text-align: center;
+    text-align:
+        center;
 
-    padding: 25px 20px;
+    padding:
+        25px 20px;
 
-    margin-bottom: 25px;
+    margin-bottom:
+        25px;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
     background:
-        rgba(255,255,255,0.16);
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.25);
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
 
-    backdrop-filter: blur(10px);
+    backdrop-filter:
+        blur(10px);
 
-    -webkit-backdrop-filter: blur(10px);
+    -webkit-backdrop-filter:
+        blur(10px);
 
     box-shadow:
         0 10px 30px
-        rgba(0,0,0,0.15);
+        rgba(
+            0,
+            0,
+            0,
+            0.15
+        );
 }
 
 
 .periode-box h3 {
 
-    font-size: 16px;
+    font-size:
+        16px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    margin-bottom: 8px;
+    margin-bottom:
+        8px;
 }
 
 
 .periode-box h2 {
 
-    font-size: 27px;
+    font-size:
+        27px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    margin-bottom: 5px;
+    margin-bottom:
+        5px;
 }
 
 
 .periode-box p {
 
-    font-size: 14px;
+    font-size:
+        14px;
 
-    opacity: 0.95;
+    opacity:
+        0.95;
 }
 
 
@@ -490,12 +532,20 @@ main {
 
 #listProfesor {
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(2, minmax(0, 1fr));
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
 
-    gap: 20px;
+    gap:
+        20px;
 }
 
 
@@ -505,30 +555,47 @@ main {
 
 .card {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 18px;
+    gap:
+        18px;
 
-    padding: 18px;
+    padding:
+        18px;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
     background:
-        rgba(255,255,255,0.96);
+        rgba(
+            255,
+            255,
+            255,
+            0.96
+        );
 
-    color: #222222;
+    color:
+        #222222;
 
     box-shadow:
         0 12px 30px
-        rgba(0,0,0,0.20);
+        rgba(
+            0,
+            0,
+            0,
+            0.20
+        );
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
 
-    overflow: hidden;
+    overflow:
+        hidden;
 }
 
 
@@ -539,7 +606,12 @@ main {
 
     box-shadow:
         0 18px 35px
-        rgba(0,0,0,0.25);
+        rgba(
+            0,
+            0,
+            0,
+            0.25
+        );
 }
 
 
@@ -549,41 +621,62 @@ main {
 
 .photo {
 
-    width: 125px;
+    width:
+        125px;
 
-    height: 155px;
+    height:
+        155px;
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    object-fit: cover;
+    object-fit:
+        cover;
 
-    object-position: center top;
+    object-position:
+        center top;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    display: block;
+    display:
+        block;
 
     box-shadow:
         0 7px 18px
-        rgba(0,0,0,0.20);
+        rgba(
+            0,
+            0,
+            0,
+            0.20
+        );
 }
 
 
+/* FOTO PLACEHOLDER */
+
 .photo-placeholder {
 
-    width: 125px;
+    width:
+        125px;
 
-    height: 155px;
+    height:
+        155px;
 
-    flex-shrink: 0;
+    flex-shrink:
+        0;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
         #e9eeee;
@@ -591,55 +684,70 @@ main {
     color:
         #7a8a84;
 
-    font-size: 40px;
+    font-size:
+        40px;
 }
 
 
 /* ========================================================
-   INFO
+   INFO PROFESOR
 ======================================================== */
 
 .info {
 
-    min-width: 0;
+    min-width:
+        0;
 
-    flex: 1;
+    flex:
+        1;
 }
 
 
 .info h3 {
 
-    font-size: 17px;
+    font-size:
+        17px;
 
-    line-height: 1.35;
+    line-height:
+        1.35;
 
-    font-weight: 700;
+    font-weight:
+        700;
 
-    color: #075c36;
+    color:
+        #075c36;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 }
 
 
 .fakultas {
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
-    color: #555555;
+    color:
+        #555555;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 }
 
 
 .periode-profesor {
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    color: #777777;
+    color:
+        #777777;
 
-    margin-bottom: 13px;
+    margin-bottom:
+        13px;
 }
 
 
@@ -669,38 +777,51 @@ mark {
 
 .buttons {
 
-    display: flex;
+    display:
+        flex;
 
-    flex-wrap: wrap;
+    flex-wrap:
+        wrap;
 
-    gap: 7px;
+    gap:
+        7px;
 }
 
 
 .btn {
 
-    display: inline-flex;
+    display:
+        inline-flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
-    gap: 6px;
+    gap:
+        6px;
 
-    padding: 8px 11px;
+    padding:
+        8px 11px;
 
-    border-radius: 9px;
+    border-radius:
+        9px;
 
-    text-decoration: none;
+    text-decoration:
+        none;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     background:
         #08783f;
 
-    font-size: 11px;
+    font-size:
+        11px;
 
-    font-weight: 500;
+    font-weight:
+        500;
 
     transition:
         0.2s ease;
@@ -716,6 +837,8 @@ mark {
         translateY(-1px);
 }
 
+
+/* TOMBOL BUKU */
 
 .btn-book {
 
@@ -740,18 +863,31 @@ mark {
     grid-column:
         1 / -1;
 
-    text-align: center;
+    text-align:
+        center;
 
-    padding: 50px 20px;
+    padding:
+        50px 20px;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
     background:
-        rgba(255,255,255,0.16);
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.25);
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
 
     backdrop-filter:
         blur(10px);
@@ -763,25 +899,31 @@ mark {
 
 .data-kosong i {
 
-    font-size: 38px;
+    font-size:
+        38px;
 
-    margin-bottom: 15px;
+    margin-bottom:
+        15px;
 }
 
 
 .data-kosong h3 {
 
-    font-size: 18px;
+    font-size:
+        18px;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 }
 
 
 .data-kosong p {
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    opacity: 0.9;
+    opacity:
+        0.9;
 }
 
 
@@ -791,33 +933,56 @@ mark {
 
 .stats {
 
-    width: min(850px, 94%);
+    width:
+        min(
+            850px,
+            94%
+        );
 
-    margin: 15px auto 35px;
+    margin:
+        15px auto 35px;
 
-    display: grid;
+    display:
+        grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(
+            3,
+            1fr
+        );
 
-    gap: 15px;
+    gap:
+        15px;
 }
 
 
 .stat {
 
-    text-align: center;
+    text-align:
+        center;
 
-    padding: 18px;
+    padding:
+        18px;
 
-    border-radius: 17px;
+    border-radius:
+        17px;
 
     background:
-        rgba(255,255,255,0.15);
+        rgba(
+            255,
+            255,
+            255,
+            0.15
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.22);
+        rgba(
+            255,
+            255,
+            255,
+            0.22
+        );
 
     backdrop-filter:
         blur(10px);
@@ -827,35 +992,48 @@ mark {
 
     box-shadow:
         0 8px 25px
-        rgba(0,0,0,0.14);
+        rgba(
+            0,
+            0,
+            0,
+            0.14
+        );
 }
 
 
 .stat i {
 
-    display: block;
+    display:
+        block;
 
-    font-size: 24px;
+    font-size:
+        24px;
 
-    margin-bottom: 7px;
+    margin-bottom:
+        7px;
 }
 
 
 .stat span {
 
-    display: block;
+    display:
+        block;
 
-    font-size: 24px;
+    font-size:
+        24px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
 
 .stat small {
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    opacity: 0.9;
+    opacity:
+        0.9;
 }
 
 
@@ -865,20 +1043,34 @@ mark {
 
 .arsip-header {
 
-    text-align: center;
+    text-align:
+        center;
 
-    padding: 25px;
+    padding:
+        25px;
 
-    margin-bottom: 25px;
+    margin-bottom:
+        25px;
 
-    border-radius: 20px;
+    border-radius:
+        20px;
 
     background:
-        rgba(255,255,255,0.16);
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.22);
+        rgba(
+            255,
+            255,
+            255,
+            0.22
+        );
 
     backdrop-filter:
         blur(10px);
@@ -890,69 +1082,104 @@ mark {
 
 .arsip-header-icon {
 
-    font-size: 38px;
+    font-size:
+        38px;
 
-    margin-bottom: 10px;
+    margin-bottom:
+        10px;
 }
 
 
 .arsip-header h2 {
 
-    font-size: 24px;
+    font-size:
+        24px;
 
-    margin-bottom: 5px;
+    margin-bottom:
+        5px;
 }
 
 
 .arsip-header p {
 
-    font-size: 13px;
+    font-size:
+        13px;
 }
 
+
+/* ========================================================
+   TAHUN ARSIP
+======================================================== */
 
 .tahun-arsip {
 
     margin:
         20px 0 10px;
 
-    padding-left: 5px;
+    padding-left:
+        5px;
 }
 
 
 .tahun-arsip h2 {
 
-    font-size: 23px;
+    font-size:
+        23px;
 
-    font-weight: 700;
+    font-weight:
+        700;
 }
 
 
+/* ========================================================
+   ITEM ARSIP
+======================================================== */
+
 .arsip-item {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: space-between;
+    justify-content:
+        space-between;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    padding: 17px 20px;
+    padding:
+        17px 20px;
 
-    margin-bottom: 10px;
+    margin-bottom:
+        10px;
 
-    border-radius: 15px;
+    border-radius:
+        15px;
 
     background:
-        rgba(255,255,255,0.94);
+        rgba(
+            255,
+            255,
+            255,
+            0.94
+        );
 
-    color: #222222;
+    color:
+        #222222;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
     box-shadow:
         0 7px 20px
-        rgba(0,0,0,0.15);
+        rgba(
+            0,
+            0,
+            0,
+            0.15
+        );
 
     transition:
         0.25s ease;
@@ -966,7 +1193,12 @@ mark {
 
     box-shadow:
         0 10px 25px
-        rgba(0,0,0,0.20);
+        rgba(
+            0,
+            0,
+            0,
+            0.20
+        );
 }
 
 
@@ -975,9 +1207,11 @@ mark {
     color:
         #075d32;
 
-    font-size: 15px;
+    font-size:
+        15px;
 
-    margin-bottom: 3px;
+    margin-bottom:
+        3px;
 }
 
 
@@ -986,7 +1220,8 @@ mark {
     color:
         #777777;
 
-    font-size: 12px;
+    font-size:
+        12px;
 }
 
 
@@ -995,11 +1230,14 @@ mark {
     color:
         #08783f;
 
-    font-size: 13px;
+    font-size:
+        13px;
 
-    font-weight: 600;
+    font-weight:
+        600;
 
-    white-space: nowrap;
+    white-space:
+        nowrap;
 }
 
 
@@ -1009,28 +1247,43 @@ mark {
 
 .periode-detail {
 
-    margin-bottom: 20px;
+    margin-bottom:
+        20px;
 }
 
 
+/* TOMBOL KEMBALI */
+
 .btn-kembali {
 
-    border: none;
+    border:
+        none;
 
-    cursor: pointer;
+    cursor:
+        pointer;
 
-    font-family: inherit;
+    font-family:
+        inherit;
 
-    color: #ffffff;
+    color:
+        #ffffff;
 
     background:
-        rgba(255,255,255,0.17);
+        rgba(
+            255,
+            255,
+            255,
+            0.17
+        );
 
-    padding: 10px 15px;
+    padding:
+        10px 15px;
 
-    border-radius: 10px;
+    border-radius:
+        10px;
 
-    margin-bottom: 15px;
+    margin-bottom:
+        15px;
 
     transition:
         0.2s ease;
@@ -1040,28 +1293,50 @@ mark {
 .btn-kembali:hover {
 
     background:
-        rgba(255,255,255,0.25);
+        rgba(
+            255,
+            255,
+            255,
+            0.25
+        );
 }
 
 
+/* BOX DETAIL PERIODE */
+
 .periode-detail-box {
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    gap: 15px;
+    gap:
+        15px;
 
-    padding: 20px;
+    padding:
+        20px;
 
-    border-radius: 18px;
+    border-radius:
+        18px;
 
     background:
-        rgba(255,255,255,0.16);
+        rgba(
+            255,
+            255,
+            255,
+            0.16
+        );
 
     border:
         1px solid
-        rgba(255,255,255,0.23);
+        rgba(
+            255,
+            255,
+            255,
+            0.23
+        );
 
     backdrop-filter:
         blur(10px);
@@ -1071,48 +1346,70 @@ mark {
 }
 
 
+/* ICON PERIODE */
+
 .periode-icon {
 
-    width: 55px;
+    width:
+        55px;
 
-    height: 55px;
+    height:
+        55px;
 
-    border-radius: 14px;
+    border-radius:
+        14px;
 
-    display: flex;
+    display:
+        flex;
 
-    align-items: center;
+    align-items:
+        center;
 
-    justify-content: center;
+    justify-content:
+        center;
 
     background:
-        rgba(255,255,255,0.18);
+        rgba(
+            255,
+            255,
+            255,
+            0.18
+        );
 
-    font-size: 25px;
+    font-size:
+        25px;
 }
 
 
+/* TEKS DETAIL */
+
 .periode-info-text h2 {
 
-    font-size: 19px;
+    font-size:
+        19px;
 
-    margin-bottom: 2px;
+    margin-bottom:
+        2px;
 }
 
 
 .periode-info-text h3 {
 
-    font-size: 21px;
+    font-size:
+        21px;
 
-    margin-bottom: 2px;
+    margin-bottom:
+        2px;
 }
 
 
 .periode-info-text p {
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    opacity: 0.9;
+    opacity:
+        0.9;
 }
 
 
@@ -1122,31 +1419,42 @@ mark {
 
 footer {
 
-    text-align: center;
+    text-align:
+        center;
 
-    padding: 25px 20px 35px;
+    padding:
+        25px 20px 35px;
 
     background:
         transparent;
 
     text-shadow:
         0 2px 5px
-        rgba(0,0,0,0.35);
+        rgba(
+            0,
+            0,
+            0,
+            0.35
+        );
 }
 
 
 footer p {
 
-    font-size: 12px;
+    font-size:
+        12px;
 
-    line-height: 1.7;
+    line-height:
+        1.7;
 
-    opacity: 0.9;
+    opacity:
+        0.9;
 }
 
 
 /* ========================================================
    TABLET
+   TETAP SATU BARIS UNTUK MENU
 ======================================================== */
 
 @media (max-width: 850px) {
@@ -1158,19 +1466,106 @@ footer p {
     }
 
 
+    /* JANGAN BIARKAN MENU TURUN BARIS */
+
     .menu {
 
-        flex-wrap: wrap;
+        width:
+            calc(
+                100% - 20px
+            );
+
+        gap:
+            7px;
+
+        padding:
+            7px;
+
+        flex-wrap:
+            nowrap;
+
+        border-radius:
+            15px;
+    }
+
+
+    .menu-btn,
+    .search-menu {
+
+        flex:
+            1 1 0;
+
+        width:
+            0;
+
+        min-width:
+            0;
+
+        height:
+            46px;
+    }
+
+
+    .menu-btn {
+
+        justify-content:
+            center;
+
+        padding:
+            10px 7px;
+
+        font-size:
+            11px;
+
+        gap:
+            5px;
+
+        white-space:
+            nowrap;
+    }
+
+
+    .menu-btn i {
+
+        font-size:
+            13px;
     }
 
 
     .search-menu {
 
-        width: 100%;
+        margin-left:
+            0;
 
-        margin-left: 0;
+        margin-top:
+            0;
+
+        width:
+            0;
+
+        padding:
+            0 10px;
+
+        gap:
+            6px;
     }
 
+
+    .search-menu i {
+
+        font-size:
+            13px;
+    }
+
+
+    .search-menu input {
+
+        font-size:
+            11px;
+
+        min-width:
+            0;
+    }
 }
 
 
@@ -1189,68 +1584,137 @@ footer p {
 
     .logo {
 
-        width: 90px;
+        width:
+            90px;
 
-        height: 90px;
+        height:
+            90px;
     }
 
 
     .site-header h1 {
 
-        font-size: 22px;
+        font-size:
+            22px;
 
-        letter-spacing: 1px;
+        letter-spacing:
+            1px;
     }
 
 
     .site-header h2 {
 
-        font-size: 19px;
+        font-size:
+            19px;
 
-        letter-spacing: 2px;
+        letter-spacing:
+            2px;
     }
 
 
     .site-header p {
 
-        font-size: 12px;
+        font-size:
+            12px;
     }
 
 
+    /* MENU TETAP SATU BARIS */
+
     .menu {
 
-        width: 94%;
+        width:
+            calc(
+                100% - 12px
+            );
 
-        padding: 8px;
+        padding:
+            6px;
 
-        gap: 5px;
+        gap:
+            4px;
+
+        flex-wrap:
+            nowrap;
+
+        border-radius:
+            12px;
+    }
+
+
+    .menu-btn,
+    .search-menu {
+
+        flex:
+            1 1 0;
+
+        width:
+            0;
+
+        min-width:
+            0;
+
+        height:
+            42px;
+
+        border-radius:
+            9px;
     }
 
 
     .menu-btn {
 
-        flex: 1;
-
-        justify-content: center;
+        justify-content:
+            center;
 
         padding:
-            10px 7px;
+            7px 4px;
 
-        font-size: 11px;
+        font-size:
+            9px;
+
+        gap:
+            3px;
+
+        white-space:
+            nowrap;
     }
 
 
     .menu-btn i {
 
-        font-size: 13px;
+        font-size:
+            10px;
     }
 
 
     .search-menu {
 
-        height: 46px;
+        margin:
+            0;
 
-        margin-top: 3px;
+        padding:
+            0 6px;
+
+        gap:
+            4px;
+    }
+
+
+    .search-menu i {
+
+        font-size:
+            10px;
+    }
+
+
+    .search-menu input {
+
+        font-size:
+            9px;
+
+        min-width:
+            0;
     }
 
 
@@ -1263,52 +1727,63 @@ footer p {
 
     .periode-box h2 {
 
-        font-size: 21px;
+        font-size:
+            21px;
     }
 
 
     .card {
 
-        align-items: flex-start;
+        align-items:
+            flex-start;
 
-        padding: 13px;
+        padding:
+            13px;
 
-        gap: 12px;
+        gap:
+            12px;
     }
 
 
     .photo,
     .photo-placeholder {
 
-        width: 90px;
+        width:
+            90px;
 
-        height: 115px;
+        height:
+            115px;
 
-        border-radius: 11px;
+        border-radius:
+            11px;
     }
 
 
     .photo-placeholder {
 
-        font-size: 30px;
+        font-size:
+            30px;
     }
 
 
     .info h3 {
 
-        font-size: 14px;
+        font-size:
+            14px;
     }
 
 
     .fakultas {
 
-        font-size: 11px;
+        font-size:
+            11px;
     }
 
 
     .periode-profesor {
 
-        font-size: 10px;
+        font-size:
+            10px;
     }
 
 
@@ -1317,7 +1792,8 @@ footer p {
         padding:
             7px 8px;
 
-        font-size: 9px;
+        font-size:
+            9px;
     }
 
 
@@ -1326,19 +1802,22 @@ footer p {
         grid-template-columns:
             1fr;
 
-        width: 94%;
+        width:
+            94%;
     }
 
 
     .stat {
 
-        padding: 14px;
+        padding:
+            14px;
     }
 
 
     .arsip-header h2 {
 
-        font-size: 20px;
+        font-size:
+            20px;
     }
 
 
@@ -1346,66 +1825,104 @@ footer p {
 
         padding:
             14px;
-
     }
 
 
     .arsip-item h3 {
 
-        font-size: 13px;
+        font-size:
+            13px;
     }
 
 
     .periode-detail-box {
 
-        padding: 15px;
+        padding:
+            15px;
     }
 
 
     .periode-info-text h2 {
 
-        font-size: 16px;
+        font-size:
+            16px;
     }
 
 
     .periode-info-text h3 {
 
-        font-size: 17px;
+        font-size:
+            17px;
     }
-
 }
 
 
 /* ========================================================
-   HP KECIL
+   HP SANGAT KECIL
 ======================================================== */
 
 @media (max-width: 380px) {
 
+    .menu {
+
+        gap:
+            3px;
+
+        padding:
+            5px;
+    }
+
+
+    .menu-btn,
+    .search-menu {
+
+        height:
+            40px;
+    }
+
+
     .menu-btn span {
 
-        font-size: 10px;
+        font-size:
+            8px;
+    }
+
+
+    .menu-btn i {
+
+        font-size:
+            9px;
+    }
+
+
+    .search-menu input {
+
+        font-size:
+            8px;
     }
 
 
     .card {
 
-        gap: 9px;
+        gap:
+            9px;
     }
 
 
     .photo,
     .photo-placeholder {
 
-        width: 78px;
+        width:
+            78px;
 
-        height: 105px;
+        height:
+            105px;
     }
 
 
     .info h3 {
 
-        font-size: 13px;
+        font-size:
+            13px;
     }
-
 }
