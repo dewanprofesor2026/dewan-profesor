@@ -737,7 +737,7 @@ mark {
 
 /* =========================================================
    STATISTIK
-   3 STATISTIK MENJADI SATU CONTAINER
+   SATU CONTAINER - 3 BAGIAN MENYATU
 ========================================================= */
 
 .stats {
@@ -749,15 +749,15 @@ mark {
     display: grid;
 
     grid-template-columns:
-        repeat(3, 1fr);
+        repeat(3, minmax(0, 1fr));
 
-    gap: 0;
+    gap: 0 !important;
 
     position: relative;
 
     z-index: 5;
 
-    /* SATU BACKGROUND UNTUK SEMUA STATISTIK */
+    /* SATU BACKGROUND UNTUK SEMUA */
     background:
         rgba(255, 255, 255, 0.92);
 
@@ -772,15 +772,20 @@ mark {
         0 8px 25px
         rgba(0, 0, 0, 0.16);
 
-    overflow: hidden;
+    overflow:
+        hidden;
 }
 
 /* =========================================================
    STAT CARD
-   TIDAK LAGI MENJADI CARD TERPISAH
+   TIDAK ADA CARD TERPISAH
 ========================================================= */
 
-.stat {
+.stats .stat {
+
+    width: 100%;
+
+    min-width: 0;
 
     min-height: 115px;
 
@@ -796,50 +801,54 @@ mark {
 
     text-align: center;
 
-    /* TRANSPARAN AGAR MENYATU */
+    /* WAJIB TRANSPARAN */
     background:
-        transparent;
+        transparent !important;
 
-    color: #006b3f;
+    color:
+        #006b3f;
 
-    /* HILANGKAN BORDER CARD */
-    border: none;
+    /* TIDAK ADA BORDER LUAR */
+    border:
+        none !important;
 
-    border-radius: 0;
+    border-radius:
+        0 !important;
 
-    /* HILANGKAN SHADOW PER CARD */
-    box-shadow: none;
+    /* TIDAK ADA SHADOW PER CARD */
+    box-shadow:
+        none !important;
 
-    /* PEMISAH VERTIKAL HALUS */
+    /* PEMISAH ANTAR BAGIAN */
     border-right:
         1px solid
-        rgba(0, 107, 63, 0.12);
+        rgba(0, 107, 63, 0.14) !important;
 
     transition:
         background 0.25s ease;
 }
 
-/* STAT TERAKHIR TIDAK ADA GARIS KANAN */
+/* STAT TERAKHIR TIDAK MEMILIKI GARIS */
 
-.stat:last-child {
+.stats .stat:last-child {
 
     border-right:
-        none;
+        none !important;
 }
 
-/* EFEK HOVER */
+/* HOVER */
 
-.stat:hover {
+.stats .stat:hover {
 
     background:
-        rgba(0, 143, 47, 0.06);
+        rgba(0, 143, 47, 0.06) !important;
 }
 
 /* =========================================================
    ICON STAT
 ========================================================= */
 
-.stat i {
+.stats .stat i {
 
     font-size: 22px;
 
@@ -850,10 +859,10 @@ mark {
 }
 
 /* =========================================================
-   ANGKA
+   ANGKA STAT
 ========================================================= */
 
-.stat span {
+.stats .stat span {
 
     display: block;
 
@@ -868,10 +877,10 @@ mark {
 }
 
 /* =========================================================
-   LABEL
+   LABEL STAT
 ========================================================= */
 
-.stat small {
+.stats .stat small {
 
     margin-top: 5px;
 
@@ -1319,13 +1328,11 @@ footer p:last-child {
 @media (max-width: 768px) {
 
     .site-header {
-
         padding-top:
             20px;
     }
 
     .site-header .logo {
-
         width:
             75px;
 
@@ -1334,19 +1341,16 @@ footer p:last-child {
     }
 
     .site-header h1 {
-
         font-size:
             21px;
     }
 
     .site-header h2 {
-
         font-size:
             18px;
     }
 
     .site-header p {
-
         font-size:
             12px;
     }
@@ -1395,13 +1399,46 @@ footer p:last-child {
             calc(100% - 25px);
     }
 
+    /* STATISTIK TETAP MENYATU */
+
     .stats {
 
         width:
             calc(100% - 25px);
 
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
         gap:
+            0 !important;
+
+        border-radius:
+            14px;
+
+        overflow:
+            hidden;
+    }
+
+    .stats .stat {
+
+        width:
+            100%;
+
+        min-width:
             0;
+
+        border-radius:
+            0 !important;
+
+        border-right:
+            1px solid
+            rgba(0, 107, 63, 0.14) !important;
+    }
+
+    .stats .stat:last-child {
+
+        border-right:
+            none !important;
     }
 
     .card {
@@ -1654,7 +1691,8 @@ footer p:last-child {
     }
 
     /* =====================================================
-       STATISTIK - TETAP MENYATU SATU BARIS
+       STATISTIK
+       TETAP MENYATU SATU BARIS DI HP
     ===================================================== */
 
     .stats {
@@ -1663,10 +1701,10 @@ footer p:last-child {
             calc(100% - 20px);
 
         grid-template-columns:
-            repeat(3, 1fr);
+            repeat(3, minmax(0, 1fr));
 
         gap:
-            0;
+            0 !important;
 
         margin:
             18px auto;
@@ -1678,7 +1716,13 @@ footer p:last-child {
             hidden;
     }
 
-    .stat {
+    .stats .stat {
+
+        width:
+            100%;
+
+        min-width:
+            0;
 
         min-height:
             90px;
@@ -1687,20 +1731,20 @@ footer p:last-child {
             10px 5px;
 
         border-radius:
-            0;
+            0 !important;
 
         border-right:
             1px solid
-            rgba(0, 107, 63, 0.12);
+            rgba(0, 107, 63, 0.12) !important;
     }
 
-    .stat:last-child {
+    .stats .stat:last-child {
 
         border-right:
-            none;
+            none !important;
     }
 
-    .stat i {
+    .stats .stat i {
 
         font-size:
             16px;
@@ -1709,13 +1753,13 @@ footer p:last-child {
             4px;
     }
 
-    .stat span {
+    .stats .stat span {
 
         font-size:
             19px;
     }
 
-    .stat small {
+    .stats .stat small {
 
         font-size:
             8px;
@@ -1899,19 +1943,49 @@ footer p:last-child {
             5px;
     }
 
-    .stat {
+    /* STATISTIK TETAP MENYATU */
+
+    .stats {
+
+        grid-template-columns:
+            repeat(3, minmax(0, 1fr));
+
+        gap:
+            0 !important;
+    }
+
+    .stats .stat {
+
+        width:
+            100%;
+
+        min-width:
+            0;
 
         min-height:
             80px;
+
+        border-radius:
+            0 !important;
+
+        border-right:
+            1px solid
+            rgba(0, 107, 63, 0.12) !important;
     }
 
-    .stat span {
+    .stats .stat:last-child {
+
+        border-right:
+            none !important;
+    }
+
+    .stats .stat span {
 
         font-size:
             17px;
     }
 
-    .stat small {
+    .stats .stat small {
 
         font-size:
             7px;
