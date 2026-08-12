@@ -1,12 +1,11 @@
 /* =========================================================
    DEWAN PROFESOR UNIVERSITAS ANDALAS
    STYLE.CSS LENGKAP
-   ========================================================= */
-
+========================================================= */
 
 /* =========================================================
    RESET
-   ========================================================= */
+========================================================= */
 
 * {
     margin: 0;
@@ -14,18 +13,15 @@
     box-sizing: border-box;
 }
 
-
 html {
     scroll-behavior: smooth;
 }
-
 
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
-
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -48,10 +44,9 @@ body {
     background-attachment: fixed;
 }
 
-
 /* =========================================================
    HILANGKAN OVERLAY YANG MUNGKIN TERDAPAT PADA BODY
-   ========================================================= */
+========================================================= */
 
 body::before,
 body::after {
@@ -68,10 +63,9 @@ body::after {
     -webkit-backdrop-filter: none !important;
 }
 
-
 /* =========================================================
    HEADER
-   ========================================================= */
+========================================================= */
 
 .site-header {
 
@@ -96,7 +90,6 @@ body::after {
     box-shadow: none !important;
 }
 
-
 /* LOGO */
 
 .site-header .logo {
@@ -118,7 +111,6 @@ body::after {
         );
 }
 
-
 /* JUDUL UTAMA */
 
 .site-header h1 {
@@ -134,7 +126,6 @@ body::after {
     text-shadow:
         0 2px 5px rgba(0, 0, 0, 0.85);
 }
-
 
 /* SUBJUDUL */
 
@@ -152,7 +143,6 @@ body::after {
         0 2px 5px rgba(0, 0, 0, 0.85);
 }
 
-
 /* DESKRIPSI */
 
 .site-header p {
@@ -169,10 +159,9 @@ body::after {
         0 2px 5px rgba(0, 0, 0, 0.9);
 }
 
-
 /* =========================================================
    MENU UTAMA
-   ========================================================= */
+========================================================= */
 
 .menu {
 
@@ -215,10 +204,9 @@ body::after {
     -webkit-backdrop-filter: blur(5px);
 }
 
-
 /* =========================================================
    TOMBOL MENU
-   ========================================================= */
+========================================================= */
 
 .menu-btn {
 
@@ -256,14 +244,12 @@ body::after {
         0.25s ease;
 }
 
-
 /* ICON */
 
 .menu-btn i {
 
     font-size: 16px;
 }
-
 
 /* HOVER */
 
@@ -274,7 +260,6 @@ body::after {
 
     transform: translateY(-1px);
 }
-
 
 /* MENU AKTIF */
 
@@ -290,10 +275,9 @@ body::after {
         rgba(0, 107, 63, 0.25);
 }
 
-
 /* =========================================================
    SEARCH
-   ========================================================= */
+========================================================= */
 
 .search-menu {
 
@@ -322,7 +306,6 @@ body::after {
         0.25s ease;
 }
 
-
 /* ICON SEARCH */
 
 .search-menu > i {
@@ -333,7 +316,6 @@ body::after {
 
     flex-shrink: 0;
 }
-
 
 /* INPUT */
 
@@ -356,7 +338,6 @@ body::after {
     font-size: 14px;
 }
 
-
 /* PLACEHOLDER */
 
 .search-menu input::placeholder {
@@ -365,7 +346,6 @@ body::after {
 
     opacity: 1;
 }
-
 
 /* FOCUS */
 
@@ -379,10 +359,9 @@ body::after {
         rgba(0, 132, 61, 0.12);
 }
 
-
 /* =========================================================
    MAIN
-   ========================================================= */
+========================================================= */
 
 main {
 
@@ -399,10 +378,9 @@ main {
     background-color: transparent !important;
 }
 
-
 /* =========================================================
    PERIODE BOX
-   ========================================================= */
+========================================================= */
 
 .periode-box {
 
@@ -430,7 +408,6 @@ main {
         rgba(0, 0, 0, 0.16);
 }
 
-
 /* JUDUL PERIODE */
 
 .periode-box h3 {
@@ -444,7 +421,6 @@ main {
     margin-bottom: 5px;
 }
 
-
 /* TANGGAL */
 
 .periode-box h2 {
@@ -455,7 +431,6 @@ main {
 
     color: #008f2f;
 }
-
 
 /* JUMLAH */
 
@@ -468,20 +443,18 @@ main {
     color: #666666;
 }
 
-
 /* =========================================================
    LIST PROFESOR
-   ========================================================= */
+========================================================= */
 
 #listProfesor {
 
     width: 100%;
 }
 
-
 /* =========================================================
    CARD PROFESOR
-   ========================================================= */
+========================================================= */
 
 .card {
 
@@ -517,7 +490,6 @@ main {
         box-shadow 0.25s ease;
 }
 
-
 .card:hover {
 
     transform:
@@ -528,10 +500,9 @@ main {
         rgba(0, 0, 0, 0.22);
 }
 
-
 /* =========================================================
    FOTO PROFESOR
-   ========================================================= */
+========================================================= */
 
 .photo {
 
@@ -559,7 +530,6 @@ main {
         rgba(0, 0, 0, 0.25);
 }
 
-
 /* FOTO PLACEHOLDER */
 
 .photo-placeholder {
@@ -586,10 +556,9 @@ main {
     font-size: 35px;
 }
 
-
 /* =========================================================
    INFO PROFESOR
-   ========================================================= */
+========================================================= */
 
 .info {
 
@@ -597,7 +566,6 @@ main {
 
     min-width: 0;
 }
-
 
 .info h3 {
 
@@ -610,7 +578,6 @@ main {
     margin-bottom: 4px;
 }
 
-
 .fakultas {
 
     font-size: 13px;
@@ -619,7 +586,6 @@ main {
 
     margin-bottom: 5px;
 }
-
 
 .periode-profesor {
 
@@ -630,7 +596,6 @@ main {
     margin-bottom: 9px;
 }
 
-
 .periode-profesor i {
 
     color: #008f2f;
@@ -638,10 +603,9 @@ main {
     margin-right: 3px;
 }
 
-
 /* =========================================================
    TOMBOL CARD
-   ========================================================= */
+========================================================= */
 
 .buttons {
 
@@ -651,7 +615,6 @@ main {
 
     gap: 7px;
 }
-
 
 .btn {
 
@@ -686,7 +649,6 @@ main {
         0.2s ease;
 }
 
-
 .btn:hover {
 
     background:
@@ -696,17 +658,15 @@ main {
         translateY(-1px);
 }
 
-
 .btn-book {
 
     background:
         #007b3d;
 }
 
-
 /* =========================================================
    HIGHLIGHT SEARCH
-   ========================================================= */
+========================================================= */
 
 mark {
 
@@ -723,10 +683,9 @@ mark {
         3px;
 }
 
-
 /* =========================================================
    DATA KOSONG
-   ========================================================= */
+========================================================= */
 
 .data-kosong {
 
@@ -750,7 +709,6 @@ mark {
         rgba(0, 0, 0, 0.15);
 }
 
-
 .data-kosong i {
 
     font-size: 30px;
@@ -761,7 +719,6 @@ mark {
     margin-bottom: 10px;
 }
 
-
 .data-kosong h3 {
 
     font-size: 17px;
@@ -771,7 +728,6 @@ mark {
     margin-bottom: 5px;
 }
 
-
 .data-kosong p {
 
     font-size: 12px;
@@ -779,10 +735,10 @@ mark {
     color: #777777;
 }
 
-
 /* =========================================================
    STATISTIK
-   ========================================================= */
+   3 STATISTIK MENJADI SATU CONTAINER
+========================================================= */
 
 .stats {
 
@@ -795,17 +751,34 @@ mark {
     grid-template-columns:
         repeat(3, 1fr);
 
-    gap: 12px;
+    gap: 0;
 
     position: relative;
 
     z-index: 5;
-}
 
+    /* SATU BACKGROUND UNTUK SEMUA STATISTIK */
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.90);
+
+    border-radius:
+        16px;
+
+    box-shadow:
+        0 8px 25px
+        rgba(0, 0, 0, 0.16);
+
+    overflow: hidden;
+}
 
 /* =========================================================
    STAT CARD
-   ========================================================= */
+   TIDAK LAGI MENJADI CARD TERPISAH
+========================================================= */
 
 .stat {
 
@@ -823,24 +796,48 @@ mark {
 
     text-align: center;
 
+    /* TRANSPARAN AGAR MENYATU */
     background:
-        rgba(255, 255, 255, 0.90);
+        transparent;
 
     color: #006b3f;
 
-    border:
+    /* HILANGKAN BORDER CARD */
+    border: none;
+
+    border-radius: 0;
+
+    /* HILANGKAN SHADOW PER CARD */
+    box-shadow: none;
+
+    /* PEMISAH VERTIKAL HALUS */
+    border-right:
         1px solid
-        rgba(255, 255, 255, 0.85);
+        rgba(0, 107, 63, 0.12);
 
-    border-radius: 14px;
-
-    box-shadow:
-        0 7px 22px
-        rgba(0, 0, 0, 0.16);
+    transition:
+        background 0.25s ease;
 }
 
+/* STAT TERAKHIR TIDAK ADA GARIS KANAN */
 
-/* ICON STAT */
+.stat:last-child {
+
+    border-right:
+        none;
+}
+
+/* EFEK HOVER */
+
+.stat:hover {
+
+    background:
+        rgba(0, 143, 47, 0.06);
+}
+
+/* =========================================================
+   ICON STAT
+========================================================= */
 
 .stat i {
 
@@ -852,8 +849,9 @@ mark {
         #008f2f;
 }
 
-
-/* ANGKA */
+/* =========================================================
+   ANGKA
+========================================================= */
 
 .stat span {
 
@@ -869,8 +867,9 @@ mark {
         #008f2f;
 }
 
-
-/* LABEL */
+/* =========================================================
+   LABEL
+========================================================= */
 
 .stat small {
 
@@ -884,10 +883,9 @@ mark {
         #555555;
 }
 
-
 /* =========================================================
    FOOTER
-   ========================================================= */
+========================================================= */
 
 footer {
 
@@ -903,8 +901,6 @@ footer {
 
     z-index: 10;
 
-    /* PENTING:
-       TIDAK ADA WARNA HIJAU */
     background:
         transparent !important;
 
@@ -926,7 +922,6 @@ footer {
     -webkit-backdrop-filter:
         none !important;
 }
-
 
 /* HILANGKAN PSEUDO FOOTER */
 
@@ -955,7 +950,6 @@ footer::after {
         none !important;
 }
 
-
 /* TEKS FOOTER */
 
 footer p {
@@ -980,7 +974,6 @@ footer p {
         0 1px 2px rgba(0, 0, 0, 1);
 }
 
-
 /* TAHUN */
 
 footer p:last-child {
@@ -995,10 +988,9 @@ footer p:last-child {
         500;
 }
 
-
 /* =========================================================
    ARSIP
-   ========================================================= */
+========================================================= */
 
 .arsip-header {
 
@@ -1027,7 +1019,6 @@ footer p:last-child {
         #006b3f;
 }
 
-
 .arsip-header-icon {
 
     font-size: 38px;
@@ -1037,7 +1028,6 @@ footer p:last-child {
     color:
         #008f2f;
 }
-
 
 .arsip-header h2 {
 
@@ -1049,7 +1039,6 @@ footer p:last-child {
         #006b3f;
 }
 
-
 .arsip-header p {
 
     font-size: 12px;
@@ -1058,10 +1047,9 @@ footer p:last-child {
         #666666;
 }
 
-
 /* =========================================================
    TAHUN ARSIP
-   ========================================================= */
+========================================================= */
 
 .tahun-arsip {
 
@@ -1071,7 +1059,6 @@ footer p:last-child {
     padding-left:
         8px;
 }
-
 
 .tahun-arsip h2 {
 
@@ -1089,10 +1076,9 @@ footer p:last-child {
         rgba(0, 0, 0, 0.9);
 }
 
-
 /* =========================================================
    ITEM ARSIP
-   ========================================================= */
+========================================================= */
 
 .arsip-item {
 
@@ -1134,7 +1120,6 @@ footer p:last-child {
         0.25s ease;
 }
 
-
 .arsip-item:hover {
 
     transform:
@@ -1144,7 +1129,6 @@ footer p:last-child {
         0 10px 25px
         rgba(0, 0, 0, 0.20);
 }
-
 
 .arsip-item h3 {
 
@@ -1158,13 +1142,11 @@ footer p:last-child {
         600;
 }
 
-
 .arsip-item h3 i {
 
     margin-right:
         5px;
 }
-
 
 .arsip-item p {
 
@@ -1177,7 +1159,6 @@ footer p:last-child {
     color:
         #666666;
 }
-
 
 .arsip-arrow {
 
@@ -1194,10 +1175,9 @@ footer p:last-child {
         nowrap;
 }
 
-
 /* =========================================================
    DETAIL PERIODE
-   ========================================================= */
+========================================================= */
 
 .periode-detail {
 
@@ -1205,7 +1185,6 @@ footer p:last-child {
 
     margin-bottom: 20px;
 }
-
 
 .btn-kembali {
 
@@ -1242,13 +1221,11 @@ footer p:last-child {
         pointer;
 }
 
-
 .btn-kembali:hover {
 
     background:
         #006b3f;
 }
-
 
 .periode-detail-box {
 
@@ -1276,7 +1253,6 @@ footer p:last-child {
         rgba(0, 0, 0, 0.15);
 }
 
-
 .periode-icon {
 
     width: 55px;
@@ -1303,7 +1279,6 @@ footer p:last-child {
         23px;
 }
 
-
 .periode-info-text h2 {
 
     font-size:
@@ -1312,7 +1287,6 @@ footer p:last-child {
     color:
         #006b3f;
 }
-
 
 .periode-info-text h3 {
 
@@ -1326,7 +1300,6 @@ footer p:last-child {
         #008f2f;
 }
 
-
 .periode-info-text p {
 
     margin-top:
@@ -1339,10 +1312,9 @@ footer p:last-child {
         #666666;
 }
 
-
 /* =========================================================
    RESPONSIVE TABLET
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 768px) {
 
@@ -1351,7 +1323,6 @@ footer p:last-child {
         padding-top:
             20px;
     }
-
 
     .site-header .logo {
 
@@ -1362,13 +1333,11 @@ footer p:last-child {
             75px;
     }
 
-
     .site-header h1 {
 
         font-size:
             21px;
     }
-
 
     .site-header h2 {
 
@@ -1376,13 +1345,11 @@ footer p:last-child {
             18px;
     }
 
-
     .site-header p {
 
         font-size:
             12px;
     }
-
 
     .menu {
 
@@ -1401,7 +1368,6 @@ footer p:last-child {
             8px;
     }
 
-
     .menu-btn {
 
         font-size:
@@ -1411,13 +1377,11 @@ footer p:last-child {
             0 8px;
     }
 
-
     .search-menu {
 
         padding:
             0 10px;
     }
-
 
     .search-menu input {
 
@@ -1425,27 +1389,26 @@ footer p:last-child {
             12px;
     }
 
-
     main {
 
         width:
             calc(100% - 25px);
     }
 
-
     .stats {
 
         width:
             calc(100% - 25px);
-    }
 
+        gap:
+            0;
+    }
 
     .card {
 
         gap:
             12px;
     }
-
 
     .photo,
     .photo-placeholder {
@@ -1457,26 +1420,22 @@ footer p:last-child {
             105px;
     }
 
-
     .info h3 {
 
         font-size:
             15px;
     }
 
-
     footer p {
 
         font-size:
             15px;
     }
-
 }
-
 
 /* =========================================================
    RESPONSIVE HP
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 600px) {
 
@@ -1489,13 +1448,11 @@ footer p:last-child {
             scroll;
     }
 
-
     .site-header {
 
         padding:
             18px 15px 20px;
     }
-
 
     .site-header .logo {
 
@@ -1509,13 +1466,11 @@ footer p:last-child {
             7px;
     }
 
-
     .site-header h1 {
 
         font-size:
             18px;
     }
-
 
     .site-header h2 {
 
@@ -1523,13 +1478,11 @@ footer p:last-child {
             16px;
     }
 
-
     .site-header p {
 
         font-size:
             10px;
     }
-
 
     /* MENU TETAP SATU BARIS */
 
@@ -1553,7 +1506,6 @@ footer p:last-child {
             13px;
     }
 
-
     .menu-btn {
 
         min-height:
@@ -1572,13 +1524,11 @@ footer p:last-child {
             8px;
     }
 
-
     .menu-btn i {
 
         font-size:
             11px;
     }
-
 
     .search-menu {
 
@@ -1595,13 +1545,11 @@ footer p:last-child {
             8px;
     }
 
-
     .search-menu > i {
 
         font-size:
             12px;
     }
-
 
     .search-menu input {
 
@@ -1615,13 +1563,11 @@ footer p:last-child {
             0;
     }
 
-
     main {
 
         width:
             calc(100% - 20px);
     }
-
 
     .periode-box {
 
@@ -1632,13 +1578,11 @@ footer p:last-child {
             13px;
     }
 
-
     .periode-box h3 {
 
         font-size:
             11px;
     }
-
 
     .periode-box h2 {
 
@@ -1646,13 +1590,11 @@ footer p:last-child {
             19px;
     }
 
-
     .periode-box p {
 
         font-size:
             9px;
     }
-
 
     /* CARD PROFESOR */
 
@@ -1668,7 +1610,6 @@ footer p:last-child {
             12px;
     }
 
-
     .photo,
     .photo-placeholder {
 
@@ -1682,13 +1623,11 @@ footer p:last-child {
             9px;
     }
 
-
     .info h3 {
 
         font-size:
             12px;
     }
-
 
     .fakultas {
 
@@ -1696,13 +1635,11 @@ footer p:last-child {
             9px;
     }
 
-
     .periode-profesor {
 
         font-size:
             8px;
     }
-
 
     .btn {
 
@@ -1716,8 +1653,9 @@ footer p:last-child {
             5px;
     }
 
-
-    /* STATISTIK TETAP SATU BARIS */
+    /* =====================================================
+       STATISTIK - TETAP MENYATU SATU BARIS
+    ===================================================== */
 
     .stats {
 
@@ -1728,12 +1666,17 @@ footer p:last-child {
             repeat(3, 1fr);
 
         gap:
-            6px;
+            0;
 
         margin:
             18px auto;
-    }
 
+        border-radius:
+            12px;
+
+        overflow:
+            hidden;
+    }
 
     .stat {
 
@@ -1744,9 +1687,18 @@ footer p:last-child {
             10px 5px;
 
         border-radius:
-            10px;
+            0;
+
+        border-right:
+            1px solid
+            rgba(0, 107, 63, 0.12);
     }
 
+    .stat:last-child {
+
+        border-right:
+            none;
+    }
 
     .stat i {
 
@@ -1757,20 +1709,17 @@ footer p:last-child {
             4px;
     }
 
-
     .stat span {
 
         font-size:
             19px;
     }
 
-
     .stat small {
 
         font-size:
             8px;
     }
-
 
     /* FOOTER */
 
@@ -1783,7 +1732,6 @@ footer p:last-child {
             30px 15px;
     }
 
-
     footer p {
 
         font-size:
@@ -1793,13 +1741,11 @@ footer p:last-child {
             3px 0;
     }
 
-
     footer p:last-child {
 
         font-size:
             12px;
     }
-
 
     /* ARSIP */
 
@@ -1809,13 +1755,11 @@ footer p:last-child {
             20px 12px;
     }
 
-
     .arsip-header-icon {
 
         font-size:
             30px;
     }
-
 
     .arsip-header h2 {
 
@@ -1823,20 +1767,17 @@ footer p:last-child {
             19px;
     }
 
-
     .arsip-header p {
 
         font-size:
             9px;
     }
 
-
     .tahun-arsip h2 {
 
         font-size:
             25px;
     }
-
 
     .arsip-item {
 
@@ -1850,13 +1791,11 @@ footer p:last-child {
             11px;
     }
 
-
     .arsip-item h3 {
 
         font-size:
             12px;
     }
-
 
     .arsip-item p {
 
@@ -1864,13 +1803,11 @@ footer p:last-child {
             8px;
     }
 
-
     .arsip-arrow {
 
         font-size:
             10px;
     }
-
 
     /* DETAIL */
 
@@ -1879,7 +1816,6 @@ footer p:last-child {
         padding:
             15px;
     }
-
 
     .periode-icon {
 
@@ -1893,13 +1829,11 @@ footer p:last-child {
             18px;
     }
 
-
     .periode-info-text h2 {
 
         font-size:
             14px;
     }
-
 
     .periode-info-text h3 {
 
@@ -1907,19 +1841,16 @@ footer p:last-child {
             16px;
     }
 
-
     .periode-info-text p {
 
         font-size:
             9px;
     }
-
 }
-
 
 /* =========================================================
    HP SANGAT KECIL
-   ========================================================= */
+========================================================= */
 
 @media (max-width: 380px) {
 
@@ -1931,20 +1862,17 @@ footer p:last-child {
             1.6fr;
     }
 
-
     .menu-btn {
 
         font-size:
             8px;
     }
 
-
     .search-menu input {
 
         font-size:
             9px;
     }
-
 
     .photo,
     .photo-placeholder {
@@ -1956,13 +1884,11 @@ footer p:last-child {
             95px;
     }
 
-
     .info h3 {
 
         font-size:
             11px;
     }
-
 
     .btn {
 
@@ -1973,13 +1899,11 @@ footer p:last-child {
             5px;
     }
 
-
     .stat {
 
         min-height:
             80px;
     }
-
 
     .stat span {
 
@@ -1987,11 +1911,9 @@ footer p:last-child {
             17px;
     }
 
-
     .stat small {
 
         font-size:
             7px;
     }
-
 }
