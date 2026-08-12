@@ -30,23 +30,18 @@ html {
 ======================================================== */
 
 body {
-
     font-family: 'Poppins', sans-serif;
 
     min-height: 100vh;
 
     color: #ffffff;
 
-    background:
-        linear-gradient(
-            rgba(0, 105, 55, 0.72),
-            rgba(0, 105, 55, 0.72)
-        ),
-        url("img/background-unand.jpg");
+    /* FOTO UNAND TAMPIL ASLI TANPA OVERLAY HIJAU */
+    background-image: url("img/background-unand.jpg");
 
     background-size: cover;
 
-    background-position: center top;
+    background-position: center center;
 
     background-repeat: no-repeat;
 
