@@ -1,13 +1,12 @@
-/* ========================================================
+/* =========================================================
    DEWAN PROFESOR UNIVERSITAS ANDALAS
-   STYLE.CSS
-   VERSI PEMULIHAN SEBELUM SLIDESHOW
-======================================================== */
+   STYLE.CSS LENGKAP
+========================================================= */
 
 
-/* ========================================================
+/* =========================================================
    RESET
-======================================================== */
+========================================================= */
 
 * {
     margin: 0;
@@ -16,28 +15,29 @@
 }
 
 
-/* ========================================================
-   HTML
-======================================================== */
+/* =========================================================
+   HTML & BODY
+========================================================= */
 
 html {
     scroll-behavior: smooth;
 }
 
 
-/* ========================================================
-   BODY
-======================================================== */
-
 body {
+
     font-family: 'Poppins', sans-serif;
 
     min-height: 100vh;
 
     color: #ffffff;
 
-    /* FOTO UNAND ASLI - TANPA OVERLAY HIJAU */
-    background-image: url("img/background-unand.jpg");
+    overflow-x: hidden;
+
+    /* FOTO UNAND ASLI - TANPA BLUR HIJAU */
+
+    background-image:
+        url("img/background-unand.jpg");
 
     background-size: cover;
 
@@ -47,214 +47,182 @@ body {
 
     background-attachment: fixed;
 
-    overflow-x: hidden;
+    position: relative;
 }
 
 
-/* ========================================================
+/* =========================================================
+   OVERLAY SANGAT TIPIS
+   HANYA AGAR TEKS TETAP TERBACA
+========================================================= */
+
+body::before {
+
+    content: "";
+
+    position: fixed;
+
+    inset: 0;
+
+    background:
+        rgba(0, 0, 0, 0.08);
+
+    pointer-events: none;
+
+    z-index: -1;
+}
+
+
+/* =========================================================
    HEADER
-======================================================== */
+========================================================= */
 
 .site-header {
 
     width: 100%;
 
+    padding: 25px 20px 20px;
+
     text-align: center;
 
-    padding: 40px 20px 25px;
+    position: relative;
 
-    background: transparent;
+    z-index: 2;
+
+    text-shadow:
+        0 2px 6px rgba(0, 0, 0, 0.65);
 }
 
 
-/* ========================================================
+/* =========================================================
    LOGO
-======================================================== */
+========================================================= */
 
-.logo {
+.site-header .logo {
 
-    width: 115px;
+    width: 90px;
 
-    height: 115px;
+    height: 90px;
 
     object-fit: contain;
 
     display: block;
 
-    margin: 0 auto 15px;
+    margin: 0 auto 10px;
 
     filter:
         drop-shadow(
-            0 5px 12px
-            rgba(0, 0, 0, 0.30)
+            0 4px 8px rgba(0, 0, 0, 0.45)
         );
 }
 
 
-/* ========================================================
+/* =========================================================
    JUDUL
-======================================================== */
+========================================================= */
 
 .site-header h1 {
 
-    font-size: 30px;
+    font-size: 25px;
 
     font-weight: 700;
 
-    letter-spacing: 2px;
+    line-height: 1.2;
 
     margin-bottom: 3px;
 
-    text-shadow:
-        0 3px 8px
-        rgba(0, 0, 0, 0.35);
+    color: #ffffff;
 }
 
-
-/* ========================================================
-   DEWAN PROFESOR
-======================================================== */
 
 .site-header h2 {
 
-    font-size: 25px;
+    font-size: 21px;
 
     font-weight: 600;
 
-    letter-spacing: 3px;
+    line-height: 1.2;
 
-    margin-bottom: 8px;
+    margin-bottom: 5px;
 
-    text-shadow:
-        0 3px 8px
-        rgba(0, 0, 0, 0.35);
+    color: #ffffff;
 }
 
-
-/* ========================================================
-   TAGLINE
-======================================================== */
 
 .site-header p {
 
-    font-size: 14px;
+    font-size: 13px;
 
     font-weight: 400;
 
-    opacity: 0.95;
-
-    text-shadow:
-        0 2px 6px
-        rgba(0, 0, 0, 0.35);
+    color: #ffffff;
 }
 
 
-/* ========================================================
+/* =========================================================
    MENU UTAMA
-   BERANDA | ARSIP | PENCARIAN
-======================================================== */
+========================================================= */
 
 .menu {
 
-    width: min(
-        900px,
-        calc(100% - 30px)
-    );
+    width: calc(100% - 40px);
 
-    margin: 20px auto;
+    max-width: 1000px;
 
-    display: flex;
+    min-height: 76px;
 
-    align-items: center;
-
-    justify-content: center;
-
-    gap: 12px;
+    margin: 20px auto 25px;
 
     padding: 10px;
 
-    box-sizing: border-box;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.75
-        );
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.8
-        );
-
-    border-radius: 18px;
-
-    box-shadow:
-        0 8px 25px
-        rgba(
-            0,
-            0,
-            0,
-            0.15
-        );
-}
-
-
-/* ========================================================
-   SEMUA ITEM MENU UKURAN SAMA
-======================================================== */
-
-.menu-btn,
-.search-menu {
-
-    width: 250px;
-
-    height: 52px;
-
-    flex: 1 1 0;
-
-    min-width: 0;
-
-    box-sizing: border-box;
-
-    border-radius: 12px;
-
     display: flex;
 
     align-items: center;
 
     justify-content: center;
 
-    font-family:
-        'Poppins',
-        sans-serif;
+    gap: 10px;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.82);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.95);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    position: relative;
+
+    z-index: 10;
 }
 
 
-/* ========================================================
-   TOMBOL BERANDA & ARSIP
-======================================================== */
+/* =========================================================
+   TOMBOL MENU
+========================================================= */
 
 .menu-btn {
 
+    flex: 1;
+
+    height: 56px;
+
     border: none;
 
-    background:
-        transparent;
+    border-radius: 14px;
 
-    color:
-        #006b3c;
+    background: transparent;
+
+    color: #006b3f;
+
+    font-family: 'Poppins', sans-serif;
 
     font-size: 14px;
 
@@ -262,566 +230,456 @@ body {
 
     cursor: pointer;
 
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
     gap: 9px;
 
     transition:
-        background 0.3s ease,
-        color 0.3s ease,
-        transform 0.2s ease,
-        box-shadow 0.3s ease;
+        all 0.25s ease;
 }
 
-
-/* ICON MENU */
 
 .menu-btn i {
 
-    font-size: 15px;
+    font-size: 17px;
 }
 
 
-/* HOVER */
-
-.menu-btn:hover {
-
-    background:
-        rgba(
-            0,
-            128,
-            0,
-            0.10
-        );
-
-    transform:
-        translateY(-1px);
-}
-
-
-/* MENU AKTIF */
+/* =========================================================
+   MENU AKTIF
+========================================================= */
 
 .menu-btn.active {
 
     background:
-        #008000;
+        #008f2d;
 
-    color:
-        #ffffff;
+    color: #ffffff;
 
     box-shadow:
-        0 5px 14px
-        rgba(
-            0,
-            128,
-            0,
-            0.25
-        );
+        0 5px 15px rgba(0, 120, 50, 0.25);
 }
 
 
-/* ========================================================
+/* =========================================================
+   HOVER MENU
+========================================================= */
+
+.menu-btn:hover {
+
+    background:
+        rgba(0, 143, 45, 0.10);
+
+    color: #007a32;
+}
+
+
+.menu-btn.active:hover {
+
+    background:
+        #007f28;
+
+    color: #ffffff;
+}
+
+
+/* =========================================================
    SEARCH
-======================================================== */
+========================================================= */
 
 .search-menu {
 
-    background:
-        #ffffff;
+    flex: 1.5;
 
-    border:
-        1px solid
-        rgba(
-            0,
-            128,
-            0,
-            0.35
-        );
+    height: 56px;
+
+    border-radius: 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 10px;
 
     padding:
-        0 15px;
+        0 17px;
 
-    gap:
-        10px;
+    background:
+        rgba(255, 255, 255, 0.96);
 
-    box-shadow:
-        inset
-        0 0 0 1px
-        rgba(
-            255,
-            255,
-            255,
-            0.5
-        );
+    border:
+        1px solid rgba(0, 128, 55, 0.35);
+
+    transition:
+        0.25s ease;
 }
 
 
-/* ICON SEARCH */
+.search-menu:focus-within {
+
+    border-color:
+        #008f2d;
+
+    box-shadow:
+        0 0 0 3px rgba(0, 143, 45, 0.12);
+}
+
 
 .search-menu i {
 
-    flex:
-        0 0 auto;
-
     color:
-        #008000;
+        #008f2d;
 
-    font-size:
-        16px;
+    font-size: 18px;
 }
 
-
-/* INPUT */
 
 .search-menu input {
 
-    width:
-        100%;
+    width: 100%;
 
-    height:
-        100%;
+    height: 100%;
 
-    min-width:
-        0;
+    border: none;
 
-    border:
-        none;
+    outline: none;
 
-    outline:
-        none;
+    background: transparent;
 
-    background:
-        transparent;
+    color: #333333;
 
-    color:
-        #333333;
+    font-family: 'Poppins', sans-serif;
 
-    font-family:
-        'Poppins',
-        sans-serif;
-
-    font-size:
-        13px;
+    font-size: 14px;
 }
 
-
-/* PLACEHOLDER */
 
 .search-menu input::placeholder {
 
     color:
-        #888888;
-
-    opacity:
-        1;
+        #777777;
 }
 
 
-/* ========================================================
+/* =========================================================
    MAIN
-======================================================== */
+========================================================= */
 
 main {
 
-    width:
-        min(
-            1100px,
-            94%
-        );
+    width: 100%;
+
+    max-width: 1000px;
 
     margin:
         0 auto;
 
-    padding-bottom:
-        30px;
+    padding:
+        0 20px 30px;
+
+    position: relative;
+
+    z-index: 2;
 }
 
 
-/* ========================================================
+/* =========================================================
    PERIODE BOX
-======================================================== */
+========================================================= */
 
 .periode-box {
 
-    width:
-        100%;
-
-    text-align:
-        center;
+    width: 100%;
 
     padding:
-        25px 20px;
+        22px 25px;
 
-    margin-bottom:
-        25px;
+    margin-bottom: 20px;
 
-    border-radius:
-        20px;
+    text-align: center;
+
+    border-radius: 18px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.16
-        );
+        rgba(255, 255, 255, 0.90);
 
     border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
+        1px solid rgba(255, 255, 255, 0.95);
 
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
+    color:
+        #006b3f;
 
     box-shadow:
-        0 10px 30px
-        rgba(
-            0,
-            0,
-            0,
-            0.15
-        );
+        0 10px 30px rgba(0, 0, 0, 0.16);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 }
 
 
 .periode-box h3 {
 
-    font-size:
-        16px;
+    font-size: 13px;
 
-    font-weight:
-        500;
+    font-weight: 500;
 
-    margin-bottom:
-        8px;
+    margin-bottom: 5px;
+
+    color:
+        #167653;
 }
 
 
 .periode-box h2 {
 
-    font-size:
-        27px;
+    font-size: 20px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 
-    margin-bottom:
-        5px;
+    margin-bottom: 4px;
+
+    color:
+        #008f2d;
 }
 
 
 .periode-box p {
 
-    font-size:
-        14px;
+    font-size: 12px;
 
-    opacity:
-        0.95;
+    color:
+        #666666;
 }
 
 
-/* ========================================================
+/* =========================================================
    DAFTAR PROFESOR
-======================================================== */
+========================================================= */
 
 #listProfesor {
 
-    display:
-        grid;
+    width: 100%;
 
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
+    display: flex;
 
-    gap:
-        20px;
+    flex-direction: column;
+
+    gap: 15px;
 }
 
 
-/* ========================================================
+/* =========================================================
    CARD PROFESOR
-======================================================== */
+========================================================= */
 
 .card {
 
-    display:
-        flex;
+    width: 100%;
 
-    align-items:
-        center;
+    min-height: 150px;
 
-    gap:
-        18px;
+    padding: 15px;
 
-    padding:
-        18px;
+    display: flex;
 
-    border-radius:
-        20px;
+    align-items: center;
+
+    gap: 18px;
+
+    border-radius: 18px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.96
-        );
+        rgba(255, 255, 255, 0.93);
 
-    color:
-        #222222;
+    border:
+        1px solid rgba(255, 255, 255, 0.95);
+
+    color: #222222;
 
     box-shadow:
-        0 12px 30px
-        rgba(
-            0,
-            0,
-            0,
-            0.20
-        );
+        0 10px 25px rgba(0, 0, 0, 0.15);
+
+    backdrop-filter: blur(8px);
+
+    -webkit-backdrop-filter: blur(8px);
 
     transition:
         transform 0.25s ease,
         box-shadow 0.25s ease;
-
-    overflow:
-        hidden;
 }
 
 
 .card:hover {
 
     transform:
-        translateY(-4px);
+        translateY(-3px);
 
     box-shadow:
-        0 18px 35px
-        rgba(
-            0,
-            0,
-            0,
-            0.25
-        );
+        0 15px 30px rgba(0, 0, 0, 0.20);
 }
 
 
-/* ========================================================
+/* =========================================================
    FOTO PROFESOR
-======================================================== */
+========================================================= */
 
-.photo {
+.card .photo {
 
-    width:
-        125px;
+    width: 125px;
 
-    height:
-        155px;
+    height: 125px;
 
-    flex-shrink:
-        0;
+    flex-shrink: 0;
 
-    object-fit:
-        cover;
+    object-fit: cover;
 
-    object-position:
-        center top;
+    object-position: center top;
 
-    border-radius:
-        14px;
+    border-radius: 12px;
 
-    display:
-        block;
+    background:
+        #008000;
 
     box-shadow:
-        0 7px 18px
-        rgba(
-            0,
-            0,
-            0,
-            0.20
-        );
+        0 6px 15px rgba(0, 0, 0, 0.25);
 }
 
 
-/* FOTO PLACEHOLDER */
+/* =========================================================
+   FOTO PLACEHOLDER
+========================================================= */
 
 .photo-placeholder {
 
-    width:
-        125px;
+    width: 125px;
 
-    height:
-        155px;
+    height: 125px;
 
-    flex-shrink:
-        0;
+    flex-shrink: 0;
 
-    border-radius:
-        14px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
+    border-radius: 12px;
 
     background:
-        #e9eeee;
+        #008000;
 
     color:
-        #7a8a84;
+        #ffffff;
 
-    font-size:
-        40px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    font-size: 35px;
 }
 
 
-/* ========================================================
+/* =========================================================
    INFO PROFESOR
-======================================================== */
+========================================================= */
 
-.info {
+.card .info {
 
-    min-width:
-        0;
+    flex: 1;
 
-    flex:
-        1;
+    min-width: 0;
 }
 
 
-.info h3 {
+.card .info h3 {
 
-    font-size:
-        17px;
+    font-size: 17px;
 
-    line-height:
-        1.35;
-
-    font-weight:
-        700;
+    font-weight: 700;
 
     color:
-        #075c36;
+        #008f2d;
 
-    margin-bottom:
-        7px;
+    margin-bottom: 3px;
 }
 
 
-.fakultas {
+.card .fakultas {
 
-    font-size:
-        13px;
-
-    font-weight:
-        500;
+    font-size: 12px;
 
     color:
         #555555;
 
-    margin-bottom:
-        7px;
+    margin-bottom: 5px;
 }
 
 
 .periode-profesor {
 
-    font-size:
-        12px;
+    font-size: 11px;
 
     color:
-        #777777;
+        #666666;
 
-    margin-bottom:
-        13px;
+    margin-bottom: 10px;
 }
 
 
-/* ========================================================
-   HIGHLIGHT SEARCH
-======================================================== */
-
-mark {
-
-    background:
-        #ffe66d;
+.periode-profesor i {
 
     color:
-        #222222;
+        #008f2d;
 
-    padding:
-        1px 3px;
-
-    border-radius:
-        3px;
+    margin-right: 3px;
 }
 
 
-/* ========================================================
-   BUTTONS
-======================================================== */
+/* =========================================================
+   BUTTON PROFESOR
+========================================================= */
 
 .buttons {
 
-    display:
-        flex;
+    display: flex;
 
-    flex-wrap:
-        wrap;
+    flex-wrap: wrap;
 
-    gap:
-        7px;
+    gap: 7px;
 }
 
 
 .btn {
 
-    display:
-        inline-flex;
+    display: inline-flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    gap:
-        6px;
+    gap: 6px;
 
     padding:
-        8px 11px;
+        7px 12px;
 
-    border-radius:
-        9px;
+    border-radius: 7px;
 
-    text-decoration:
-        none;
+    border: none;
+
+    background:
+        #008f2d;
 
     color:
         #ffffff;
 
-    background:
-        #08783f;
+    text-decoration: none;
 
-    font-size:
-        11px;
+    font-family: 'Poppins', sans-serif;
 
-    font-weight:
-        500;
+    font-size: 10px;
+
+    font-weight: 600;
 
     transition:
         0.2s ease;
@@ -831,791 +689,817 @@ mark {
 .btn:hover {
 
     background:
-        #075d32;
+        #006f25;
 
     transform:
         translateY(-1px);
 }
 
 
-/* TOMBOL BUKU */
+.btn i {
 
-.btn-book {
-
-    background:
-        #b18a2d;
+    font-size: 11px;
 }
 
 
-.btn-book:hover {
-
-    background:
-        #92701f;
-}
-
-
-/* ========================================================
-   DATA KOSONG
-======================================================== */
+/* =========================================================
+   DATA KOSONG / LOADING
+========================================================= */
 
 .data-kosong {
 
-    grid-column:
-        1 / -1;
-
-    text-align:
-        center;
+    width: 100%;
 
     padding:
-        50px 20px;
+        45px 20px;
 
-    border-radius:
-        20px;
+    text-align: center;
+
+    border-radius: 18px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.16
-        );
+        rgba(255, 255, 255, 0.90);
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
+    color:
+        #555555;
 
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
 }
 
 
 .data-kosong i {
 
-    font-size:
-        38px;
+    font-size: 30px;
 
-    margin-bottom:
-        15px;
+    color:
+        #008f2d;
+
+    margin-bottom: 10px;
 }
 
 
 .data-kosong h3 {
 
-    font-size:
-        18px;
+    font-size: 16px;
 
-    margin-bottom:
-        7px;
+    color:
+        #333333;
+
+    margin-bottom: 5px;
 }
 
 
 .data-kosong p {
 
-    font-size:
-        13px;
+    font-size: 12px;
 
-    opacity:
-        0.9;
+    color:
+        #777777;
 }
 
 
-/* ========================================================
+/* =========================================================
+   HIGHLIGHT HASIL SEARCH
+========================================================= */
+
+mark {
+
+    background:
+        #fff176;
+
+    color:
+        #222222;
+
+    padding:
+        0 2px;
+
+    border-radius: 3px;
+}
+
+
+/* =========================================================
    STATISTIK
-======================================================== */
+   SATU CARD BESAR - 3 BAGIAN SATU BARIS
+========================================================= */
 
 .stats {
 
-    width:
-        min(
-            850px,
-            94%
-        );
+    width: calc(100% - 40px);
+
+    max-width: 1000px;
+
+    min-height: 130px;
 
     margin:
-        15px auto 35px;
+        10px auto 30px;
 
-    display:
-        grid;
+    display: flex;
 
-    grid-template-columns:
-        repeat(
-            3,
-            1fr
-        );
+    flex-direction: row;
 
-    gap:
-        15px;
+    align-items: stretch;
+
+    justify-content: center;
+
+    overflow: hidden;
+
+    border-radius: 20px;
+
+    background:
+        rgba(255, 255, 255, 0.22);
+
+    border:
+        1px solid rgba(255, 255, 255, 0.55);
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.20);
+
+    backdrop-filter: blur(10px);
+
+    -webkit-backdrop-filter: blur(10px);
+
+    position: relative;
+
+    z-index: 2;
 }
 
+
+/* =========================================================
+   STAT
+========================================================= */
 
 .stat {
 
-    text-align:
-        center;
+    flex: 1;
+
+    min-width: 0;
+
+    min-height: 130px;
 
     padding:
-        18px;
+        18px 15px;
 
-    border-radius:
-        17px;
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+
+    color:
+        #ffffff;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.15
-        );
+        transparent;
 
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.22
-        );
+    border: none;
 
-    backdrop-filter:
-        blur(10px);
+    border-radius: 0;
 
-    -webkit-backdrop-filter:
-        blur(10px);
+    box-shadow: none;
+
+    position: relative;
+
+    transition:
+        background 0.25s ease;
+}
+
+
+/* =========================================================
+   GARIS PEMISAH
+========================================================= */
+
+.stat:not(:last-child)::after {
+
+    content: "";
+
+    position: absolute;
+
+    right: 0;
+
+    top: 20%;
+
+    width: 1px;
+
+    height: 60%;
+
+    background:
+        rgba(255, 255, 255, 0.55);
+}
+
+
+/* =========================================================
+   HOVER STAT
+========================================================= */
+
+.stat:hover {
+
+    background:
+        rgba(255, 255, 255, 0.10);
+}
+
+
+/* =========================================================
+   ICON STAT
+========================================================= */
+
+.stat > i {
+
+    font-size: 25px;
+
+    color:
+        #ffffff;
+
+    margin-bottom: 8px;
+}
+
+
+/* =========================================================
+   CONTENT STAT
+========================================================= */
+
+.stat-content {
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+}
+
+
+/* =========================================================
+   ANGKA STAT
+========================================================= */
+
+.stat-content span {
+
+    display: block;
+
+    font-size: 30px;
+
+    line-height: 1;
+
+    font-weight: 700;
+
+    color:
+        #ffffff;
+
+    margin-bottom: 7px;
+}
+
+
+/* =========================================================
+   LABEL STAT
+========================================================= */
+
+.stat-content p {
+
+    margin: 0;
+
+    font-size: 13px;
+
+    line-height: 1.3;
+
+    font-weight: 500;
+
+    color:
+        #ffffff;
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+footer {
+
+    width: 100%;
+
+    padding:
+        25px 20px;
+
+    margin-top: 20px;
+
+    text-align: center;
+
+    background:
+        rgba(0, 91, 55, 0.88);
+
+    color:
+        #ffffff;
 
     box-shadow:
-        0 8px 25px
-        rgba(
-            0,
-            0,
-            0,
-            0.14
-        );
+        0 -5px 20px rgba(0, 0, 0, 0.10);
+
+    position: relative;
+
+    z-index: 2;
 }
 
 
-.stat i {
+footer p {
 
-    display:
-        block;
+    margin:
+        2px 0;
 
-    font-size:
-        24px;
+    font-size: 11px;
 
-    margin-bottom:
-        7px;
+    line-height: 1.5;
 }
 
 
-.stat span {
+footer p:first-child {
 
-    display:
-        block;
-
-    font-size:
-        24px;
-
-    font-weight:
-        700;
+    font-weight: 600;
 }
 
 
-.stat small {
-
-    font-size:
-        12px;
-
-    opacity:
-        0.9;
-}
-
-
-/* ========================================================
+/* =========================================================
    ARSIP
-======================================================== */
+========================================================= */
 
 .arsip-header {
 
-    text-align:
-        center;
+    width: 100%;
 
     padding:
-        25px;
+        30px 20px;
 
-    margin-bottom:
-        25px;
+    margin-bottom: 25px;
 
-    border-radius:
-        20px;
+    text-align: center;
+
+    border-radius: 20px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.16
-        );
+        rgba(255, 255, 255, 0.22);
 
     border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.22
-        );
+        1px solid rgba(255, 255, 255, 0.50);
 
-    backdrop-filter:
-        blur(10px);
+    backdrop-filter: blur(10px);
 
-    -webkit-backdrop-filter:
-        blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+
+    color:
+        #ffffff;
+
+    box-shadow:
+        0 10px 30px rgba(0, 0, 0, 0.18);
 }
 
 
 .arsip-header-icon {
 
-    font-size:
-        38px;
+    font-size: 42px;
 
-    margin-bottom:
-        10px;
+    margin-bottom: 10px;
 }
 
 
 .arsip-header h2 {
 
-    font-size:
-        24px;
+    font-size: 25px;
 
-    margin-bottom:
-        5px;
+    margin-bottom: 5px;
 }
 
 
 .arsip-header p {
 
-    font-size:
-        13px;
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    TAHUN ARSIP
-======================================================== */
+========================================================= */
 
 .tahun-arsip {
 
-    margin:
-        20px 0 10px;
+    width: 100%;
 
-    padding-left:
-        5px;
+    margin:
+        25px 0 10px;
+
+    padding:
+        5px 10px;
+
+    color:
+        #ffffff;
+
+    text-shadow:
+        0 2px 5px rgba(0, 0, 0, 0.65);
 }
 
 
 .tahun-arsip h2 {
 
-    font-size:
-        23px;
+    font-size: 28px;
 
-    font-weight:
-        700;
+    font-weight: 700;
 }
 
 
-/* ========================================================
+/* =========================================================
    ITEM ARSIP
-======================================================== */
+========================================================= */
 
 .arsip-item {
 
-    display:
-        flex;
+    width: 100%;
 
-    align-items:
-        center;
-
-    justify-content:
-        space-between;
-
-    gap:
-        15px;
+    min-height: 90px;
 
     padding:
-        17px 20px;
+        18px 22px;
 
-    margin-bottom:
-        10px;
+    margin-bottom: 12px;
 
-    border-radius:
-        15px;
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    cursor: pointer;
+
+    border-radius: 18px;
 
     background:
-        rgba(
-            255,
-            255,
-            255,
-            0.94
-        );
+        rgba(255, 255, 255, 0.90);
 
     color:
-        #222222;
-
-    cursor:
-        pointer;
+        #333333;
 
     box-shadow:
-        0 7px 20px
-        rgba(
-            0,
-            0,
-            0,
-            0.15
-        );
+        0 8px 25px rgba(0, 0, 0, 0.15);
 
     transition:
-        0.25s ease;
+        all 0.25s ease;
 }
 
 
 .arsip-item:hover {
 
     transform:
-        translateX(4px);
+        translateY(-3px);
+
+    background:
+        rgba(255, 255, 255, 0.96);
 
     box-shadow:
-        0 10px 25px
-        rgba(
-            0,
-            0,
-            0,
-            0.20
-        );
+        0 12px 30px rgba(0, 0, 0, 0.20);
 }
 
 
 .arsip-item h3 {
 
     color:
-        #075d32;
+        #006b3f;
 
-    font-size:
-        15px;
+    font-size: 15px;
 
-    margin-bottom:
-        3px;
+    margin-bottom: 5px;
+}
+
+
+.arsip-item h3 i {
+
+    color:
+        #008f2d;
+
+    margin-right: 5px;
 }
 
 
 .arsip-item p {
 
-    color:
-        #777777;
+    font-size: 12px;
 
-    font-size:
-        12px;
+    color:
+        #666666;
 }
 
 
 .arsip-arrow {
 
+    flex-shrink: 0;
+
     color:
-        #08783f;
+        #008f2d;
 
-    font-size:
-        13px;
+    font-weight: 600;
 
-    font-weight:
-        600;
-
-    white-space:
-        nowrap;
+    font-size: 13px;
 }
 
 
-/* ========================================================
+/* =========================================================
    DETAIL PERIODE
-======================================================== */
+========================================================= */
 
 .periode-detail {
 
-    margin-bottom:
-        20px;
+    width: 100%;
 }
 
 
-/* TOMBOL KEMBALI */
-
 .btn-kembali {
 
-    border:
-        none;
+    border: none;
 
-    cursor:
-        pointer;
+    background:
+        rgba(255, 255, 255, 0.90);
+
+    color:
+        #006b3f;
+
+    padding:
+        9px 15px;
+
+    border-radius: 10px;
 
     font-family:
-        inherit;
+        'Poppins', sans-serif;
+
+    font-size: 12px;
+
+    font-weight: 600;
+
+    cursor: pointer;
+
+    margin-bottom: 15px;
+}
+
+
+.periode-detail-box {
+
+    width: 100%;
+
+    padding:
+        20px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 15px;
+
+    border-radius: 18px;
+
+    background:
+        rgba(255, 255, 255, 0.92);
+
+    color:
+        #333333;
+
+    box-shadow:
+        0 10px 25px rgba(0, 0, 0, 0.15);
+
+    margin-bottom: 20px;
+}
+
+
+.periode-icon {
+
+    width: 55px;
+
+    height: 55px;
+
+    border-radius: 50%;
+
+    background:
+        #008f2d;
 
     color:
         #ffffff;
 
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.17
-        );
+    display: flex;
 
-    padding:
-        10px 15px;
+    align-items: center;
 
-    border-radius:
-        10px;
+    justify-content: center;
 
-    margin-bottom:
-        15px;
+    font-size: 22px;
 
-    transition:
-        0.2s ease;
+    flex-shrink: 0;
 }
 
-
-.btn-kembali:hover {
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.25
-        );
-}
-
-
-/* BOX DETAIL PERIODE */
-
-.periode-detail-box {
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    gap:
-        15px;
-
-    padding:
-        20px;
-
-    border-radius:
-        18px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.16
-        );
-
-    border:
-        1px solid
-        rgba(
-            255,
-            255,
-            255,
-            0.23
-        );
-
-    backdrop-filter:
-        blur(10px);
-
-    -webkit-backdrop-filter:
-        blur(10px);
-}
-
-
-/* ICON PERIODE */
-
-.periode-icon {
-
-    width:
-        55px;
-
-    height:
-        55px;
-
-    border-radius:
-        14px;
-
-    display:
-        flex;
-
-    align-items:
-        center;
-
-    justify-content:
-        center;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.18
-        );
-
-    font-size:
-        25px;
-}
-
-
-/* TEKS DETAIL */
 
 .periode-info-text h2 {
 
-    font-size:
-        19px;
+    font-size: 17px;
 
-    margin-bottom:
-        2px;
+    color:
+        #333333;
+
+    margin-bottom: 3px;
 }
 
 
 .periode-info-text h3 {
 
-    font-size:
-        21px;
+    font-size: 20px;
 
-    margin-bottom:
-        2px;
+    color:
+        #008f2d;
+
+    margin-bottom: 3px;
 }
 
 
 .periode-info-text p {
 
-    font-size:
-        12px;
+    font-size: 11px;
 
-    opacity:
-        0.9;
+    color:
+        #666666;
 }
 
 
-/* ========================================================
-   FOOTER
-======================================================== */
+/* =========================================================
+   RESPONSIVE TABLET
+========================================================= */
 
-footer {
+@media (max-width: 768px) {
 
-    text-align:
-        center;
+    .site-header {
 
-    padding:
-        25px 20px 35px;
+        padding-top: 20px;
 
-    background:
-        transparent;
-
-    text-shadow:
-        0 2px 5px
-        rgba(
-            0,
-            0,
-            0,
-            0.35
-        );
-}
-
-
-footer p {
-
-    font-size:
-        12px;
-
-    line-height:
-        1.7;
-
-    opacity:
-        0.9;
-}
-
-
-/* ========================================================
-   TABLET
-   TETAP SATU BARIS UNTUK MENU
-======================================================== */
-
-@media (max-width: 850px) {
-
-    #listProfesor {
-
-        grid-template-columns:
-            1fr;
     }
 
 
-    /* JANGAN BIARKAN MENU TURUN BARIS */
+    .site-header .logo {
+
+        width: 75px;
+
+        height: 75px;
+
+    }
+
+
+    .site-header h1 {
+
+        font-size: 21px;
+
+    }
+
+
+    .site-header h2 {
+
+        font-size: 18px;
+
+    }
+
+
+    .site-header p {
+
+        font-size: 11px;
+
+    }
+
 
     .menu {
 
-        width:
-            calc(
-                100% - 20px
-            );
+        width: calc(100% - 25px);
 
-        gap:
-            7px;
+        gap: 7px;
 
-        padding:
-            7px;
+        padding: 7px;
 
-        flex-wrap:
-            nowrap;
+        border-radius: 16px;
 
-        border-radius:
-            15px;
-    }
-
-
-    .menu-btn,
-    .search-menu {
-
-        flex:
-            1 1 0;
-
-        width:
-            0;
-
-        min-width:
-            0;
-
-        height:
-            46px;
     }
 
 
     .menu-btn {
 
-        justify-content:
-            center;
+        height: 50px;
 
-        padding:
-            10px 7px;
+        font-size: 11px;
 
-        font-size:
-            11px;
+        gap: 5px;
 
-        gap:
-            5px;
-
-        white-space:
-            nowrap;
     }
 
 
     .menu-btn i {
 
-        font-size:
-            13px;
+        font-size: 14px;
+
     }
 
 
     .search-menu {
 
-        margin-left:
-            0;
+        height: 50px;
 
-        margin-top:
-            0;
+        padding: 0 12px;
 
-        width:
-            0;
-
-        padding:
-            0 10px;
-
-        gap:
-            6px;
-    }
-
-
-    .search-menu i {
-
-        font-size:
-            13px;
     }
 
 
     .search-menu input {
 
-        font-size:
-            11px;
+        font-size: 12px;
 
-        min-width:
-            0;
     }
+
+
+    main {
+
+        padding:
+            0 12px 25px;
+
+    }
+
+
+    .card {
+
+        padding: 12px;
+
+    }
+
+
+    .card .photo,
+    .photo-placeholder {
+
+        width: 105px;
+
+        height: 105px;
+
+    }
+
+
+    .card .info h3 {
+
+        font-size: 15px;
+
+    }
+
+
+    .stats {
+
+        width:
+            calc(100% - 25px);
+
+    }
+
 }
 
 
-/* ========================================================
-   HP
-======================================================== */
+/* =========================================================
+   RESPONSIVE HP
+========================================================= */
 
 @media (max-width: 600px) {
 
     .site-header {
 
         padding:
-            25px 15px 20px;
+            15px 10px 10px;
+
     }
 
 
-    .logo {
+    .site-header .logo {
 
-        width:
-            90px;
+        width: 65px;
 
-        height:
-            90px;
+        height: 65px;
+
+        margin-bottom: 6px;
+
     }
 
 
     .site-header h1 {
 
-        font-size:
-            22px;
+        font-size: 18px;
 
-        letter-spacing:
-            1px;
     }
 
 
     .site-header h2 {
 
-        font-size:
-            19px;
+        font-size: 15px;
 
-        letter-spacing:
-            2px;
     }
 
 
     .site-header p {
 
-        font-size:
-            12px;
+        font-size: 9px;
+
     }
 
 
@@ -1624,228 +1508,384 @@ footer p {
     .menu {
 
         width:
-            calc(
-                100% - 12px
-            );
+            calc(100% - 16px);
+
+        min-height:
+            60px;
 
         padding:
-            6px;
+            5px;
 
         gap:
             4px;
 
-        flex-wrap:
-            nowrap;
+        margin:
+            12px auto 18px;
 
         border-radius:
-            12px;
-    }
+            13px;
 
-
-    .menu-btn,
-    .search-menu {
-
-        flex:
-            1 1 0;
-
-        width:
-            0;
-
-        min-width:
-            0;
-
-        height:
-            42px;
-
-        border-radius:
-            9px;
     }
 
 
     .menu-btn {
 
-        justify-content:
-            center;
+        height:
+            48px;
 
         padding:
-            7px 4px;
+            0 5px;
+
+        border-radius:
+            10px;
 
         font-size:
             9px;
 
         gap:
-            3px;
+            4px;
 
-        white-space:
-            nowrap;
     }
 
 
     .menu-btn i {
 
         font-size:
-            10px;
+            12px;
+
     }
 
 
     .search-menu {
 
-        margin:
-            0;
+        height:
+            48px;
 
         padding:
-            0 6px;
+            0 8px;
+
+        border-radius:
+            10px;
 
         gap:
-            4px;
+            5px;
+
     }
 
 
     .search-menu i {
 
         font-size:
-            10px;
+            13px;
+
     }
 
 
     .search-menu input {
 
         font-size:
-            9px;
+            10px;
 
-        min-width:
-            0;
     }
 
 
     .periode-box {
 
         padding:
-            20px 15px;
+            17px 12px;
+
+        border-radius:
+            14px;
+
+    }
+
+
+    .periode-box h3 {
+
+        font-size:
+            10px;
+
     }
 
 
     .periode-box h2 {
 
         font-size:
-            21px;
+            17px;
+
     }
 
+
+    .periode-box p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    /* CARD PROFESOR */
 
     .card {
 
-        align-items:
-            flex-start;
+        gap:
+            10px;
 
         padding:
+            10px;
+
+        min-height:
+            110px;
+
+        border-radius:
             13px;
 
-        gap:
-            12px;
     }
 
 
-    .photo,
+    .card .photo,
     .photo-placeholder {
 
         width:
-            90px;
+            80px;
 
         height:
-            115px;
+            80px;
 
         border-radius:
-            11px;
+            9px;
+
     }
 
 
-    .photo-placeholder {
+    .card .info h3 {
 
         font-size:
-            30px;
+            12px;
+
     }
 
 
-    .info h3 {
+    .card .fakultas {
 
         font-size:
-            14px;
-    }
+            9px;
 
-
-    .fakultas {
-
-        font-size:
-            11px;
     }
 
 
     .periode-profesor {
 
         font-size:
-            10px;
+            8px;
+
+        margin-bottom:
+            7px;
+
     }
 
 
     .btn {
 
         padding:
-            7px 8px;
+            5px 7px;
 
         font-size:
-            9px;
+            8px;
+
     }
 
 
+    /* =====================================================
+       STATISTIK HP
+       TETAP SATU BARIS
+    ===================================================== */
+
     .stats {
 
-        grid-template-columns:
-            1fr;
-
         width:
-            94%;
+            calc(100% - 16px);
+
+        min-height:
+            90px;
+
+        margin:
+            5px auto 20px;
+
+        border-radius:
+            13px;
+
     }
 
 
     .stat {
 
+        min-height:
+            90px;
+
         padding:
-            14px;
+            8px 3px;
+
+    }
+
+
+    .stat > i {
+
+        font-size:
+            17px;
+
+        margin-bottom:
+            4px;
+
+    }
+
+
+    .stat-content span {
+
+        font-size:
+            20px;
+
+        margin-bottom:
+            3px;
+
+    }
+
+
+    .stat-content p {
+
+        font-size:
+            8px;
+
+    }
+
+
+    .stat:not(:last-child)::after {
+
+        top:
+            20%;
+
+        height:
+            60%;
+
+    }
+
+
+    /* =====================================================
+       ARSIP
+    ===================================================== */
+
+    .arsip-header {
+
+        padding:
+            25px 12px;
+
+        border-radius:
+            15px;
+
+    }
+
+
+    .arsip-header-icon {
+
+        font-size:
+            32px;
+
     }
 
 
     .arsip-header h2 {
 
         font-size:
-            20px;
+            19px;
+
+    }
+
+
+    .arsip-header p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .tahun-arsip h2 {
+
+        font-size:
+            23px;
+
     }
 
 
     .arsip-item {
 
+        min-height:
+            75px;
+
         padding:
-            14px;
+            13px;
+
+        border-radius:
+            13px;
+
     }
 
 
     .arsip-item h3 {
 
         font-size:
-            13px;
+            12px;
+
     }
 
+
+    .arsip-item p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    .arsip-arrow {
+
+        font-size:
+            10px;
+
+    }
+
+
+    /* =====================================================
+       DETAIL PERIODE
+    ===================================================== */
 
     .periode-detail-box {
 
         padding:
             15px;
+
+    }
+
+
+    .periode-icon {
+
+        width:
+            45px;
+
+        height:
+            45px;
+
+        font-size:
+            18px;
+
     }
 
 
     .periode-info-text h2 {
 
         font-size:
-            16px;
+            14px;
+
     }
 
 
@@ -1853,300 +1893,83 @@ footer p {
 
         font-size:
             17px;
+
     }
+
+
+    .periode-info-text p {
+
+        font-size:
+            9px;
+
+    }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
+
+    footer {
+
+        padding:
+            18px 10px;
+
+    }
+
+
+    footer p {
+
+        font-size:
+            8px;
+
+    }
+
 }
 
 
-/* ========================================================
+/* =========================================================
    HP SANGAT KECIL
-======================================================== */
+========================================================= */
 
 @media (max-width: 380px) {
-
-    .menu {
-
-        gap:
-            3px;
-
-        padding:
-            5px;
-    }
-
-
-    .menu-btn,
-    .search-menu {
-
-        height:
-            40px;
-    }
-
 
     .menu-btn span {
 
         font-size:
             8px;
-    }
 
-
-    .menu-btn i {
-
-        font-size:
-            9px;
     }
 
 
     .search-menu input {
 
         font-size:
-            8px;
+            9px;
+
     }
 
 
-    .card {
+    .menu-btn {
 
         gap:
-            9px;
+            2px;
+
     }
 
 
-    .photo,
-    .photo-placeholder {
-
-        width:
-            78px;
-
-        height:
-            105px;
-    }
-
-
-    .info h3 {
+    .stat-content span {
 
         font-size:
-            13px;
-    }
-}
+            18px;
 
-/* =========================================================
-   SEMBUNYIKAN HEADER BESAR "ARSIP PENGUKUHAN"
-   ========================================================= */
-
-.arsip-header {
-    display: none !important;
-}
-
-/* =========================================================
-   PERBAIKAN TAMPILAN ARSIP
-   Tahun + Card Periode
-========================================================= */
-
-/* Area setiap tahun */
-.tahun-arsip {
-    position: relative;
-    width: 100%;
-    margin: 45px 0 15px;
-    text-align: left;
-    z-index: 5;
-}
-
-/* Tulisan tahun 2025, 2026, dst */
-.tahun-arsip h2 {
-    display: inline-block;
-
-    margin: 0 0 12px 30px;
-    padding: 8px 20px;
-
-    font-size: 32px;
-    font-weight: 800;
-
-    color: #ffffff;
-
-    /* supaya tulisan jelas di atas foto */
-    text-shadow:
-        0 2px 4px rgba(0, 0, 0, 0.85),
-        0 0 10px rgba(0, 0, 0, 0.65);
-
-    letter-spacing: 1px;
-}
-
-
-/* =========================================================
-   CARD PERIODE DI BAWAH TAHUN
-========================================================= */
-
-.arsip-item {
-    position: relative;
-
-    width: calc(100% - 60px);
-    margin: 0 30px 20px;
-
-    min-height: 85px;
-
-    padding: 20px 25px;
-
-    box-sizing: border-box;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    border-radius: 20px;
-
-    /* kaca transparan */
-    background: rgba(255, 255, 255, 0.88);
-
-    border: 1px solid rgba(255, 255, 255, 0.9);
-
-    box-shadow:
-        0 8px 25px rgba(0, 0, 0, 0.18);
-
-    color: #006b3f;
-
-    cursor: pointer;
-
-    transition:
-        transform 0.3s ease,
-        box-shadow 0.3s ease,
-        background 0.3s ease;
-}
-
-
-/* Hover card */
-.arsip-item:hover {
-    transform: translateY(-4px);
-
-    background: rgba(255, 255, 255, 0.96);
-
-    box-shadow:
-        0 12px 30px rgba(0, 0, 0, 0.25);
-}
-
-
-/* Judul tanggal */
-.arsip-item h3 {
-    margin: 0 0 6px;
-
-    font-size: 18px;
-    font-weight: 700;
-
-    color: #006b3f;
-}
-
-
-/* Icon kalender */
-.arsip-item h3 i {
-    margin-right: 7px;
-
-    color: #008c45;
-}
-
-
-/* Jumlah profesor */
-.arsip-item p {
-    margin: 0;
-
-    font-size: 14px;
-
-    color: #555;
-}
-
-
-/* Tulisan Lihat */
-.arsip-arrow {
-    flex-shrink: 0;
-
-    margin-left: 20px;
-
-    font-size: 15px;
-    font-weight: 700;
-
-    color: #008c45;
-
-    white-space: nowrap;
-}
-
-
-/* =========================================================
-   RESPONSIVE HP
-========================================================= */
-
-@media (max-width: 768px) {
-
-    .tahun-arsip {
-        margin-top: 30px;
     }
 
-    .tahun-arsip h2 {
-        margin-left: 18px;
 
-        font-size: 27px;
+    .stat-content p {
 
-        padding: 6px 15px;
+        font-size:
+            7px;
+
     }
 
-    .arsip-item {
-        width: calc(100% - 36px);
-
-        margin-left: 18px;
-        margin-right: 18px;
-
-        padding: 17px 18px;
-
-        min-height: 75px;
-
-        border-radius: 16px;
-    }
-
-    .arsip-item h3 {
-        font-size: 16px;
-    }
-
-    .arsip-item p {
-        font-size: 12px;
-    }
-
-    .arsip-arrow {
-        font-size: 13px;
-    }
-}
-
-
-/* =========================================================
-   HP KECIL
-========================================================= */
-
-@media (max-width: 480px) {
-
-    .tahun-arsip {
-        margin-top: 25px;
-    }
-
-    .tahun-arsip h2 {
-        margin-left: 15px;
-
-        font-size: 24px;
-    }
-
-    .arsip-item {
-        width: calc(100% - 30px);
-
-        margin-left: 15px;
-        margin-right: 15px;
-
-        padding: 15px;
-
-        flex-direction: row;
-    }
-
-    .arsip-item h3 {
-        font-size: 14px;
-    }
-
-    .arsip-item p {
-        font-size: 11px;
-    }
-
-    .arsip-arrow {
-        font-size: 12px;
-    }
 }
